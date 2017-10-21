@@ -1,0 +1,10 @@
+dj-database-url==0.4.2
+Django==1.11.4
+django-extensions==1.9.0
+django-model-utils==3.0.0
+django-widget-tweaks==1.4.1
+gunicorn==19.7.1
+Pillow==4.2.1
+psycopg2==2.7.3.1
+python-decouple==3.1
+pytz

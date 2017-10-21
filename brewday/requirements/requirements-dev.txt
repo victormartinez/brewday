@@ -1,0 +1,3 @@
+-r requirements-prod.txt
+
+ipython==6.1.0
