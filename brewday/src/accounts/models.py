@@ -57,3 +57,6 @@ class Profile(TimeStampedModel):
     @property
     def full_name(self):
         return "{} {}".format(self.name, self.surname)
+
+    def __str__(self):
+        return self.full_name
