@@ -29,6 +29,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third party libs
+    'django_extensions',
+    'widget_tweaks',
+
+    # Apps
     'src.accounts',
     'src.core',
 ]
@@ -92,7 +97,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
-
+LOGIN_REDIRECT_URL = 'core:index'
+LOGOUT_REDIRECT_URL = 'core:login'
+LOGIN_URL = 'core:login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
