@@ -34,6 +34,11 @@ class UserRegistrationForm(UserCreationForm):
         error_messages={'required': 'You need to accept the terms.'}
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'autofocus': True})
+        self.fields['username'].widget.attrs.update({'autofocus': False})
+
     class Meta:
         model = User
         fields = ['username', 'email', 'name', 'surname']
