@@ -15,7 +15,7 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'core:logout' %}">Logout</a></li>
                 {% else %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'core:login' %}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Crie sua conta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'core:register' %}">Create an account</a></li>
                 {% endif %}
             </ul>
         </div>
