@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block form_title %}
+    {{ block.super }} | Login
+{% endblock %}
+
+{% block content %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger text-center">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+        <div class="form-group">
+            {% render_field form.name class='form-control' placeholder=form.name.label %}
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+            {% for error in form.name.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {% render_field form.surname class='form-control' placeholder=form.surname.label %}
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            {% for error in form.surname.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {% render_field form.email class='form-control' placeholder=form.email.label %}
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            {% for error in form.email.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {% render_field form.username class='form-control' placeholder=form.username.label %}
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            {% for error in form.username.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {% render_field form.password1 class='form-control' placeholder=form.password1.label %}
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            {% for error in form.password1.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {% render_field form.password2 class='form-control' placeholder=form.password2.label %}
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            {% for error in form.password2.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-xs-8">
+                {% render_field form.agree_terms type='checkbox' %}
+                <label for="{{ form.agree_terms.auto_id }}">I accept the <a href="#">terms</a>.</label>
+                <br>
+                {% for error in form.agree_terms.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="col-xs-4 pull-right">
+
+                <button type="submit" class="btn btn-primary btn-block btn-flat">
+                    <i class="fa fa-refresh fa-spin" style="display: none;"></i>
+                    <span>Register</span>
+                </button>
+            </div>
+            <!-- /.col -->
+        </div>
+    </form>
+{% endblock %}
