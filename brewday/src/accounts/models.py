@@ -23,7 +23,6 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     email = models.EmailField('E-mail', unique=True)
     is_staff = models.BooleanField('Equipe', default=False)
     is_active = models.BooleanField('Ativo', default=True)
-    activated = models.BooleanField(default=False)
     activation_key = models.CharField(max_length=120, blank=True, null=True)
 
     USERNAME_FIELD = 'username'
@@ -51,10 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     # this methods are require to login super user from admin panel
     def has_module_perms(self, app_label):
         return self.is_superuser
-
-    def activate(self):
-        self.activation_key = None
-        self.activated = True
 
 
 class Profile(TimeStampedModel):
