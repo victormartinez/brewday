@@ -21,18 +21,14 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     )
 
     email = models.EmailField('E-mail', unique=True)
-    is_staff = models.BooleanField('Equipe', default=False)
-    is_active = models.BooleanField('Ativo', default=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     activation_key = models.CharField(max_length=120, blank=True, null=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
     objects = CustomUserManager()
-
-    class Meta:
-        verbose_name = 'Usuário'
-        verbose_name_plural = 'Usuários'
 
     def __str__(self):
         return self.username
