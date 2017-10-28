@@ -59,9 +59,6 @@ class Profile(TimeStampedModel):
     surname = models.CharField(max_length=50)
     photo = models.ImageField(blank=True, null=True)
 
-    class Meta:
-        abstract = True
-
     @property
     def full_name(self):
         return "{} {}".format(self.name, self.surname)
