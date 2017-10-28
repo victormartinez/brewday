@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import User
+from .models import User, Profile
 from .forms import UserAdminCreationForm, UserAdminForm
 
 
@@ -17,11 +17,11 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'fields': ('username', 'email')
         }),
-        ('Informações Básicas', {
+        ('Basic Info', {
             'fields': ('last_login', )
         }),
         (
-            'Permissões', {
+            'Permissions', {
                 'fields': (
                     'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'
                 )
@@ -32,3 +32,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Profile)
