@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 from model_utils.models import TimeStampedModel
 
+from .managers import CustomUserManager
+
 
 class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     username = models.CharField(
@@ -26,6 +28,8 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
+
+    objects = CustomUserManager()
 
     class Meta:
         verbose_name = 'Usuário'
