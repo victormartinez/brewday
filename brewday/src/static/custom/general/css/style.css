@@ -1,0 +1,147 @@
+/* ========================================================================
+   General
+ ========================================================================== */
+
+
+body{
+	font-family: 'Saira Semi Condensed', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Saira Semi Condensed', sans-serif;
+}
+
+/* ========================================================================
+   Login
+ ========================================================================== */
+
+
+.form-login{
+	padding: 6rem;
+}
+
+.logo img{
+	width: 300px;
+}
+
+.logo {
+    padding: 2em;
+}
+
+.header-form{
+	text-align: center;
+}
+
+.header-form h2{
+	font-weight: bold;
+	color: #3c0014;
+}
+
+.remember-password {
+    text-align: center;
+}
+
+.create-account{
+	text-align: center;
+	padding-top: 20px;
+}
+
+.create-account a{
+	font-weight: bold;
+}
+
+.bg-login img{
+	position: fixed;
+}
+
+.uk-button-default {
+    background-color: #ffc30f;
+    color: #fff;
+    border: 1px solid #e5e5e5;
+    padding: 5px 0;
+    font-weight: bold;
+}
+
+.uk-button-default:hover {
+    background-color: #c7980b;
+    color: #fff;
+}
+
+.uk-input{
+	height: 50px;
+}
+
+.uk-link, a{
+	color: #3c0014;
+	font-weight: bold;
+}
+
+.uk-link, a:hover{
+	color: #ffc30f;
+	text-decoration: none;
+}
+
+/* ========================================================================
+   Menu
+ ========================================================================== */
+
+ .avatar img{
+ 	height: 35px;
+    width: 35px;
+    border-radius: 50%;
+ }
+
+ .avatar{
+ 	padding-right: 20px;
+ }
+
+ .uk-navbar-container.uk-sticky.uk-sticky-fixed{
+ 	padding: 12px 0;
+ }
+
+ .menu-profile span{
+ 	padding-right: 10px
+ }
+
+.link-menu-profile i{
+	float: left;
+    padding-right: 10px;
+}
+
+.link-menu-profile li{
+	padding-bottom: 20px;
+}
+
+.link-menu-profile a{
+	color: #333;
+	font-weight: normal;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: #3c0014;
+}
+
+.uk-dropdown {
+    min-width: 270px;
+}
+
+.info-profile{
+	padding-bottom: 30px;
+}
+
+p.uk-comment-meta.uk-margin-remove-top{
+	margin: 0;
+}
+
+span.arrow-profile{
+	color: #fff;
+}
+
+/* ========================================================================
+   Pages
+ ========================================================================== */
+
+.dashboard-header {
+    background: #f5f8fa;
+    padding-top: 50px;
+}
