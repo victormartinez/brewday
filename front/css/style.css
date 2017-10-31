@@ -137,11 +137,81 @@ span.arrow-profile{
 	color: #fff;
 }
 
+.uk-logo {
+    color: #fff;
+}
+
+.uk-navbar-nav>li>a {
+    color: #fff;
+    text-transform: none;
+}
+
+.tab{
+	display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -20px;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.tab a{
+    display: block;
+    text-align: center;
+    padding: 5px 10px;
+    color: #999;
+    border-bottom: 1px solid transparent;
+    font-size: .875rem;
+    text-transform: uppercase;
+    -webkit-transition: color .1s ease-in-out;
+    transition: color .1s ease-in-out;
+}
+
+.tab li{
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+    padding-left: 20px;
+    position: relative;
+}
+
+li.uk-active a{
+    border-color: #ffc30f;
+    color: #333;
+}
+
 /* ========================================================================
    Pages
  ========================================================================== */
 
 .dashboard-header {
     background: #f5f8fa;
-    padding-top: 50px;
+    padding-top: 30px;
+}
+
+.title-page h2 {
+    margin-bottom: 30px;
+}
+
+.breadcrumb ul{
+	float: right;
+    padding-top: 20px;
+}
+
+.uk-tab {
+    margin-bottom: 0;
+}
+
+.alter h4{
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.uk-tab>.uk-active>a {
+    border-color: #ffc30f;
 }
