@@ -1,0 +1,94 @@
+{% extends 'app.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {{ block.super }} | Profile
+{% endblock %}
+
+{% block container %}
+    <div id="tm-main" class="tm-main uk-section uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="uk-first-column">
+                            <form class="uk-grid-small alter" uk-grid>
+                                <div class="uk-margin">
+                                    <div uk-form-custom>
+                                        <div class="uk-grid-medium uk-flex-middle info-profile" uk-grid>
+                                            <div class="uk-width-auto">
+                                                <img class="uk-comment-avatar" src="{% static 'custom/general/img/avatar.png' %}" width="80"
+                                                     height="80" alt="">
+                                            </div>
+                                            <input type="file"><a href="#">Upload Foto</a>
+                                        </div>
+                                        <h4>Informações Pessoais</h4>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-1@s">
+                                    <input class="uk-input" type="text" placeholder="Nome">
+                                </div>
+                                <div class="uk-width-1-1@s">
+                                    <input class="uk-input" type="text" placeholder="Sobrenome">
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <input class="uk-input" type="email" placeholder="E-mail">
+                                </div>
+                                <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"
+                                        style="margin-left: 15px;">Alterar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    <footer>
+        <div class="uk-section-secondary uk-section uk-section-xsmall rodape">
+            <div class="uk-container">
+                <div class="uk-flex-middle uk-margin-remove-vertical uk-grid" uk-grid="">
+                    <div class="uk-width-expand@s uk-first-column">
+                        <div class="uk-margin uk-text-left@s uk-text-center uk-text-small">
+                            © Brewday | All rights reserved.
+                        </div>
+                    </div>
+                    <div class="uk-width-expand@s">
+                        <div class="uk-margin uk-text-right@s uk-text-center">
+                            <a href="#" uk-totop="" uk-scroll="" class="uk-totop uk-icon topo"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block extra %}
+    <!-- Menu Responsivo Modal -->
+    <div id="tm-mobile" class="uk-modal-full uk-modal" uk-modal="">
+        <div class="uk-modal-dialog uk-modal-body uk-text-center uk-flex" uk-height-viewport=""
+             style="box-sizing: border-box; min-height: 100vh; height: 100vh;">
+            <button class="uk-modal-close-full uk-close uk-icon" type="button" uk-close=""></button>
+            <div class="uk-margin-auto-vertical uk-width-1-1">
+                <div class="uk-child-width-1-1 uk-grid uk-grid-stack" uk-grid="">
+                    <div class="uk-first-column">
+                        <div class="uk-panel">
+                            <ul class="uk-nav uk-nav-primary uk-nav-center">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Perfil</a></li>
+                                <li><a href="#">Receitas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

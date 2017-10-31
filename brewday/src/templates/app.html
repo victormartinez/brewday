@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="">
+
+    <title>{% block title %}BrewDay!{% endblock %}</title>
+
+    {% block base_font %}
+        <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed" rel="stylesheet">
+    {% endblock %}
+
+    {% block base_css %}
+        <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}"/>
+    {% endblock %}
+
+    {% block custom_css %}
+        <link rel="stylesheet" href="{% static 'custom/general/css/style.css' %}"/>
+    {% endblock %}
+</head>
+<body>
+{% block nav %}
+    {% include '_includes/nav.html' %}
+{% endblock %}
+
+{% block container %}
+    <div class="uk-grid">
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block extra %}
+{% endblock %}
+
+{% block base_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+    <script src="{% static 'uikit/js/uikit-icons.min.js' %}"></script>
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}
+</body>
+</html>

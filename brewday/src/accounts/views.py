@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
-from ..accounts.forms import UserLoginForm, UserRegistrationForm
+from ..accounts.forms import UserLoginForm, UserRegistrationForm, UserUpdateForm
 
 User = get_user_model()
 
@@ -26,6 +27,18 @@ class UserRegistrationView(CreateView):
     template_name = 'core/register.html'
     success_url = reverse_lazy('core:login')
 
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'accounts/profile.html'
+    success_url = reverse_lazy('accounts:update_user')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
 login = UserLoginView.as_view()
 logout = UserLogoutView.as_view()
 register = UserRegistrationView.as_view()
+profile = ProfileView.as_view()

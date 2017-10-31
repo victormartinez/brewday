@@ -1,6 +1,6 @@
 from django import forms
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.db import transaction
 
 from ..accounts.models import Profile
@@ -56,3 +56,28 @@ class UserRegistrationForm(UserCreationForm):
                 )
                 profile.save()
         return user
+
+
+class UserUpdateForm(UserChangeForm):
+    old_password = forms.CharField(
+        label="Old password",
+        strip=False,
+        widget=forms.PasswordInput,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+
+    new_password1 = forms.CharField(
+        label="New password",
+        strip=False,
+        widget=forms.PasswordInput,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+
+    new_password2 = forms.CharField(
+        label="Confirm the new password",
+        widget=forms.PasswordInput,
+        strip=False
+    )
+
+    def is_valid(self):
+        pass

@@ -1,23 +1,129 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #653400;">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'core:index' %}">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{% load static %}
+<div class="tm-header-mobile uk-hidden@m">
+		<nav class="uk-navbar-container uk-navbar" uk-navbar="">
+			<div class="uk-navbar-center">
+				<a class="uk-navbar-item uk-logo" href="#">
+					<img src="images/logointerna.png" class="uk-responsive-height" alt="Brewday">
+				</a>
+			</div>
+			<div class="uk-navbar-right">
+				<a class="uk-navbar-toggle" href="#tm-mobile" uk-toggle="">
+					<div uk-navbar-toggle-icon="" class="uk-navbar-toggle-icon uk-icon"></div>
+				</a>
+			</div>
+		</nav>
+	</div>
+	<div class="tm-header uk-visible@m" uk-header="">
+		<div class="uk-navbar-container uk-sticky uk-sticky-fixed uk-active uk-navbar-sticky uk-sticky-below">
+			<div class="uk-container">
+				<nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;}">
+					<div class="uk-navbar-left">
+						<a href="#" class="uk-logo">
+							<img src="images/logointerna.png" alt="Brewday">
+							<img src="images/logointerna.png" class="uk-logo-inverse" alt="Brewday">
+						</a>
+					</div>
+					<div class="uk-navbar-center">
+						<div class="uk-margin-auto-vertical">
+							<ul class="uk-navbar-nav">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Perfil</a></li>
+								<li><a href="#">Receitas</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="uk-navbar-right">
+						<div class="menu-profile">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link" aria-expanded="false">
+								<span class="avatar avatar-online">
+									<img src="{% static 'custom/general/img/avatar.png' %}" alt="avatar">
+									<span class="arrow-profile" uk-icon="icon: chevron-down"></span>
+									<div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000">
+										<div class="uk-grid-medium uk-flex-middle info-profile" uk-grid>
+											<div class="uk-width-auto">
+												<img class="uk-comment-avatar" src="{% static 'custom/general/img/avatar.png' %}" width="80" height="80" alt="">
+											</div>
+											<div class="uk-width-expand">
+												<p class="uk-comment-meta uk-margin-remove-top"><a class="uk-link-reset" href="#">Logado como</a></p>
+												<h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Fernando</a></h4>
+											</div>
+										</div>
+										<ul class="uk-nav uk-dropdown-nav">
+											<div class="link-menu-profile">
+												<li>
+													<i uk-icon="icon: user"></i>
+													<a href="#">
+														<span>Seu Perfil</span>
+													</a>
+												</li>
+												<li class="">
+													<i uk-icon="icon: sign-out"></i>
+													<a href="#">
+														<span>Logout</span>
+													</a>
+												</li>
+											</div>
+										</ul>
+									</div>
+								</span>
+							</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="dashboard-header">
+			<div class="uk-container">
+				<div class="uk-grid uk-grid-large" uk-grid="">
+					<div class="uk-width-expand@m uk-first-column">
+						<div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+							<div class="uk-first-column">
+								<div class="title-page">
+									<h2>Editar Perfil</h2>
+								</div>
+								<div class="menu-tabs">
+									<ul class="tab">
+										<li class="uk-active"><a href="#">Dados</a></li>
+										<li><a href="perfil-senha.html">Senha</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="uk-width-1-2@m breadcrumb">
+						<div class="uk-child-width-1-1 uk-grid uk-grid-stack" uk-grid="">
+							<div class="uk-first-column">
+								<ul class="uk-breadcrumb">
+									<li><a href="#">Home</a></li>
+									<li><a href="#">Editar Perfil</a></li>
+									<li><span href="#">Dados</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'core:index' %}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'core:logout' %}">Logout</a></li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'core:login' %}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'core:register' %}">Create an account</a></li>
-                {% endif %}
-            </ul>
+
+<div class="tm-header-mobile uk-hidden@m">
+    <nav class="uk-navbar-container uk-navbar" uk-navbar="">
+        <div class="uk-navbar-center">
+            <a class="uk-navbar-item uk-logo" href="#">
+                <img src="images/logointerna.png" class="uk-responsive-height" alt="Brewday">
+            </a>
         </div>
-    </div>
-</nav>
+        <div class="uk-navbar-right">
+            <a class="uk-navbar-toggle" href="#tm-mobile" uk-toggle="">
+                <div uk-navbar-toggle-icon="" class="uk-navbar-toggle-icon uk-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ratio="1">
+                        <rect y="9" width="20" height="2"></rect>
+                        <rect y="3" width="20" height="2"></rect>
+                        <rect y="15" width="20" height="2"></rect>
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </nav>
+</div>
