@@ -20,6 +20,10 @@
                         <img src="{% static 'custom/general/img/logo.png' %}" alt="">
                     </div>
                     <h2>Login</h2>
+
+                    {% for error in form.non_field_errors %}
+                        <span class="uk-text-danger">{{ error }}</span>
+                    {% endfor %}
                 </div>
                 <div class="uk-width-1-1@m">
                     <form method="post">
@@ -29,12 +33,18 @@
                                 <div class="uk-inline uk-width-1-1">
                                     <span class="uk-form-icon" uk-icon="icon: user"></span>
                                     {% render_field form.username class='uk-input' placeholder=form.username.label %}
+                                    {% for error in form.username.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="uk-margin">
                                 <div class="uk-inline uk-width-1-1">
                                     <span class="uk-form-icon" uk-icon="icon: lock"></span>
                                     {% render_field form.password class='uk-input' placeholder=form.password.label %}
+                                    {% for error in form.password.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">

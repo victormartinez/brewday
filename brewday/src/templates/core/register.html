@@ -20,30 +20,57 @@
                         <img src="{% static 'custom/general/img/logo.png' %}" alt="">
                     </div>
                     <h2>Create an account</h2>
+
+                    {% for error in form.non_field_errors %}
+                        <span class="uk-text-danger">{{ error }}</span>
+                    {% endfor %}
                 </div>
                 <form method="post" class="uk-grid-small" uk-grid>
+                    {% csrf_token %}
                     <div class="uk-width-1-2@s">
                         {% render_field form.name class='uk-input' placeholder=form.name.label %}
+                        {% for error in form.name.errors %}
+                            <span class="uk-text-danger">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="uk-width-1-2@s">
                         {% render_field form.surname class='uk-input' placeholder=form.surname.label %}
+                        {% for error in form.surname.errors %}
+                            <span class="uk-text-danger">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="uk-width-1-1">
                         {% render_field form.email class='uk-input' placeholder=form.email.label %}
+                        {% for error in form.email.errors %}
+                            <span class="uk-text-danger">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="uk-width-1-1">
                         {% render_field form.username class='uk-input' placeholder=form.username.label %}
+                        {% for error in form.username.errors %}
+                            <span class="uk-text-danger">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="uk-width-1-2@s">
                         {% render_field form.password1 class='uk-input' placeholder=form.password1.label %}
+                        {% for error in form.password1.errors %}
+                            <span class="uk-text-danger">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="uk-width-1-2@s">
                         {% render_field form.password2 class='uk-input' placeholder=form.password2.label %}
+                        {% for error in form.password2.errors %}
+                            <span class="uk-text-danger">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                         <div class="uk-width-1-1@m">
                             {% render_field form.agree_terms class='uk-checkbox' type='checkbox' %}
                             <label for="{{ form.agree_terms.auto_id }}">I accept the <a href="#">terms</a>.</label>
+
+                            {% for error in form.agree_terms.errors %}
+                                <span class="uk-text-danger">{{ error }}</span>
+                            {% endfor %}
                         </div>
                     </div>
                     <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Create my account
