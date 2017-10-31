@@ -7,29 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="">
+    <link rel="shortcut icon" href="">
+
     <title>{% block title %}BrewDay!{% endblock %}</title>
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
+
+    {% block base_font %}
+        <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed" rel="stylesheet">
+    {% endblock %}
+
+    {% block base_css %}
+        <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}"/>
+    {% endblock %}
+
     {% block custom_css %}
+        <link rel="stylesheet" href="{% static 'custom/general/css/style.css' %}"/>
     {% endblock %}
 </head>
 <body>
-{% include '_includes/nav.html' %}
 
-<div class="container" style="margin-top: 100px;">
-    {% block content %}
-    {% endblock %}
-</div>
+{% block container %}
+    <div class="uk-grid">
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
 
 {% block footer %}
 {% endblock %}
+{% block base_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+    <script src="{% static 'uikit/js/uikit-icons.min.js' %}"></script>
+{% endblock %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 {% block custom_js %}
 {% endblock %}
 </body>
