@@ -1,0 +1,51 @@
+.avatar img{
+ 	height: 35px;
+    width: 35px;
+    border-radius: 50%;
+ }
+
+ .avatar{
+ 	padding-right: 20px;
+ }
+
+ .uk-navbar-container.uk-sticky.uk-sticky-fixed{
+ 	padding: 12px 0;
+ }
+
+ .menu-profile span{
+ 	padding-right: 10px
+ }
+
+.link-menu-profile i{
+	float: left;
+    padding-right: 10px;
+}
+
+.link-menu-profile li{
+	padding-bottom: 20px;
+}
+
+.link-menu-profile a{
+	color: #333;
+	font-weight: normal;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: #3c0014;
+}
+
+.uk-dropdown {
+    min-width: 270px;
+}
+
+.info-profile{
+	padding-bottom: 30px;
+}
+
+p.uk-comment-meta.uk-margin-remove-top{
+	margin: 0;
+}
+
+span.arrow-profile{
+	color: #fff;
+}

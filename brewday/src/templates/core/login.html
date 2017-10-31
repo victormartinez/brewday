@@ -6,6 +6,11 @@
     {{ block.super }} | Login
 {% endblock %}
 
+{% block custom_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'custom/css/login.css' %}"/>
+{% endblock %}
+
 {% block content %}
     <div class="uk-width-1-2@m">
         <div class="row">

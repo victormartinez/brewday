@@ -6,6 +6,11 @@
     {{ block.super }} | Register
 {% endblock %}
 
+{% block custom_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'custom/css/register.css' %}"/>
+{% endblock %}
+
 {% block content %}
     <div class="uk-width-1-2@m">
         <div class="row">
@@ -37,11 +42,12 @@
                     </div>
                     <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                         <div class="uk-width-1-1@m">
-                            {% render_field form.agree_terms class="uk-checkbox" type='checkbox' %}
+                            {% render_field form.agree_terms class='uk-checkbox' type='checkbox' %}
                             <label for="{{ form.agree_terms.auto_id }}">I accept the <a href="#">terms</a>.</label>
                         </div>
                     </div>
-                    <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Create my account</button>
+                    <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Create my account
+                    </button>
                 </form>
                 <div class="create-account">
                     <h5>Have you already got an account? <a href="{% url 'core:login' %}">Login!</a></h5>
