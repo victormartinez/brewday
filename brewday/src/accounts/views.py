@@ -37,10 +37,6 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.profile
 
-    def form_valid(self, form):
-        form.save()
-        return super(UpdateProfileView, self).form_valid(form)
-
     def get_success_url(self):
         messages.success(self.request, 'Your Personal Info was changed successfully.')
         return super(UpdateProfileView, self).get_success_url()
