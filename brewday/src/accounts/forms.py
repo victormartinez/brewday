@@ -25,6 +25,18 @@ class UserLoginForm(AuthenticationForm):
         super().__init__(request, *args, **kwargs)
 
 
+class ProfileChangeForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name', 'surname']
+
+
+class EmailChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['email', ]
+
+
 class UserRegistrationForm(UserCreationForm):
     name = forms.CharField(max_length=50)
     surname = forms.CharField(max_length=50)

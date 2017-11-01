@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 
 {% block title %}
-    {{ block.super }} | Profile
+    {{ block.super }} | Password
 {% endblock %}
 
 {% block container %}
@@ -14,19 +14,11 @@
                 <div class="uk-width-expand@m uk-first-column">
                     <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
                         <div class="uk-first-column">
-                            <form class="uk-grid-small alter" uk-grid>
+                            <form method="post" class="uk-grid-small alter" uk-grid>
                                 {% csrf_token %}
                                 <div class="uk-margin">
                                     <div uk-form-custom>
-                                        <div class="uk-grid-medium uk-flex-middle info-profile" uk-grid>
-                                            <div class="uk-width-auto">
-                                                <img class="uk-comment-avatar"
-                                                     src="{% static 'custom/general/img/avatar.png' %}" width="80"
-                                                     height="80" alt="">
-                                            </div>
-                                            <input type="file"><a href="#">Upload Photo</a>
-                                        </div>
-                                        <h4>Personal Info</h4>
+                                        <h4>Change Email</h4>
                                     </div>
 
                                     {% for message in messages %}
@@ -38,18 +30,10 @@
                                         <br>
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
-
-                                </div>
-
-                                <div class="uk-width-1-1@s">
-                                    {% render_field form.name class='uk-input' placeholder=form.name.label %}
-                                    {% for error in form.name.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
                                 </div>
                                 <div class="uk-width-1-1@s">
-                                    {% render_field form.surname class='uk-input' placeholder=form.surname.label %}
-                                    {% for error in form.surname.errors %}
+                                    {% render_field form.email class='uk-input' placeholder=form.email.label %}
+                                    {% for error in form.email.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>

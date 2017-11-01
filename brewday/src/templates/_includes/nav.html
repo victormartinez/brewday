@@ -85,8 +85,10 @@
 									<ul class="tab">
                                         {% url 'accounts:profile' as profile_url %}
                                         {% url 'accounts:profile_password' as profile_password_url %}
+                                        {% url 'accounts:profile_email' as profile_email_url %}
 
 										<li class="{% if profile_url == request.path %}uk-active{% endif %}"><a href="{% url 'accounts:profile' %}">Info</a></li>
+										<li class="{% if profile_email_url == request.path %}uk-active{% endif %}"><a href="{% url 'accounts:profile_email' %}">Email</a></li>
 										<li class="{% if profile_password_url == request.path %}uk-active{% endif %}"><a href="{% url 'accounts:profile_password' %}">Password</a></li>
 									</ul>
 								</div>

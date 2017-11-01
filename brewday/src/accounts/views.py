@@ -6,8 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.views.generic import CreateView, UpdateView, FormView
 
-from ..accounts.models import Profile
-from ..accounts.forms import UserLoginForm, UserRegistrationForm
+from ..accounts.forms import UserLoginForm, UserRegistrationForm, EmailChangeForm, ProfileChangeForm
 
 User = get_user_model()
 
@@ -30,14 +29,34 @@ class UserRegistrationView(CreateView):
     success_url = reverse_lazy('core:login')
 
 
-class ProfileView(LoginRequiredMixin, UpdateView):
-    model = Profile
-    fields = ['name', 'surname']
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
+    form_class = ProfileChangeForm
     template_name = 'accounts/profile.html'
-    success_url = reverse_lazy('accounts:update_user')
+    success_url = reverse_lazy('accounts:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def form_valid(self, form):
+        form.save()
+        return super(UpdateProfileView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your Personal Info was changed successfully.')
+        return super(UpdateProfileView, self).get_success_url()
+
+
+class UpdateEmailView(LoginRequiredMixin, UpdateView):
+    form_class = EmailChangeForm
+    template_name = 'accounts/profile_email.html'
+    success_url = reverse_lazy('accounts:profile_email')
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your email was changed successfully.')
+        return super(UpdateEmailView, self).get_success_url()
 
 
 class UpdatePasswordView(LoginRequiredMixin, FormView):
@@ -65,5 +84,6 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
 login = UserLoginView.as_view()
 logout = UserLogoutView.as_view()
 register = UserRegistrationView.as_view()
-profile = ProfileView.as_view()
+profile = UpdateProfileView.as_view()
 profile_password = UpdatePasswordView.as_view()
+profile_email = UpdateEmailView.as_view()
