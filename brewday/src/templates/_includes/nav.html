@@ -27,8 +27,8 @@
 						<div class="uk-margin-auto-vertical">
 							<ul class="uk-navbar-nav">
 								<li><a href="#">Home</a></li>
-								<li><a href="#">Perfil</a></li>
-								<li><a href="#">Receitas</a></li>
+								<li><a href="{% url 'accounts:profile' %}">Profile</a></li>
+								<li><a href="#">Recipes</a></li>
 							</ul>
 						</div>
 					</div>
@@ -44,21 +44,21 @@
 												<img class="uk-comment-avatar" src="{% static 'custom/general/img/avatar.png' %}" width="80" height="80" alt="">
 											</div>
 											<div class="uk-width-expand">
-												<p class="uk-comment-meta uk-margin-remove-top"><a class="uk-link-reset" href="#">Logado como</a></p>
-												<h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Fernando</a></h4>
+												<p class="uk-comment-meta uk-margin-remove-top"><a class="uk-link-reset" href="#">Logged as</a></p>
+												<h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">First Name</a></h4>
 											</div>
 										</div>
 										<ul class="uk-nav uk-dropdown-nav">
 											<div class="link-menu-profile">
 												<li>
 													<i uk-icon="icon: user"></i>
-													<a href="#">
-														<span>Seu Perfil</span>
+													<a href="{% url 'accounts:profile' %}">
+														<span>Profile</span>
 													</a>
 												</li>
 												<li class="">
 													<i uk-icon="icon: sign-out"></i>
-													<a href="#">
+													<a href="{% url 'core:logout' %}">
 														<span>Logout</span>
 													</a>
 												</li>
@@ -79,25 +79,14 @@
 						<div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
 							<div class="uk-first-column">
 								<div class="title-page">
-									<h2>Editar Perfil</h2>
+									<h2>Profile</h2>
 								</div>
 								<div class="menu-tabs">
 									<ul class="tab">
-										<li class="uk-active"><a href="#">Dados</a></li>
-										<li><a href="perfil-senha.html">Senha</a></li>
+										<li class="uk-active"><a href="{% url 'accounts:profile' %}">Info</a></li>
+										<li><a href="{% url 'accounts:profile_password' %}">Password</a></li>
 									</ul>
 								</div>
-							</div>
-						</div>
-					</div>
-					<div class="uk-width-1-2@m breadcrumb">
-						<div class="uk-child-width-1-1 uk-grid uk-grid-stack" uk-grid="">
-							<div class="uk-first-column">
-								<ul class="uk-breadcrumb">
-									<li><a href="#">Home</a></li>
-									<li><a href="#">Editar Perfil</a></li>
-									<li><span href="#">Dados</span></li>
-								</ul>
 							</div>
 						</div>
 					</div>

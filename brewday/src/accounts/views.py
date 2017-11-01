@@ -38,7 +38,18 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
+class ProfilePasswordView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'accounts/profile_password.html'
+    success_url = reverse_lazy('accounts:update_user')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
 login = UserLoginView.as_view()
 logout = UserLogoutView.as_view()
 register = UserRegistrationView.as_view()
 profile = ProfileView.as_view()
+profile_password = ProfilePasswordView.as_view()
