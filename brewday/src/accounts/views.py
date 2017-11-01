@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.views.generic import CreateView, UpdateView, FormView
 
+from ..core.utils.mail import send_welcome_mail
 from ..accounts.forms import UserLoginForm, UserRegistrationForm, EmailChangeForm, ProfileChangeForm
 
 User = get_user_model()
@@ -27,6 +28,13 @@ class UserRegistrationView(CreateView):
     form_class = UserRegistrationForm
     template_name = 'core/register.html'
     success_url = reverse_lazy('core:login')
+
+    def get_success_url(self):
+        print('##############')
+        print(self.object)
+        print('##############')
+        send_welcome_mail(self.object)
+        return super().get_success_url()
 
 
 class UpdateProfileView(LoginRequiredMixin, UpdateView):
