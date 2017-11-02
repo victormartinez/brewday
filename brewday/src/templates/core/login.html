@@ -49,7 +49,8 @@
                             </div>
                             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                 <div class="uk-width-1-1@m">
-                                    <label><input class="uk-checkbox" type="checkbox"> Keep me logged in</label>
+                                    {% render_field form.keep_signed class='uk-checkbox' type='checkbox' %}
+                                    <label for="{{ form.keep_signed.auto_id }}">Keep me logged in.</label>
                                 </div>
                             </div>
                             <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Login

@@ -21,6 +21,11 @@ class UserAdminForm(forms.ModelForm):
 
 
 class UserLoginForm(AuthenticationForm):
+    keep_signed = forms.BooleanField(
+        widget=forms.CheckboxInput,
+        required=False,
+    )
+
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(request, *args, **kwargs)
 
