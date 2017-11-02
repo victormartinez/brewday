@@ -1,0 +1,10 @@
+language: python
+python:
+  - "3.6.1"
+install:
+  - pip install -q -r requirements-dev.txt
+script:
+  - python manage.py test src/
+deploy:
+  provider: heroku
+  api_key: "1f7aa12e-34c1-4238-830f-c009e4195439"
