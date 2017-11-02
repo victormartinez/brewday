@@ -30,9 +30,6 @@ class UserRegistrationView(CreateView):
     success_url = reverse_lazy('core:login')
 
     def get_success_url(self):
-        print('##############')
-        print(self.object)
-        print('##############')
         send_welcome_mail(self.object)
         return super().get_success_url()
 
