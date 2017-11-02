@@ -8,8 +8,7 @@ ENV REFRESHED_AT 2017-10-24
 RUN mkdir /brewday
 WORKDIR /brewday
 ADD requirements.txt /brewday/
-ADD requirements-dev.txt /brewday/
-RUN pip install -r /brewday/requirements-dev.txt
+RUN pip install -r /brewday/requirements.txt
 ADD . /brewday
 
 EXPOSE 8000
