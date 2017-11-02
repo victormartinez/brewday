@@ -4,9 +4,7 @@ python:
 install:
   - pip install -q -r requirements.txt
 env:
-  - SECRET_KEY="0%9tz(fb0d(f!(y@4h2y(e7!m7u#!^)6*bd7_gn4v_kl3^%z1#"
-  - DEBUG=True
-  - ALLOWED_HOSTS="127.0.0.1"
+  - SECRET_KEY="0%9tz(fb0d(f!(y@4h2y(e7!m7u#!^)6*bd7_gn4v_kl3^%z1#" DEBUG=True ALLOWED_HOSTS="127.0.0.1"
 script:
   - python manage.py test src/
 deploy:
