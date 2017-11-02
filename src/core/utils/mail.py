@@ -1,15 +1,19 @@
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 def send_welcome_mail(user):
-    message = EmailMessage(
+    html_content = render_to_string('emails/welcome.html', {'user': user})
+    text_content = strip_tags(html_content)
+
+    message = EmailMultiAlternatives(
+        subject='[BrewDay Platform] Welcome {}'.format(user.profile.name),
         from_email=settings.DEFAULT_FROM_EMAIL,
         to=[user.email],
-        subject='[BrewDay Platform] Welcome {}'.format(user.profile.name),
+        body=text_content
     )
 
-    message.template_name = 'emails/welcome.html'
-    message.global_merge_vars = {'user': user}
-    message.merge_language = "handlebars"
+    message.attach_alternative(html_content, "text/html")
     message.send(fail_silently=True)
