@@ -9,6 +9,31 @@ from src.accounts.models import Profile
 User = get_user_model()
 
 
+class LoginViewTemplateTestCase(TestCase):
+    def setUp(self):
+        self.url = reverse('core:login')
+        self.response = self.client.get(self.url)
+
+    def test_status_code(self):
+        self.assertEqual(200, self.response.status_code)
+
+    def test_contents(self):
+        contents = [
+            '<h2>Login</h2>',
+            '<form method="post">',
+            'csrfmiddlewaretoken',
+            '<input type="text" name="username"',
+            '<input type="password" name="password"',
+            '<input type="checkbox" name="keep_signed"',
+            "<h5>Don't have an account?",
+            'Forgot your password?</a>',
+        ]
+
+        for expected in contents:
+            with self.subTest():
+                self.assertContains(self.response, expected)
+
+
 class LoginSuccessWithEmailTestCase(TestCase):
     def setUp(self):
         User.objects.create_user('victormartinez', 'vcrmartinez@gmail.com', '123!123!123!')
