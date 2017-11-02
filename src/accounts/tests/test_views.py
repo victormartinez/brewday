@@ -11,10 +11,7 @@ User = get_user_model()
 
 class LoginSuccessWithEmailTestCase(TestCase):
     def setUp(self):
-        user = User(username='victormartinez', email='vcrmartinez@gmail.com')
-        user.set_password('123!123!123!')
-        user.save()
-
+        User.objects.create_user('victormartinez', 'vcrmartinez@gmail.com', '123!123!123!')
         mommy.make(Profile, user=User.objects.get(username='victormartinez'))
 
         self.url = reverse('core:login')
@@ -42,10 +39,7 @@ class LoginSuccessWithEmailTestCase(TestCase):
 
 class LoginSuccessWithUsernameTestCase(TestCase):
     def setUp(self):
-        user = User(username='victormartinez', email='vcrmartinez@gmail.com')
-        user.set_password('123!123!123!')
-        user.save()
-
+        User.objects.create_user('victormartinez', 'vcrmartinez@gmail.com', '123!123!123!')
         mommy.make(Profile, user=User.objects.get(username='victormartinez'))
 
         self.url = reverse('core:login')
@@ -71,5 +65,76 @@ class LoginSuccessWithUsernameTestCase(TestCase):
         User.objects.all().delete()
 
 
-class LoginFailureTestCase(TestCase):
-    pass
+class LoginUsernameFailureTestCase(TestCase):
+    def setUp(self):
+        User.objects.create_user('victormartinez', 'vcrmartinez@gmail.com', '123!123!123!')
+        mommy.make(Profile, user=User.objects.get(username='victormartinez'))
+
+        self.url = reverse('core:login')
+        self.response = self.client.post(
+            self.url,
+            data={'username': 'admin', 'password': '123!123!123!'}
+        )
+
+    def test_status_code(self):
+        self.assertEquals(200, self.response.status_code)
+
+    def test_not_authenticated(self):
+        self.assertFalse(self.response.wsgi_request.user.is_authenticated())
+
+    def test_error_messages(self):
+        message = 'Please enter a correct Username and password. Note that both fields may be case-sensitive.'
+        self.assertTrue(message in self.response.rendered_content)
+
+    def tearDown(self):
+        User.objects.all().delete()
+
+
+class LoginEmailFailureTestCase(TestCase):
+    def setUp(self):
+        User.objects.create_user('victormartinez', 'vcrmartinez@gmail.com', '123!123!123!')
+        mommy.make(Profile, user=User.objects.get(username='victormartinez'))
+
+        self.url = reverse('core:login')
+        self.response = self.client.post(
+            self.url,
+            data={'username': 'admin@gmail.com', 'password': '123!123!123!'}
+        )
+
+    def test_status_code(self):
+        self.assertEquals(200, self.response.status_code)
+
+    def test_not_authenticated(self):
+        self.assertFalse(self.response.wsgi_request.user.is_authenticated())
+
+    def test_error_messages(self):
+        message = 'Please enter a correct Username and password. Note that both fields may be case-sensitive.'
+        self.assertTrue(message in self.response.rendered_content)
+
+    def tearDown(self):
+        User.objects.all().delete()
+
+
+class LoginPasswordFailureTestCase(TestCase):
+    def setUp(self):
+        User.objects.create_user('victormartinez', 'vcrmartinez@gmail.com', '123!123!123!')
+        mommy.make(Profile, user=User.objects.get(username='victormartinez'))
+
+        self.url = reverse('core:login')
+        self.response = self.client.post(
+            self.url,
+            data={'username': 'victormartinez', 'password': '123!123!'}
+        )
+
+    def test_status_code(self):
+        self.assertEquals(200, self.response.status_code)
+
+    def test_not_authenticated(self):
+        self.assertFalse(self.response.wsgi_request.user.is_authenticated())
+
+    def test_error_messages(self):
+        message = 'Please enter a correct Username and password. Note that both fields may be case-sensitive.'
+        self.assertTrue(message in self.response.rendered_content)
+
+    def tearDown(self):
+        User.objects.all().delete()
