@@ -1,9 +1,10 @@
+from django.conf import settings
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetConfirmView, PasswordResetView
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.views.generic import CreateView, UpdateView, FormView
 
 from ..core.utils.mail import send_welcome_mail
@@ -89,9 +90,32 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
         return super(UpdatePasswordView, self).get_success_url()
 
 
+class UserForgotPasswordView(PasswordResetView):
+    template_name = 'core/forgot_password.html'
+    email_template_name = 'emails/password_reset_email.html'
+    subject_template_name = 'emails/password_reset_subject.txt'
+    success_url = reverse_lazy('core:forgot_password')
+    from_email = settings.DEFAULT_FROM_EMAIL
+
+    def post(self, request, *args, **kwargs):
+        messages.success(
+            request,
+            'If your e-mail is registered you will receive instructions on how to redefine your password.'
+        )
+        return super().post(request, *args, **kwargs)
+
+
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'core/reset_confirm_password.html'
+    success_url = reverse_lazy('core:login')
+    form_class = SetPasswordForm
+
+
 login = UserLoginView.as_view()
 logout = UserLogoutView.as_view()
 register = UserRegistrationView.as_view()
 profile = UpdateProfileView.as_view()
 profile_password = UpdatePasswordView.as_view()
 profile_email = UpdateEmailView.as_view()
+forgot_password = UserForgotPasswordView.as_view()
+reset_password = UserPasswordResetConfirmView.as_view()
