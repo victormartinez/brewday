@@ -1,51 +1,68 @@
 {% load static %}
 <div class="tm-header-mobile uk-hidden@m">
-		<nav class="uk-navbar-container uk-navbar" uk-navbar="">
-			<div class="uk-navbar-center">
-				<a class="uk-navbar-item uk-logo" href="#">
-					<img src="images/logointerna.png" class="uk-responsive-height" alt="Brewday">
-				</a>
-			</div>
-			<div class="uk-navbar-right">
-				<a class="uk-navbar-toggle" href="#tm-mobile" uk-toggle="">
-					<div uk-navbar-toggle-icon="" class="uk-navbar-toggle-icon uk-icon"></div>
-				</a>
-			</div>
-		</nav>
-	</div>
-	<div class="tm-header uk-visible@m" uk-header="">
-		<div class="uk-navbar-container uk-sticky uk-sticky-fixed uk-active uk-navbar-sticky uk-sticky-below">
-			<div class="uk-container">
-				<nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;}">
-					<div class="uk-navbar-left">
-						<a href="#" class="uk-logo">
-							<img src="images/logointerna.png" alt="Brewday">
-							<img src="images/logointerna.png" class="uk-logo-inverse" alt="Brewday">
-						</a>
-					</div>
-					<div class="uk-navbar-center">
-						<div class="uk-margin-auto-vertical">
-							<ul class="uk-navbar-nav">
-								<li><a href="#">Home</a></li>
-								<li><a href="{% url 'accounts:profile' %}">Profile</a></li>
-								<li><a href="#">Recipes</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="uk-navbar-right">
-						<div class="menu-profile">
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link" aria-expanded="false">
+    <nav class="uk-navbar-container uk-navbar" uk-navbar="">
+        <div class="uk-navbar-center">
+            <a class="uk-navbar-item uk-logo" href="#">
+                <img src="images/logointerna.png" class="uk-responsive-height" alt="Brewday">
+            </a>
+        </div>
+        <div class="uk-navbar-right">
+            <a class="uk-navbar-toggle" href="#tm-mobile" uk-toggle="">
+                <div uk-navbar-toggle-icon="" class="uk-navbar-toggle-icon uk-icon"></div>
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="tm-header uk-visible@m" uk-header="">
+    <div class="uk-navbar-container uk-sticky uk-sticky-fixed uk-active uk-navbar-sticky uk-sticky-below">
+        <div class="uk-container">
+            <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;}">
+                <div class="uk-navbar-left">
+                    <a href="#" class="uk-logo">
+                        <img src="images/logointerna.png" alt="Brewday">
+                        <img src="images/logointerna.png" class="uk-logo-inverse" alt="Brewday">
+                    </a>
+                </div>
+                <div class="uk-navbar-center">
+                    <div class="uk-margin-auto-vertical">
+                        <ul class="uk-navbar-nav">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
+                            <li><a href="#">Recipes</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="uk-navbar-right">
+                    <div class="menu-profile">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link"
+                           aria-expanded="false">
 								<span class="avatar avatar-online">
-									<img src="{% static 'custom/general/img/avatar.png' %}" alt="avatar">
-									<span class="arrow-profile" uk-icon="icon: chevron-down"></span>
+                                    {% if user.profile.photo %}
+                                        <img src="{{ user.profile.photo.url }}" alt="avatar">
+                                    {% else %}
+                                        <img src="{% static 'custom/general/img/avatar.png' %}" alt="avatar">
+                                    {% endif %}
+                                    <span class="arrow-profile" uk-icon="icon: chevron-down"></span>
 									<div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000">
 										<div class="uk-grid-medium uk-flex-middle info-profile" uk-grid>
 											<div class="uk-width-auto">
-												<img class="uk-comment-avatar" src="{% static 'custom/general/img/avatar.png' %}" width="80" height="80" alt="">
+
+                                                {% if user.profile.photo %}
+                                                    <img class="uk-comment-avatar"
+                                                         src="{{ user.profile.photo.url }}" width="80"
+                                                         height="80" alt="">
+                                                {% else %}
+                                                    <img class="uk-comment-avatar"
+                                                         src="{% static 'custom/general/img/avatar.png' %}" width="80"
+                                                         height="80" alt="">
+                                                {% endif %}
+
 											</div>
 											<div class="uk-width-expand">
-												<p class="uk-comment-meta uk-margin-remove-top"><a class="uk-link-reset" href="#">Logged as</a></p>
-												<h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{ user.profile }}</a></h4>
+												<p class="uk-comment-meta uk-margin-remove-top"><a class="uk-link-reset"
+                                                                                                   href="#">Logged as</a></p>
+												<h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset"
+                                                                                                 href="#">{{ user.profile }}</a></h4>
 											</div>
 										</div>
 										<ul class="uk-nav uk-dropdown-nav">
@@ -66,39 +83,42 @@
 										</ul>
 									</div>
 								</span>
-							</a>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div>
-		<div class="dashboard-header">
-			<div class="uk-container">
-				<div class="uk-grid uk-grid-large" uk-grid="">
-					<div class="uk-width-expand@m uk-first-column">
-						<div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-							<div class="uk-first-column">
-								<div class="title-page">
-									<h2>Profile</h2>
-								</div>
-								<div class="menu-tabs">
-									<ul class="tab">
-                                        {% url 'accounts:profile' as profile_url %}
-                                        {% url 'accounts:profile_password' as profile_password_url %}
-                                        {% url 'accounts:profile_email' as profile_email_url %}
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="dashboard-header">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="uk-first-column">
+                            <div class="title-page">
+                                <h2>Profile</h2>
+                            </div>
+                            <div class="menu-tabs">
+                                <ul class="tab">
+                                    {% url 'accounts:profile' as profile_url %}
+                                    {% url 'accounts:profile_password' as profile_password_url %}
+                                    {% url 'accounts:profile_email' as profile_email_url %}
 
-										<li class="{% if profile_url == request.path %}uk-active{% endif %}"><a href="{% url 'accounts:profile' %}">Info</a></li>
-										<li class="{% if profile_email_url == request.path %}uk-active{% endif %}"><a href="{% url 'accounts:profile_email' %}">Email</a></li>
-										<li class="{% if profile_password_url == request.path %}uk-active{% endif %}"><a href="{% url 'accounts:profile_password' %}">Password</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                    <li class="{% if profile_url == request.path %}uk-active{% endif %}"><a
+                                            href="{% url 'accounts:profile' %}">Info</a></li>
+                                    <li class="{% if profile_email_url == request.path %}uk-active{% endif %}"><a
+                                            href="{% url 'accounts:profile_email' %}">Email</a></li>
+                                    <li class="{% if profile_password_url == request.path %}uk-active{% endif %}"><a
+                                            href="{% url 'accounts:profile_password' %}">Password</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div class="tm-header-mobile uk-hidden@m">

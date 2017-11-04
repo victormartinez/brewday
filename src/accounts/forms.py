@@ -33,7 +33,7 @@ class UserLoginForm(AuthenticationForm):
 class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'surname']
+        fields = ['name', 'surname', 'photo', ]
 
 
 class EmailChangeForm(forms.ModelForm):

@@ -32,10 +32,13 @@ class UserLogoutView(LogoutView):
 
 
 class UserRegistrationView(CreateView):
-    model = User
     form_class = UserRegistrationForm
     template_name = 'core/register.html'
     success_url = reverse_lazy('core:login')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Your account was created. Please, login.')
+        return super(UserRegistrationView, self).form_valid(form)
 
     def get_success_url(self):
         send_welcome_mail(self.object)
