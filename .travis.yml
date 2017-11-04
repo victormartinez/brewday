@@ -6,7 +6,9 @@ install:
 env:
   - SECRET_KEY="0%9tz(fb0d(f!(y@4h2y(e7!m7u#!^)6*bd7_gn4v_kl3^%z1#" DEBUG=True ALLOWED_HOSTS="127.0.0.1"
 script:
+  - python manage.py check
   - python manage.py test src/
 deploy:
   provider: heroku
-  api_key: "1f7aa12e-34c1-4238-830f-c009e4195439"
+  api_key:
+    secure: "1f7aa12e-34c1-4238-830f-c009e4195439"
