@@ -9,6 +9,11 @@ from model_utils.models import TimeStampedModel
 from .managers import CustomUserManager
 
 
+def profile_image_upload_location(instance, filename):
+    name = "avatar.{}".format(filename.split('.')[-1])
+    return "{}/{}/{}/{}".format('media_cdn', 'profile_photos', instance.id, name)
+
+
 class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     username = models.CharField(
         'Username', max_length=30, unique=True, validators=[
@@ -52,7 +57,16 @@ class Profile(TimeStampedModel):
     user = models.OneToOneField(User)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
-    photo = models.ImageField(blank=True, null=True)
+    photo = models.ImageField(
+        null=True,
+        blank=True,
+        height_field="height_field",
+        width_field="width_field",
+        upload_to=profile_image_upload_location
+    )
+
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
 
     @property
     def full_name(self):
