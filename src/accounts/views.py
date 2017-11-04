@@ -27,7 +27,7 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     def get_next_page(self):
-        # messages.success(self.request, 'You have logged out.')
+        messages.success(self.request, 'You have logged out.')
         return super(UserLogoutView, self).get_next_page()
 
 
@@ -50,9 +50,9 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.profile
 
-    def get_success_url(self):
+    def form_valid(self, form):
         messages.success(self.request, 'Your Personal Info was changed successfully.')
-        return super(UpdateProfileView, self).get_success_url()
+        return super(UpdateProfileView, self).form_valid(form)
 
 
 class UpdateEmailView(LoginRequiredMixin, UpdateView):
@@ -63,9 +63,9 @@ class UpdateEmailView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-    def get_success_url(self):
+    def form_valid(self, form):
         messages.success(self.request, 'Your email was changed successfully.')
-        return super(UpdateEmailView, self).get_success_url()
+        return super(UpdateEmailView, self).form_valid(form)
 
 
 class UpdatePasswordView(LoginRequiredMixin, FormView):
@@ -80,14 +80,11 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, 'Your password was changed successfully.')
         return super(UpdatePasswordView, self).form_valid(form)
 
     def get_object(self, queryset=None):
         return self.request.user
-
-    def get_success_url(self):
-        messages.success(self.request, 'Your password was changed successfully.')
-        return super(UpdatePasswordView, self).get_success_url()
 
 
 class UserForgotPasswordView(PasswordResetView):
@@ -100,12 +97,12 @@ class UserForgotPasswordView(PasswordResetView):
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
-    def get_success_url(self):
+    def form_valid(self, form):
         messages.success(
             self.request,
             'If your e-mail is registered you will receive instructions on how to redefine your password.'
         )
-        return super(UserForgotPasswordView, self).get_success_url()
+        return super(UserForgotPasswordView, self).form_valid(form)
 
 
 class UserPasswordResetConfirmView(PasswordResetConfirmView):
@@ -113,12 +110,12 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
     success_url = reverse_lazy('core:login')
     form_class = SetPasswordForm
 
-    def get_success_url(self):
+    def form_valid(self, form):
         messages.success(
             self.request,
             'Password reset successfully. Login in your account.'
         )
-        return super(UserPasswordResetConfirmView, self).get_success_url()
+        return super(UserPasswordResetConfirmView, self).form_valid(form)
 
 
 login = UserLoginView.as_view()
