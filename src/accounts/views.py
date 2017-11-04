@@ -92,23 +92,33 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
 
 class UserForgotPasswordView(PasswordResetView):
     template_name = 'core/forgot_password.html'
-    email_template_name = 'emails/password_reset_email.html'
+    html_email_template_name = 'emails/password_reset_email.html'
     subject_template_name = 'emails/password_reset_subject.txt'
     success_url = reverse_lazy('core:forgot_password')
     from_email = settings.DEFAULT_FROM_EMAIL
 
     def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
         messages.success(
-            request,
+            self.request,
             'If your e-mail is registered you will receive instructions on how to redefine your password.'
         )
-        return super().post(request, *args, **kwargs)
+        return super(UserForgotPasswordView, self).get_success_url()
 
 
 class UserPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'core/reset_confirm_password.html'
     success_url = reverse_lazy('core:login')
     form_class = SetPasswordForm
+
+    def get_success_url(self):
+        messages.success(
+            self.request,
+            'Password reset successfully. Login in your account.'
+        )
+        return super(UserPasswordResetConfirmView, self).get_success_url()
 
 
 login = UserLoginView.as_view()
