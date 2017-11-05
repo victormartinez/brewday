@@ -98,7 +98,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'accounts.User'
-LOGIN_REDIRECT_URL = 'accounts:profile'
+LOGIN_REDIRECT_URL = 'core:app'
 LOGOUT_REDIRECT_URL = 'core:login'
 LOGIN_URL = 'core:login'
 

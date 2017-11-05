@@ -215,3 +215,101 @@ li.uk-active a{
 .uk-tab>.uk-active>a {
     border-color: #ffc30f;
 }
+
+.uk-card-header{
+    background: url("../images/bg-profile.jpg");
+}
+
+.box-profile {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.abk {
+    margin-bottom: 1.5rem !important;
+}
+
+.blf .bg-profile {
+    height: 50px;
+}
+
+.bg-profile {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+}
+
+.arx {
+    text-align: center;
+}
+
+.profile-avatar {
+    max-width: 100px;
+    margin-top: -55px;
+    border: 3px solid #ffc30f;
+    border-radius: 100%;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.box-profile h4{
+    margin-top: 20px;
+}
+
+body.content-profile{
+    background: #f5f8fa;
+}
+
+.uk-section-default {
+    background: none;
+}
+
+.bli {
+    display: inline-block;
+    padding: 0 10px;
+    border-right: 1px solid #d4dbe0;
+}
+
+.links-profile {
+    list-style: none;
+    padding: 0;
+}
+
+.bli:last-child {
+    border-right: 0;
+}
+
+.box-profile h6{
+    margin-bottom: 0;
+}
+
+.uk-button-primary {
+    background: none;
+    margin-right: 10px;
+    text-transform: none;
+    color: #ffc30f;
+}
+
+.uk-button-primary:hover {
+    background: none;
+    color: white;
+}
+
+.bg-index{
+    position: fixed;
+}
+
+.uk-logo img{
+    padding-left: 14px;
+}

@@ -1,0 +1,95 @@
+{% extends 'app.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block container %}
+    <div id="tm-main" class="tm-main uk-section uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
+		<div class="uk-container">
+			<div class="uk-grid uk-grid-large" uk-grid="">
+				<div class="uk-width-expand@m uk-first-column">
+					<div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+						<div class="uk-first-column">
+							<div class="uk-card uk-card-default uk-width-1-2@m">
+								<div class="box-profile blf abk">
+									<div class="bg-profile"></div>
+									<div class="mv arx">
+                                        <a href="{% url 'accounts:profile' %}">
+                                            {% if user.profile.photo %}
+                                                <img src="{{ user.profile.photo.url }}" class="profile-avatar" alt="avatar">
+                                            {% else %}
+                                                <img src="{% static 'custom/general/img/avatar.png' %}" class="profile-avatar" alt="avatar">
+                                            {% endif %}
+                                        </a>
+                                        <h4 class="mw">
+                                            <a class="bjx" href="{% url 'accounts:profile' %}">{{ request.user.profile.full_name }}</a>
+                                        </h4>
+{#                                        <ul class="links-profile">#}
+{#                                            <li class="bli">#}
+{#                                                <a href="#" class="bjx">#}
+{#                                                    Amigos#}
+{#                                                    <h6 class="aal">12M</h6>#}
+{#                                                </a>#}
+{#                                            </li>#}
+{##}
+{#                                            <li class="bli">#}
+{#                                                <a href="#" class="bjx">#}
+{#                                                    Receitas#}
+{#                                                    <h6 class="aal">1</h6>#}
+{#                                                </a>#}
+{#                                            </li>#}
+{#                                        </ul>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    <footer>
+        <div class="uk-section-secondary uk-section uk-section-xsmall rodape">
+            <div class="uk-container">
+                <div class="uk-flex-middle uk-margin-remove-vertical uk-grid" uk-grid="">
+                    <div class="uk-width-expand@s uk-first-column">
+                        <div class="uk-margin uk-text-left@s uk-text-center uk-text-small">
+                            © Brewday | All rights reserved.
+                        </div>
+                    </div>
+                    <div class="uk-width-expand@s">
+                        <div class="uk-margin uk-text-right@s uk-text-center">
+                            <a href="#" uk-totop="" uk-scroll="" class="uk-totop uk-icon topo"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block extra %}
+    <!-- Menu Responsivo Modal -->
+    <div id="tm-mobile" class="uk-modal-full uk-modal" uk-modal="">
+        <div class="uk-modal-dialog uk-modal-body uk-text-center uk-flex" uk-height-viewport=""
+             style="box-sizing: border-box; min-height: 100vh; height: 100vh;">
+            <button class="uk-modal-close-full uk-close uk-icon" type="button" uk-close=""></button>
+            <div class="uk-margin-auto-vertical uk-width-1-1">
+                <div class="uk-child-width-1-1 uk-grid uk-grid-stack" uk-grid="">
+                    <div class="uk-first-column">
+                        <div class="uk-panel">
+                            <ul class="uk-nav uk-nav-primary uk-nav-center">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Recipes</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
