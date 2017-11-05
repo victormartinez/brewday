@@ -53,19 +53,19 @@
 
                                 </div>
 
-                                <div class="uk-width-1-1@s">
+                                <div class="uk-width-1-1@s uk-grid-margin">
                                     {% render_field form.name class='uk-input' placeholder=form.name.label %}
                                     {% for error in form.name.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
-                                <div class="uk-width-1-1@s">
+                                <div class="uk-width-1-1@s uk-grid-margin">
                                     {% render_field form.surname class='uk-input' placeholder=form.surname.label %}
                                     {% for error in form.surname.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
-                                <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"
+                                <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin uk-margin-small-bottom"
                                         style="margin-left: 15px;">Update
                                 </button>
                             </form>
