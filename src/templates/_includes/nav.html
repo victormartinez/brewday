@@ -1,24 +1,11 @@
 {% load static %}
-<div class="tm-header-mobile uk-hidden@m">
-    <nav class="uk-navbar-container uk-navbar" uk-navbar="">
-        <div class="uk-navbar-center">
-            <a class="uk-navbar-item uk-logo" href="#">
-                <img src="images/logointerna.png" class="uk-responsive-height" alt="Brewday">
-            </a>
-        </div>
-        <div class="uk-navbar-right">
-            <a class="uk-navbar-toggle" href="#tm-mobile" uk-toggle="">
-                <div uk-navbar-toggle-icon="" class="uk-navbar-toggle-icon uk-icon"></div>
-            </a>
-        </div>
-    </nav>
-</div>
+
 <div class="tm-header uk-visible@m" uk-header="">
     <div class="uk-navbar-container uk-sticky uk-sticky-fixed uk-active uk-navbar-sticky uk-sticky-below">
         <div class="uk-container">
             <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;}">
                 <div class="uk-navbar-left">
-                    <a href="#" class="uk-logo">
+                    <a href="{% url 'core:app' %}" class="uk-logo">
                         <img src="images/logointerna.png" alt="Brewday">
                         <img src="images/logointerna.png" class="uk-logo-inverse" alt="Brewday">
                     </a>
