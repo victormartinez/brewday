@@ -49,7 +49,7 @@ class LoginSuccessWithEmailTestCase(TestCase):
         self.assertEqual(302, self.response.status_code)
 
     def test_redirects(self):
-        self.assertRedirects(self.response, reverse('accounts:profile'))
+        self.assertRedirects(self.response, reverse('core:app'))
 
     def test_user_match(self):
         user = User.objects.get(username='victormartinez')
@@ -77,7 +77,7 @@ class LoginSuccessWithUsernameTestCase(TestCase):
         self.assertEqual(302, self.response.status_code)
 
     def test_redirects(self):
-        self.assertRedirects(self.response, reverse('accounts:profile'))
+        self.assertRedirects(self.response, reverse('core:app'))
 
     def test_user_match(self):
         user = User.objects.get(username='victormartinez')
