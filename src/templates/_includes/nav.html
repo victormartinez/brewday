@@ -3,7 +3,7 @@
 <div class="tm-header uk-visible@m" uk-header="">
     <div class="uk-navbar-container uk-sticky uk-sticky-fixed uk-active uk-navbar-sticky uk-sticky-below">
         <div class="uk-container">
-            <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;}">
+            <nav class="uk-navbar" uk-navbar="{'align':'left'}">
                 <div class="uk-navbar-left">
                     <a href="{% url 'core:app' %}" class="uk-logo">
                         <img src="images/logointerna.png" alt="Brewday">
@@ -70,11 +70,10 @@
         </div>
     </div>
 
-    {% url 'accounts:profile' as profile_url %}
-    {% url 'accounts:profile_password' as profile_password_url %}
-    {% url 'accounts:profile_email' as profile_email_url %}
 
-    {% if request.path == profile_url or request.path == profile_password_url or request.path == profile_email_url %}
+    {% url 'core:app' as app_url %}
+
+    {% if not request.path == app_url %}
         <div class="dashboard-header">
             <div class="uk-container">
                 <div class="uk-grid uk-grid-large" uk-grid="">
@@ -86,13 +85,35 @@
                                 </div>
                                 <div class="menu-tabs">
                                     <ul class="tab">
+                                        {% url 'accounts:profile' as profile_url %}
+                                        {% url 'accounts:profile_password' as profile_password_url %}
+                                        {% url 'accounts:profile_email' as profile_email_url %}
+
                                         <li class="{% if profile_url == request.path %}uk-active{% endif %}"><a
-                                                href="{% url 'accounts:profile' %}">Info</a></li>
-                                        <li class="{% if profile_email_url == request.path %}uk-active{% endif %}"><a
-                                                href="{% url 'accounts:profile_email' %}">Email</a></li>
-                                        <li class="{% if profile_password_url == request.path %}uk-active{% endif %}"><a
-                                                href="{% url 'accounts:profile_password' %}">Password</a></li>
+                                                href="{% url 'accounts:profile' %}">Profile</a></li>
+                                        <div uk-dropdown="" class="nav-dropdown">
+                                            <ul class="uk-nav uk-dropdown-nav">
+                                                <li class="{% if profile_email_url == request.path %}uk-active{% endif %}">
+                                                    <a href="{% url 'accounts:profile' %}">Personal Info</a></li>
+                                                <li class="{% if profile_email_url == request.path %}uk-active{% endif %}">
+                                                    <a href="{% url 'accounts:profile_email' %}">Email</a></li>
+                                                <li class="{% if profile_password_url == request.path %}uk-active{% endif %}">
+                                                    <a href="{% url 'accounts:profile_password' %}">Password</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <li class="{% if profile_url == request.path %}uk-active{% endif %}"><a
+                                                href="#">Recipes</a></li>
+                                        <div uk-dropdown="" class="nav-dropdown">
+                                            <ul class="uk-nav uk-dropdown-nav">
+                                                <li class="{% if profile_email_url == request.path %}uk-active{% endif %}">
+                                                    <a href="{% url 'accounts:profile_email' %}">Email</a></li>
+                                                <li class="{% if profile_password_url == request.path %}uk-active{% endif %}">
+                                                    <a href="{% url 'accounts:profile_password' %}">Password</a></li>
+                                            </ul>
+                                        </div>
                                     </ul>
+
                                 </div>
                             </div>
                         </div>

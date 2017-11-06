@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block container %}
-    <div id="tm-main" class="tm-main uk-section uk-section-default" uk-height-viewport="expand: true"
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
         <div class="uk-container">
             <div class="uk-grid uk-grid-large" uk-grid="">
@@ -16,29 +16,41 @@
                         <div class="uk-first-column">
                             <form method="post" class="uk-grid-small alter" enctype="multipart/form-data">
                                 {% csrf_token %}
+
                                 <div class="uk-margin">
                                     <div uk-form-custom>
-                                        <div class="uk-grid-medium uk-flex-middle info-profile" uk-grid>
-                                            <div class="uk-width-auto">
-                                                {% if user.profile.photo %}
-                                                    <img class="uk-comment-avatar"
-                                                         src="{{ user.profile.photo.url }}" width="80"
-                                                         height="80" alt="">
-                                                {% else %}
-                                                    <img class="uk-comment-avatar"
-                                                         src="{% static 'custom/general/img/avatar.png' %}" width="80"
-                                                         height="80" alt="">
-                                                {% endif %}
-
-                                                <input type="file" name="photo" placeholder="Photo" class="uk-input"
-                                                       id="id_photo"><a href="#">Upload {% if user.profile.photo %}
-                                                new{% endif %} photo</a>
-                                                {% for error in form.photo.errors %}
-                                                    <span class="uk-text-danger">{{ error }}</span>
-                                                {% endfor %}
+                                        <div class="uk-grid-medium uk-margin-top">
+                                            <div class="uk-block">
+                                                <h4>Personal Info</h4>
                                             </div>
                                         </div>
-                                        <h4>Personal Info</h4>
+
+                                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                                            {% if user.profile.photo %}
+                                                <img class="uk-comment-avatar uk-float-left"
+                                                     src="{{ user.profile.photo.url }}"
+                                                     height="140" width="140" alt="">
+                                            {% else %}
+                                                <img class="uk-comment-avatar uk-float-left"
+                                                     src="{% static 'custom/general/img/avatar.png' %}"
+                                                     height="140" width="140" alt="">
+                                            {% endif %}
+
+                                            <div class="js-upload uk-placeholder uk-text-center uk-float-left uk-margin-left">
+                                                <span uk-icon="icon: cloud-upload"></span>
+                                                <span class="uk-text-middle">Drop your photo here or</span>
+                                                <div uk-form-custom>
+                                                    <input type="file" name="photo" placeholder="Photo" class="uk-input"
+                                                           id="id_photo">
+                                                    <span class="uk-link">select one</span>
+                                                </div>
+                                            </div>
+
+                                            {% for error in form.photo.errors %}
+                                                <span class="uk-text-danger">{{ error }}</span>
+                                            {% endfor %}
+
+                                        </div>
                                     </div>
 
                                     {% for message in messages %}
@@ -65,9 +77,10 @@
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
-                                <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin uk-margin-small-bottom"
-                                        style="margin-left: 15px;">Update
-                                </button>
+
+                                <div class="uk-width-1-1@s uk-grid-margin">
+                                    <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Update</button>
+                                </div>
                             </form>
                         </div>
                     </div>
