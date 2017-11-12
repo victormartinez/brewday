@@ -27,11 +27,11 @@
 
                                         <div class="uk-grid-medium uk-flex-middle" uk-grid>
                                             {% if user.profile.photo %}
-                                                <img class="uk-comment-avatar uk-float-left"
+                                                <img id="profilePhoto" class="uk-comment-avatar uk-float-left"
                                                      src="{{ user.profile.photo.url }}"
                                                      height="140" width="140" alt="">
                                             {% else %}
-                                                <img class="uk-comment-avatar uk-float-left"
+                                                <img id="profilePhoto" class="uk-comment-avatar uk-float-left"
                                                      src="{% static 'custom/general/img/avatar.png' %}"
                                                      height="140" width="140" alt="">
                                             {% endif %}
@@ -79,7 +79,8 @@
                                 </div>
 
                                 <div class="uk-width-1-1@s uk-grid-margin">
-                                    <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Update</button>
+                                    <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Update
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -88,4 +89,22 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block custom_js %}
+    <script type="application/javascript">
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profilePhoto').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#id_photo").change(function () {
+            readURL(this);
+        });
+    </script>
 {% endblock %}
