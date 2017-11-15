@@ -7,25 +7,31 @@
 {% endblock %}
 
 {% block container %}
-    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
-         style="box-sizing: border-box;">
-        <div class="uk-container uk-margin-large-bottom">
-            <form method="post">
+    <div class="dashboard-subnav">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="menu-tabs">
+                            <ul class="tab">
 
-                {% url 'recipes:my_recipes' as my_recipes_url %}
-                {% url 'recipes:new' as new_recipe_url %}
+                                {% url 'recipes:my_recipes' as my_recipes_url %}
+                                {% url 'recipes:new' as new_recipe_url %}
 
-                <div class="uk-grid">
-                    <div class="uk-grid-medium uk-margin-top">
-                        <div class="uk-block">
-                            <ul class="uk-subnav">
                                 <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a href="{{ my_recipes_url }}">My Recipes</a></li>
                                 <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}"><a href="{{ new_recipe_url }}">New Recipe</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
+        <div class="uk-container uk-margin-large-bottom">
+            <form method="post">
 
                 <div class="uk-grid-medium uk-margin-large-top">
                     <div class="uk-block">

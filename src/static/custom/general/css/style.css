@@ -180,8 +180,12 @@ span.arrow-profile{
     position: relative;
 }
 
-li.uk-active a{
+.dashboard-header li.uk-active a{
     border-color: #ffc30f;
+    color: #333;
+}
+
+.dashboard-subnav li.uk-active a {
     color: #333;
 }
 
