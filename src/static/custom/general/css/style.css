@@ -189,6 +189,10 @@ span.arrow-profile{
     color: #333;
 }
 
+.dashboard-subnav ul.tab li {
+    border-bottom: 1px solid #f2f3f4;
+}
+
 .nav-dropdown {
     width: 100px !important;
 }
