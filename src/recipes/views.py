@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class NewRecipeView(TemplateView):
+    template_name = 'recipes/new.html'
+
+
+new_recipe = NewRecipeView.as_view()
