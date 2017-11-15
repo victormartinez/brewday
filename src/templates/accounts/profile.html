@@ -17,40 +17,53 @@
                             <form method="post" class="uk-grid-small alter" enctype="multipart/form-data">
                                 {% csrf_token %}
 
+                                {% url 'accounts:profile' as profile_url %}
+                                {% url 'accounts:profile_password' as profile_password_url %}
+                                {% url 'accounts:profile_email' as profile_email_url %}
+
                                 <div class="uk-margin">
-                                    <div uk-form-custom>
-                                        <div class="uk-grid-medium uk-margin-top">
-                                            <div class="uk-block">
-                                                <h4>Personal Info</h4>
+                                    <div class="uk-grid-medium uk-margin-top">
+                                        <div class="uk-block">
+                                            <ul class="uk-subnav">
+                                                <li class="{% if profile_url == request.path %}uk-active{% endif %}"><a href="{{ profile_url }}">Personal Info</a></li>
+                                                <li class="{% if profile_email_url == request.path %}uk-active{% endif %}"><a href="{{ profile_email_url }}">Change Email</a></li>
+                                                <li class="{% if profile_password_url == request.path %}uk-active{% endif %}"><a href="{{ profile_password_url }}">Change Password</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="uk-grid-medium uk-margin-large-top">
+                                        <div class="uk-block">
+                                            <h4>Personal Info</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                                        {% if user.profile.photo %}
+                                            <img id="profilePhoto" class="uk-comment-avatar uk-float-left"
+                                                 src="{{ user.profile.photo.url }}"
+                                                 height="140" width="140" alt="">
+                                        {% else %}
+                                            <img id="profilePhoto" class="uk-comment-avatar uk-float-left"
+                                                 src="{% static 'custom/general/img/avatar.png' %}"
+                                                 height="140" width="140" alt="">
+                                        {% endif %}
+
+                                        <div class="js-upload uk-placeholder uk-text-center uk-float-left uk-margin-left">
+                                            <span uk-icon="icon: cloud-upload"></span>
+                                            <span class="uk-text-middle">Drop your photo here or</span>
+                                            <div uk-form-custom>
+                                                <input type="file" name="photo" placeholder="Photo" class="uk-input"
+                                                       id="id_photo">
+                                                <span class="uk-link">select one</span>
                                             </div>
                                         </div>
 
-                                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                                            {% if user.profile.photo %}
-                                                <img id="profilePhoto" class="uk-comment-avatar uk-float-left"
-                                                     src="{{ user.profile.photo.url }}"
-                                                     height="140" width="140" alt="">
-                                            {% else %}
-                                                <img id="profilePhoto" class="uk-comment-avatar uk-float-left"
-                                                     src="{% static 'custom/general/img/avatar.png' %}"
-                                                     height="140" width="140" alt="">
-                                            {% endif %}
+                                        {% for error in form.photo.errors %}
+                                            <span class="uk-text-danger">{{ error }}</span>
+                                        {% endfor %}
 
-                                            <div class="js-upload uk-placeholder uk-text-center uk-float-left uk-margin-left">
-                                                <span uk-icon="icon: cloud-upload"></span>
-                                                <span class="uk-text-middle">Drop your photo here or</span>
-                                                <div uk-form-custom>
-                                                    <input type="file" name="photo" placeholder="Photo" class="uk-input"
-                                                           id="id_photo">
-                                                    <span class="uk-link">select one</span>
-                                                </div>
-                                            </div>
-
-                                            {% for error in form.photo.errors %}
-                                                <span class="uk-text-danger">{{ error }}</span>
-                                            {% endfor %}
-
-                                        </div>
                                     </div>
 
                                     {% for message in messages %}

@@ -70,7 +70,6 @@
         </div>
     </div>
 
-
     {% url 'core:app' as app_url %}
 
     {% if not request.path == app_url %}
@@ -79,49 +78,27 @@
                 <div class="uk-grid uk-grid-large" uk-grid="">
                     <div class="uk-width-expand@m uk-first-column">
                         <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-                            <div class="uk-first-column">
-                                <div class="title-page">
-                                    <h2>Profile</h2>
-                                </div>
-                                <div class="menu-tabs">
-                                    <ul class="tab">
-                                        {% url 'accounts:profile' as profile_url %}
-                                        {% url 'accounts:profile_password' as profile_password_url %}
-                                        {% url 'accounts:profile_email' as profile_email_url %}
+                            <div class="menu-tabs">
+                                <ul class="tab">
 
-                                        <li class="{% if profile_url == request.path %}uk-active{% endif %}"><a
-                                                href="{% url 'accounts:profile' %}">Profile</a></li>
-                                        <div uk-dropdown="" class="nav-dropdown">
-                                            <ul class="uk-nav uk-dropdown-nav">
-                                                <li class="{% if profile_email_url == request.path %}uk-active{% endif %}">
-                                                    <a href="{% url 'accounts:profile' %}">Personal Info</a></li>
-                                                <li class="{% if profile_email_url == request.path %}uk-active{% endif %}">
-                                                    <a href="{% url 'accounts:profile_email' %}">Email</a></li>
-                                                <li class="{% if profile_password_url == request.path %}uk-active{% endif %}">
-                                                    <a href="{% url 'accounts:profile_password' %}">Password</a></li>
-                                            </ul>
-                                        </div>
+                                    {% url 'accounts:profile' as profile_url %}
+                                    {% url 'accounts:profile_password' as profile_password_url %}
+                                    {% url 'accounts:profile_email' as profile_email_url %}
+                                    {% url 'recipes:new' as new_recipe_url %}
 
-                                        <li class="{% if profile_url == request.path %}uk-active{% endif %}"><a
-                                                href="#">Recipes</a></li>
-                                        <div uk-dropdown="" class="nav-dropdown">
-                                            <ul class="uk-nav uk-dropdown-nav">
-                                                <li class="{% if profile_email_url == request.path %}uk-active{% endif %}">
-                                                    <a href="{% url 'accounts:profile_email' %}">Email</a></li>
-                                                <li class="{% if profile_password_url == request.path %}uk-active{% endif %}">
-                                                    <a href="{% url 'accounts:profile_password' %}">Password</a></li>
-                                            </ul>
-                                        </div>
-                                    </ul>
-
-                                </div>
+                                    <li class="{% if profile_url == request.path or profile_password_url == request.path or profile_email_url == request.path %}uk-active{% endif %}">
+                                        <a href="{{ profile_url }}">Profile</a>
+                                    </li>
+                                    <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}">
+                                        <a href="{{ new_recipe_url }}">Recipes</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     {% endif %}
 </div>
 
