@@ -11,12 +11,16 @@
          style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
             <form method="post">
+
+                {% url 'recipes:my_recipes' as my_recipes_url %}
+                {% url 'recipes:new' as new_recipe_url %}
+
                 <div class="uk-grid">
                     <div class="uk-grid-medium uk-margin-top">
                         <div class="uk-block">
                             <ul class="uk-subnav">
-                                <li><a href="#">My Recipes</a></li>
-                                <li class="uk-active"><a href="#">New Recipe</a></li>
+                                <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a href="{{ my_recipes_url }}">My Recipes</a></li>
+                                <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}"><a href="{{ new_recipe_url }}">New Recipe</a></li>
                             </ul>
                         </div>
                     </div>
