@@ -9,8 +9,26 @@
 {% block container %}
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
-        <div class="uk-container" style="margin-top: 40px;">
+        <div class="uk-container uk-margin-large-bottom">
             <form method="post">
+                <div class="uk-grid">
+                    <div class="uk-grid-medium uk-margin-top">
+                        <div class="uk-block">
+                            <ul class="uk-subnav">
+                                <li><a href="#">My Recipes</a></li>
+                                <li class="uk-active"><a href="#">New Recipe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="uk-grid-medium uk-margin-large-top">
+                    <div class="uk-block">
+                        <h4>New Recipe</h4>
+                    </div>
+                </div>
+
 
                 <div class="uk-grid">
                     <div class="uk-width-1-2">
@@ -45,8 +63,8 @@
                             </div>
 
                             <div class="uk-width-1-6@s">
-                                <a uk-icon="icon:minus-circle"></a>
-                                <a uk-icon="icon:plus-circle"></a>
+                                <a uk-icon="icon:minus-circle" class="uk-margin-top"></a>
+                                <a uk-icon="icon:plus-circle" class="uk-margin-top"></a>
                             </div>
                         </div>
 
@@ -98,7 +116,6 @@
                             <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Create Recipe
                             </button>
                         </div>
-
                     </div>
                 </div>
             </form>
