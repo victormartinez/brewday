@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'src.accounts',
     'src.core',
     'src.recipes',
-    'src.ingredients',
+    'src.storages',
 ]
 
 MIDDLEWARE = [
