@@ -92,12 +92,18 @@
                                     {% url 'accounts:profile_email' as profile_email_url %}
                                     {% url 'recipes:new' as new_recipe_url %}
                                     {% url 'recipes:my_recipes' as my_recipes_url %}
+                                    {% url 'storages:new_ingredient' as new_ingredient_url %}
+                                    {% url 'storages:my' as my_storage_url %}
 
                                     <li class="{% if profile_url == request.path or profile_password_url == request.path or profile_email_url == request.path %}uk-active{% endif %}">
                                         <a href="{{ profile_url }}">Profile</a>
                                     </li>
                                     <li class="{% if new_recipe_url == request.path or my_recipes_url == request.path %}uk-active{% endif %}">
                                         <a href="{{ my_recipes_url }}">Recipes</a>
+                                    </li>
+
+                                    <li class="{% if new_ingredient_url == request.path or my_storage_url == request.path %}uk-active{% endif %}">
+                                        <a href="{{ my_storage_url }}">My Storage</a>
                                     </li>
                                 </ul>
                             </div>
