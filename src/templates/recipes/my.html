@@ -18,8 +18,10 @@
                                 {% url 'recipes:my_recipes' as my_recipes_url %}
                                 {% url 'recipes:new' as new_recipe_url %}
 
-                                <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a href="{{ my_recipes_url }}">My Recipes</a></li>
-                                <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}"><a href="{{ new_recipe_url }}">New Recipe</a></li>
+                                <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a
+                                        href="{{ my_recipes_url }}">My Recipes</a></li>
+                                <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}"><a
+                                        href="{{ new_recipe_url }}">New Recipe</a></li>
                             </ul>
                         </div>
                     </div>
@@ -31,17 +33,138 @@
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
-            <form method="post">
 
-                <div class="uk-grid-medium uk-margin-top">
-                    <div class="uk-block">
-                        <h4>My Recipes</h4>
+            <div class="uk-grid-medium uk-margin-top">
+                <div class="uk-block">
+                    <h4>My Recipes</h4>
+                </div>
+            </div>
+
+            <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">
+                <div class="uk-block">
+                    <form class="uk-search uk-search-default">
+                        <span uk-search-icon></span>
+                        <input class="uk-search-input" type="search" placeholder="Search recipe...">
+                    </form>
+                </div>
+            </div>
+
+            <form method="post">
+                <div class="uk-grid">
+                    <div class="uk-width-1-4 uk-margin-bottom">
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default recipe-card"
+                             uk-toggle="target: #recipe-modal">
+                            <h3 class="uk-card-title">Indian Pale Ale</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid autem
+                                consequatur cum dolore eveniet ex exercitationem hic, impedit iure mollitia natus
+                                quia
+                                quidem repudiandae similique tenetur voluptas voluptatibus?</p>
+                        </div>
                     </div>
+
+                    <div class="uk-width-1-4 uk-margin-bottom">
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default recipe-card">
+                            <h3 class="uk-card-title">Indian Pale Ale</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid autem
+                                consequatur cum dolore eveniet ex exercitationem hic, impedit iure mollitia natus
+                                quia
+                                quidem repudiandae similique tenetur voluptas voluptatibus?</p>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-4 uk-margin-bottom">
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default recipe-card">
+                            <h3 class="uk-card-title">Indian Pale Ale</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid autem
+                                consequatur cum dolore eveniet ex exercitationem hic, impedit iure mollitia natus
+                                quia
+                                quidem repudiandae similique tenetur voluptas voluptatibus?</p>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-4 uk-margin-bottom">
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default recipe-card">
+                            <h3 class="uk-card-title">Indian Pale Ale</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid autem
+                                consequatur cum dolore eveniet ex exercitationem hic, impedit iure mollitia natus
+                                quia
+                                quidem repudiandae similique tenetur voluptas voluptatibus?</p>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-4 uk-margin-bottom">
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default recipe-card">
+                            <h3 class="uk-card-title">Indian Pale Ale</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid autem
+                                consequatur cum dolore eveniet ex exercitationem hic, impedit iure mollitia natus
+                                quia
+                                quidem repudiandae similique tenetur voluptas voluptatibus?</p>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-4 uk-margin-bottom">
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default recipe-card">
+                            <h3 class="uk-card-title">Indian Pale Ale</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid autem
+                                consequatur cum dolore eveniet ex exercitationem hic, impedit iure mollitia natus
+                                quia quidem repudiandae similique tenetur voluptas voluptatibus?</p>
+                        </div>
+                    </div>
+
                 </div>
 
+
+                <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">
+                    <ul class="uk-pagination uk-flex-center" uk-margin="">
+                        <li class="uk-first-column"><a href="#"><span uk-pagination-previous=""
+                                                                      class="uk-pagination-previous uk-icon"><svg
+                                width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg" ratio="1"><polyline
+                                fill="none" stroke="#000" stroke-width="1.2"
+                                points="6 1 1 6 6 11"></polyline></svg></span></a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="uk-disabled"><span>...</span></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li class="uk-active"><span>7</span></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#"><span uk-pagination-next="" class="uk-pagination-next uk-icon"><svg width="7"
+                                                                                                            height="12"
+                                                                                                            viewBox="0 0 7 12"
+                                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                                            ratio="1"><polyline
+                                fill="none" stroke="#000" stroke-width="1.2"
+                                points="1 1 6 6 1 11"></polyline></svg></span></a></li>
+                    </ul>
+                </div>
             </form>
         </div>
     </div>
 
 {% endblock %}
 
+
+{% block extra %}
+    <div id="recipe-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Indian Pale Ale</h2>
+            </div>
+
+            <div class="uk-modal-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-width-1-3 uk-modal-close" type="button"
+                        style="background: #e5e5e5">Close
+                </button>
+                <button class="uk-button uk-button-default uk-width-1-3" type="button">Start brew!</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

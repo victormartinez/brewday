@@ -324,3 +324,18 @@ body.content-profile{
 .uk-logo img{
     padding-left: 14px;
 }
+
+.recipe-card {
+    background-color: #FFE699;
+    cursor: pointer;
+}
+
+.uk-list-inline {
+    padding: 0;
+    margin: 0;
+}
+
+.uk-list-inline > li {
+    list-style: none;
+    display: inline-block;
+}
