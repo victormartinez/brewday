@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block content %}
 
-    HOME
-    {% if user.is_authenticated %}
-        <a class="nav-link" href="{% url 'core:logout' %}">Logout</a>
-    {% endif %}
-
+    <div class="uk-grid bg-landing-page" style="background: url({% static 'custom/general/img/bg-index.jpg' %});">
+        <div class="uk-width-1-1">
+            <div class="uk-container">
+                <div class="row center">
+                    <div class="info-landing-page">
+                        <div class="logo-landing-page">
+                            <img src="{% static 'custom/general/img/logo-landing-page.png' %}" alt="Brewday">
+                        </div>
+                        <h2>Homebrewer? We help you to brew awesome beers!</h2>
+                        <h5>Login to access the Brewday App</h5>
+                        <a href="{% url 'core:login' %}" class="uk-button uk-button-default uk-width-1-3@m uk-margin-small-bottom">Fazer Login</a>
+                        <div class="create-account">
+                            <h5>Don't have an account? <a href="{% url 'core:register' %}">Register!</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

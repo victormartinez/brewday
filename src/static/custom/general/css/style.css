@@ -1,4 +1,37 @@
 /* ========================================================================
+   Landing Page
+ ========================================================================== */
+
+.bg-landing-page{
+	background-size: cover;
+    height: 1080px;
+    position: fixed;
+    width: 2000px;
+}
+
+.info-landing-page {
+	padding: 200px 0;
+  text-align: center;
+}
+
+.info-landing-page h2{
+	color: #FFF;
+}
+
+.info-landing-page h5{
+	color: #FFF;
+	margin-top: 10px;
+}
+
+.info-landing-page a{
+	color: #FFF;
+}
+
+.info-landing-page .uk-button-default{
+	border: none;
+}
+
+/* ========================================================================
    General
  ========================================================================== */
 
