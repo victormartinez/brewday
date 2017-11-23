@@ -16,7 +16,7 @@ def profile_image_upload_location(instance, filename):
 
 class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     username = models.CharField(
-        'Username', max_length=30, unique=True, validators=[
+        'username', max_length=30, unique=True, validators=[
             validators.RegexValidator(
                 re.compile('^[a-zA-Z0-9_]+$'),
                 'Enter a valid username',
