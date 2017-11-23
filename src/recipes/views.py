@@ -1,11 +1,17 @@
-from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView
+
+from .forms import NewRecipeForm
 
 
-class MyRecipesView(TemplateView):
+class MyRecipesView(LoginRequiredMixin, TemplateView):
     template_name = 'recipes/my.html'
 
 
-class NewRecipeView(TemplateView):
+class NewRecipeView(LoginRequiredMixin, CreateView):
+    form_class = NewRecipeForm
+    success_url = reverse_lazy('recipes:new')
     template_name = 'recipes/new.html'
 
 

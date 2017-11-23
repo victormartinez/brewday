@@ -92,8 +92,8 @@
                                     {% url 'accounts:profile_email' as profile_email_url %}
                                     {% url 'recipes:new' as new_recipe_url %}
                                     {% url 'recipes:my_recipes' as my_recipes_url %}
-                                    {% url 'storages:new_ingredient' as new_ingredient_url %}
-                                    {% url 'storages:my' as my_storage_url %}
+                                    {% url 'ingredients:new' as new_ingredient_url %}
+                                    {% url 'ingredients:my' as my_storage_url %}
 
                                     <li class="{% if profile_url == request.path or profile_password_url == request.path or profile_email_url == request.path %}uk-active{% endif %}">
                                         <a href="{{ profile_url }}">Profile</a>

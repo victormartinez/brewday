@@ -32,22 +32,33 @@
 
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
+
         <div class="uk-container uk-margin-large-bottom">
-            <form method="post">
+            <form method="post" novalidate>
+                {% csrf_token %}
 
                 <div class="uk-grid-medium uk-margin-top">
                     <div class="uk-block">
                         <h4>New Recipe</h4>
                     </div>
+                    {% for error in form.non_field_errors %}
+                        <span class="uk-text-danger">{{ error }}</span>
+                    {% endfor %}
+
                 </div>
 
 
                 <div class="uk-grid">
                     <div class="uk-width-1-2">
+
                         <div class="uk-grid">
                             <div class="uk-width-1-1@s">
-                                <label for="">Title <span class="uk-text-danger">*</span></label>
-                                <input class="uk-input" type="text" placeholder="Title" required="">
+                                <label for="{{ form.title.id_for_label }}">{{ form.title.label }} <span
+                                        class="uk-text-danger">*</span></label>
+                                {% render_field form.title class='uk-input' placeholder=form.title.label %}
+                                {% for error in form.title.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
 
@@ -81,47 +92,74 @@
                         </div>
 
                         <div class="uk-width-1-1@s uk-grid-margin">
-                            <label for="">Steps <span class="uk-text-danger">*</span></label>
-                            <textarea class="uk-textarea" rows="6"></textarea>
+                            <label for="{{ form.steps.id_for_label }}">{{ form.steps.label }} <span
+                                    class="uk-text-danger">*</span></label>
+                            {% render_field form.steps class='uk-input' placeholder=form.steps.label %}
+                            {% for error in form.steps.errors %}
+                                <span class="uk-text-danger">{{ error }}</span>
+                            {% endfor %}
                         </div>
                     </div>
 
                     <div class="uk-width-1-2">
                         <div class="uk-grid">
-                            <div class="uk-width-1-4@s">
-                                <label for="">OG <a uk-icon="icon:info"
-                                                    uk-toggle="target: #modal-og"></a></label>
-                                <input class="uk-input" type="text" placeholder="OG" required="">
+                            <div class="uk-width-1-5@s">
+                                <label for="{{ form.og.id_for_label }}">{{ form.og.label }}
+                                    <a uk-icon="icon:info" uk-toggle="target: #modal-og"></a>
+                                </label>
+                                {% render_field form.og class='uk-input' data-mask="0.000" placeholder=form.og.label %}
+                                {% for error in form.og.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
 
-                            <div class="uk-width-1-4@s">
-                                <label for="">FG <a uk-icon="icon:info"
-                                                    uk-toggle="target: #modal-fg"></a></label>
-                                <input class="uk-input" type="text" placeholder="FG" required="">
+                            <div class="uk-width-1-5@s">
+                                <label for="{{ form.fg.id_for_label }}">{{ form.fg.label }}
+                                    <a uk-icon="icon:info" uk-toggle="target: #modal-fg"></a>
+                                </label>
+                                {% render_field form.fg class='uk-input' data-mask="0.000" placeholder=form.fg.label %}
+                                {% for error in form.fg.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-5@s">
+                                <label for="{{ form.abv.id_for_label }}">{{ form.abv.label }}
+                                    <a uk-icon="icon:info" uk-toggle="target: #modal-abv"></a>
+                                </label>
+                                {% render_field form.abv class='uk-input' data-mask="00.00" mask-reverse="true" placeholder=form.abv.label %}
+                                {% for error in form.abv.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
 
                             <div class="uk-width-1-6@s">
-                                <label for="">IBU <a uk-icon="icon:info"
-                                                     uk-toggle="target: #modal-ibu"></a></label>
-                                <input class="uk-input" type="text" placeholder="IBU" required="">
+                                <label for="{{ form.ibu.id_for_label }}">{{ form.ibu.label }}
+                                    <a uk-icon="icon:info" uk-toggle="target: #modal-ibu"></a>
+                                </label>
+                                {% render_field form.ibu class='uk-input' placeholder=form.ibu.label %}
+                                {% for error in form.ibu.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
 
                             <div class="uk-width-1-6@s">
-                                <label for="">SRM <a uk-icon="icon:info"
-                                                     uk-toggle="target: #modal-srm"></a></label>
-                                <input class="uk-input" type="text" placeholder="SRM" required="">
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                <label for="">ABV <a uk-icon="icon:info"
-                                                     uk-toggle="target: #modal-abv"></a></label>
-                                <input class="uk-input" type="text" placeholder="ABV" required="">
+                                <label for="{{ form.srm.id_for_label }}">{{ form.srm.label }}
+                                    <a uk-icon="icon:info" uk-toggle="target: #modal-srm"></a>
+                                </label>
+                                {% render_field form.srm class='uk-input' placeholder=form.srm.label %}
+                                {% for error in form.srm.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
 
                         <div class="uk-width-1-1@s uk-grid-margin">
-                            <label for="">Observations</label>
-                            <textarea class="uk-textarea" rows="4"></textarea>
+                            <label for="{{ form.observations.id_for_label }}">{{ form.observations.label }}</label>
+                            {% render_field form.observations class='uk-input' placeholder=form.observations.label %}
+                            {% for error in form.observations.errors %}
+                                <span class="uk-text-danger">{{ error }}</span>
+                            {% endfor %}
                         </div>
 
                         <div class="uk-width-1-1@s uk-grid-margin uk-margin-bottom">
@@ -226,3 +264,6 @@
     {{ block.super }}
 {% endblock %}
 
+{% block custom_js %}
+    <script src="{% static 'mask/1.14.12/jquery.mask.min.js' %}"></script>
+{% endblock %}

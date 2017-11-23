@@ -15,8 +15,8 @@
                         <div class="menu-tabs">
                             <ul class="tab">
 
-                                {% url 'storages:my' as my_storage_url %}
-                                {% url 'storages:new_ingredient' as new_ingredient %}
+                                {% url 'ingredients:my' as my_storage_url %}
+                                {% url 'ingredients:new' as new_ingredient %}
 
                                 <li class="{% if my_storage_url == request.path %}uk-active{% endif %}"><a
                                         href="{{ my_storage_url }}">My Storage</a></li>
@@ -33,10 +33,9 @@
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
-
             <div class="uk-grid-medium uk-margin-top">
                 <div class="uk-block">
-                    <h4>My Storage</h4>
+                    <h4>New Ingredient</h4>
                 </div>
             </div>
 
@@ -44,5 +43,4 @@
     </div>
 
 {% endblock %}
-
 

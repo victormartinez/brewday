@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^', include('src.core.urls', namespace='core')),
     url(r'^accounts/', include('src.accounts.urls', namespace='accounts')),
     url(r'^recipes/', include('src.recipes.urls', namespace='recipes')),
-    url(r'^storage/', include('src.storages.urls', namespace='storages')),
+    url(r'^ingredients/', include('src.ingredients.urls', namespace='ingredients')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
