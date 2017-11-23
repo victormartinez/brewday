@@ -23,7 +23,7 @@ class Recipe(TimeStampedModel):
     fg = models.DecimalField('FG', max_digits=4, decimal_places=4, blank=True, null=True, help_text='Final Gravity')
     ibu = models.PositiveIntegerField('IBU', blank=True, null=True, help_text='International Bitterness Unit')
     srm = models.PositiveIntegerField('SRV', blank=True, null=True, help_text='Standard Reference Method')
-    abv = models.DecimalField('ABV', max_digits=2, decimal_places=2, blank=True, null=True,
+    abv = models.DecimalField('ABV', max_digits=3, decimal_places=2, blank=True, null=True,
                               help_text='Alcohool by Volume')
 
     steps = models.TextField('Steps')
