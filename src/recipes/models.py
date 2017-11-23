@@ -24,7 +24,7 @@ class Recipe(TimeStampedModel):
     ibu = models.PositiveIntegerField('IBU', blank=True, null=True, help_text='International Bitterness Unit')
     srm = models.PositiveIntegerField('SRV', blank=True, null=True, help_text='Standard Reference Method')
     abv = models.DecimalField('ABV', max_digits=3, decimal_places=2, blank=True, null=True,
-                              help_text='Alcohool by Volume')
+                              help_text='Alcohol by Volume')
 
     steps = models.TextField('Steps')
     observations = models.TextField('Observations', blank=True, null=True)
