@@ -11,7 +11,7 @@ User = get_user_model()
 
 class Ingredient(TimeStampedModel):
     name = models.CharField(max_length=255)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField('Qty')
     unit = models.CharField(max_length=2, choices=UNIT_CHOICES)
 
     class Meta:

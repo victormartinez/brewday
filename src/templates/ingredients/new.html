@@ -35,90 +35,84 @@
         <div class="uk-container uk-margin-large-bottom">
             <div class="uk-grid-medium uk-margin-top">
                 <div class="uk-block">
-                    <h4>New Ingredient</h4>
+                    <h4>New Ingredient <a uk-icon="icon:plus-circle"
+                                          class="uk-margin-top plus-new-user-ingredient-form"></a></h4>
                 </div>
+
+                {% for error in form.non_field_errors %}
+                    <span class="uk-text-danger">{{ error }}</span>
+                {% endfor %}
             </div>
 
             <div class="uk-grid">
                 <div class="uk-width-1-2">
-                    <div class="uk-grid uk-margin-remove-top">
-                        <div class="uk-width-1-2@s ">
-                            <input class="uk-input" type="text" placeholder="Ingredient">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ formset.management_form }}
+
+                        {% for form in formset.forms %}
+                            <div class="uk-grid">
+                                <div class="uk-width-1-2@s ">
+                                    {% render_field form.name class='uk-input' placeholder=form.name.label %}
+                                    {% for error in form.name.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="uk-width-1-6@s">
+                                    {% render_field form.quantity class='uk-input' placeholder=form.quantity.label %}
+                                    {% for error in form.quantity.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="uk-width-1-6@s">
+                                    {% render_field form.unit class='uk-input' placeholder=form.unit.label %}
+                                    {% for error in form.unit.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="uk-width-1-6@s">
+                                    <a uk-icon="icon:minus-circle"
+                                       class="uk-margin-top minus-new-user-ingredient-form"></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="form-row uk-grid" id="empty-row" hidden>
+                            <div class="uk-width-1-2@s ">
+                                {% render_field formset.empty_form.name class='uk-input' placeholder=formset.empty_form.name.label %}
+                                {% for error in formset.empty_form.name.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="uk-width-1-6@s">
+                                {% render_field formset.empty_form.quantity class='uk-input' placeholder=formset.empty_form.quantity.label %}
+                                {% for error in formset.empty_form.quantity.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-6@s">
+                                {% render_field formset.empty_form.unit class='uk-input' placeholder=formset.empty_form.unit.label %}
+                                {% for error in formset.empty_form.unit.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-6@s">
+                                <a uk-icon="icon:minus-circle" class="uk-margin-top minus-new-user-ingredient-form"></a>
+                            </div>
                         </div>
 
-                        <div class="uk-width-1-6@s">
-                            <input class="uk-input" type="text" placeholder="Qty">
+
+                        <div class="uk-width-1-1@s uk-grid-margin uk-margin-bottom">
+                            <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Add (<span
+                                    id="numberOfIngredients">1</span>) Ingredients
+                            </button>
                         </div>
-
-                        <div class="uk-width-1-6@s">
-                            <select name="unit" id="id_unit" class="uk-select" style="height: 50px;">
-                                <option value="">Unit</option>
-                                <option value="">Kg</option>
-                                <option value="">g</option>
-                                <option value="">Litre</option>
-                                <option value="">Mililitre</option>
-                            </select>
-                        </div>
-
-                        <div class="uk-width-1-6@s">
-                            <a uk-icon="icon:minus-circle" class="uk-margin-top"></a>
-                            <a uk-icon="icon:plus-circle" class="uk-margin-top"></a>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="uk-grid uk-margin-remove-top">
-                        <div class="uk-width-1-2@s ">
-                            <input class="uk-input" type="text" placeholder="Ingredient">
-                        </div>
-
-                        <div class="uk-width-1-6@s">
-                            <input class="uk-input" type="text" placeholder="Qty">
-                        </div>
-
-                        <div class="uk-width-1-6@s">
-                            <select name="unit" id="id_unit" class="uk-select" style="height: 50px;">
-                                <option value="">Unit</option>
-                                <option value="">Kg</option>
-                                <option value="">g</option>
-                                <option value="">Litre</option>
-                                <option value="">Mililitre</option>
-                            </select>
-                        </div>
-
-                        <div class="uk-width-1-6@s">
-                            <a uk-icon="icon:minus-circle" class="uk-margin-top"></a>
-                            <a uk-icon="icon:plus-circle" class="uk-margin-top"></a>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="uk-grid uk-margin-remove-top">
-                        <div class="uk-width-1-2@s ">
-                            <input class="uk-input" type="text" placeholder="Ingredient">
-                        </div>
-
-                        <div class="uk-width-1-6@s">
-                            <input class="uk-input" type="text" placeholder="Qty">
-                        </div>
-
-                        <div class="uk-width-1-6@s">
-                            <select name="unit" id="id_unit" class="uk-select" style="height: 50px;">
-                                <option value="">Unit</option>
-                                <option value="">Kg</option>
-                                <option value="">g</option>
-                                <option value="">Litre</option>
-                                <option value="">Mililitre</option>
-                            </select>
-                        </div>
-
-                        <div class="uk-width-1-6@s">
-                            <a uk-icon="icon:minus-circle" class="uk-margin-top"></a>
-                            <a uk-icon="icon:plus-circle" class="uk-margin-top"></a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -127,3 +121,65 @@
 
 {% endblock %}
 
+{% block custom_js %}
+    <script>
+        $(document).ready(function () {
+            function updateEmptyFormIDs(element, totalForms) {
+                var thisInput = element;
+                var currentName = element.attr('name');
+                var newName = currentName.replace(/__prefix__/g, totalForms);
+
+                thisInput.attr('name', newName);
+                thisInput.attr('id', 'id_' + newName);
+
+                var newFormRow = element.closest('.form-row');
+                var newRowId = 'row_id_' + newName;
+                newFormRow.attr('id', newRowId);
+
+                newFormRow.addClass('new-parent-row');
+
+                var parentDiv = element.parent();
+                parentDiv.attr('id', 'parent_id_' + newName);
+
+                var inputLabel = parentDiv.find('label');
+                inputLabel.attr('for', 'id_' + newName);
+
+                return newFormRow;
+            };
+
+            $('.plus-new-user-ingredient-form').on('click', function () {
+                var formId = '#id_form-TOTAL_FORMS';
+                var emptyRow = $('#empty-row').clone();
+                emptyRow.attr('id', null);
+                emptyRow.removeAttr('hidden');
+
+                var totalForms = parseInt($(formId).val());
+
+                var newFormRow;
+                emptyRow.find('input, select').each(function () {
+                    newFormRow = updateEmptyFormIDs($(this), totalForms);
+                });
+
+
+                $('.form-row:last').after(newFormRow);
+                $(formId).val(totalForms + 1);
+
+
+                var number = parseInt($("#numberOfIngredients").text());
+                number += 1;
+                $("#numberOfIngredients").text(number);
+            });
+
+            $('.uk-grid').on('click', '.minus-new-user-ingredient-form', function () {
+                $(this).parent().parent().remove();
+
+                var number = parseInt($("#numberOfIngredients").html());
+                number -= 1;
+                $("#numberOfIngredients").text(number);
+            });
+
+
+        });
+    </script>
+
+{% endblock %}

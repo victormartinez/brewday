@@ -1,11 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, ListView
 
+from src.recipes.models import Recipe
 from .forms import NewRecipeForm
 
 
-class MyRecipesView(LoginRequiredMixin, TemplateView):
+class MyRecipesView(LoginRequiredMixin, ListView):
+    context_object_name = 'recipes'
+    queryset = Recipe.objects.all()
+    ordering = ('created',)
     template_name = 'recipes/my.html'
 
 

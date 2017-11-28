@@ -372,3 +372,8 @@ body.content-profile{
     list-style: none;
     display: inline-block;
 }
+
+
+#empty-row {
+    display: none;
+}
