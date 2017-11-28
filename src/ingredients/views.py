@@ -1,15 +1,19 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
-from django.shortcuts import redirect
+from django.views.generic import CreateView, ListView
 
 from src.ingredients.models import UserIngredient
 from src.ingredients.forms import NewUserIngredientFormSet, NewUserIngredientForm
 
 
-class MyIngredientsView(LoginRequiredMixin, TemplateView):
+class MyIngredientsView(LoginRequiredMixin, ListView):
+    context_object_name = 'ingredients'
     template_name = 'ingredients/my.html'
+
+    def get_queryset(self):
+        return UserIngredient.objects.filter(user=self.request.user).order_by('-quantity')
 
 
 class NewIngredientView(LoginRequiredMixin, CreateView):

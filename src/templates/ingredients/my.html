@@ -30,7 +30,8 @@
         </div>
     </div>
 
-    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
 
             <div class="uk-grid-medium uk-margin-top">
@@ -39,9 +40,43 @@
                 </div>
             </div>
 
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <table class="uk-table uk-table-divider">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Qty</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% if not ingredients %}
+                            <tr>
+                                <td colspan="3">You have not added any ingredient to your storage. <a href="{% url 'ingredients:new' %}">Click here to start adding!</a></td>
+                            </tr>
+                        {% endif %}
 
-
-
+                        {% for ing in ingredients %}
+                            <tr>
+                                <td>{{ ing.name }}</td>
+                                <td>{{ ing.quantity }}{{ ing.unit }}</td>
+                                <td>
+                                    <a uk-icon="icon:arrow-up"></a>
+                                </td>
+                                <td>
+                                    <a uk-icon="icon:arrow-down"></a>
+                                </td>
+                                <td>
+                                    <a uk-icon="icon:trash"></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
