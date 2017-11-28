@@ -19,10 +19,11 @@ class IncreaseUserIngredientForm(forms.ModelForm):
                 _('The amount must be greater than zero.'),
                 code='invalid',
             )
+        return amount
 
     def save(self, commit=True):
         amount = self.cleaned_data['amount']
-        self.instance.increase(amount)
+        self.instance.increase(int(amount))
         self.instance.save()
         return self.instance
 
@@ -49,9 +50,11 @@ class DecreaseUserIngredientForm(forms.ModelForm):
                 params={'quantity': self.instance.quantity}
             )
 
+        return amount
+
     def save(self, commit=True):
         amount = self.cleaned_data['amount']
-        self.instance.decrease(amount)
+        self.instance.decrease(int(amount))
         self.instance.save()
         return self.instance
 
