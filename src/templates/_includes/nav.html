@@ -93,7 +93,7 @@
                                     {% url 'recipes:new' as new_recipe_url %}
                                     {% url 'recipes:my_recipes' as my_recipes_url %}
                                     {% url 'ingredients:new' as new_ingredient_url %}
-                                    {% url 'ingredients:my' as my_storage_url %}
+                                    {% url 'ingredients:my' as my_ingredients_url %}
 
                                     <li class="{% if profile_url == request.path or profile_password_url == request.path or profile_email_url == request.path %}uk-active{% endif %}">
                                         <a href="{{ profile_url }}">Profile</a>
@@ -102,8 +102,8 @@
                                         <a href="{{ my_recipes_url }}">Recipes</a>
                                     </li>
 
-                                    <li class="{% if new_ingredient_url == request.path or my_storage_url == request.path %}uk-active{% endif %}">
-                                        <a href="{{ my_storage_url }}">My Storage</a>
+                                    <li class="{% if new_ingredient_url == request.path or my_ingredients_url == request.path %}uk-active{% endif %}">
+                                        <a href="{{ my_ingredients_url }}">My Ingredients</a>
                                     </li>
                                 </ul>
                             </div>

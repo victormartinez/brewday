@@ -15,11 +15,11 @@
                         <div class="menu-tabs">
                             <ul class="tab">
 
-                                {% url 'ingredients:my' as my_storage_url %}
+                                {% url 'ingredients:my' as my_ingredients_url %}
                                 {% url 'ingredients:new' as new_ingredient %}
 
-                                <li class="{% if my_storage_url == request.path %}uk-active{% endif %}"><a
-                                        href="{{ my_storage_url }}">My Storage</a></li>
+                                <li class="{% if my_ingredients_url == request.path %}uk-active{% endif %}"><a
+                                        href="{{ my_ingredients_url }}">My Ingredients</a></li>
                                 <li class="{% if new_ingredient == request.path %}uk-active{% endif %}"><a
                                         href="{{ new_ingredient }}">New Ingredient</a></li>
                             </ul>
@@ -66,10 +66,10 @@
                                 <td>{{ ing.name }}</td>
                                 <td>{{ ing.quantity }}{{ ing.unit }}</td>
                                 <td>
-                                    <a uk-icon="icon:arrow-up"></a>
+                                    <a uk-icon="icon:arrow-up" href="{% url 'ingredients:increase' ing.id %}"></a>
                                 </td>
                                 <td>
-                                    <a uk-icon="icon:arrow-down"></a>
+                                    <a uk-icon="icon:arrow-down" href="{% url 'ingredients:decrease' ing.id %}"></a>
                                 </td>
                                 <td>
                                     <form class="card-tool delete-task-form" action="{% url 'ingredients:delete' ing.pk %}" method="post">

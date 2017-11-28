@@ -4,7 +4,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
 from src.ingredients.models import UserIngredient
-from src.ingredients.forms import NewUserIngredientFormSet, NewUserIngredientForm
+from src.ingredients.forms import (
+    NewUserIngredientFormSet,
+    NewUserIngredientForm,
+    IncreaseUserIngredientForm,
+    DecreaseUserIngredientForm
+)
 
 
 class EditUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
@@ -18,11 +23,25 @@ class EditUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class DecreaseUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
-    pass
+    template_name = 'ingredients/decrease.html'
+    form_class = DecreaseUserIngredientForm
+    success_url = reverse_lazy('ingredients:my')
+    slug_field = 'pk'
+    slug_url_kwarg = 'pk'
+
+    def get_queryset(self):
+        return UserIngredient.objects.filter(user=self.request.user)
 
 
 class IncreaseUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
-    pass
+    template_name = 'ingredients/increase.html'
+    form_class = IncreaseUserIngredientForm
+    success_url = reverse_lazy('ingredients:my')
+    slug_field = 'pk'
+    slug_url_kwarg = 'pk'
+
+    def get_queryset(self):
+        return UserIngredient.objects.filter(user=self.request.user)
 
 
 class UserIngredientsDeleteView(LoginRequiredMixin, DeleteView):
