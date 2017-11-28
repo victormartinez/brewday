@@ -1,0 +1,86 @@
+{% extends 'app.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {{ block.super }} | New Recipe
+{% endblock %}
+
+{% block container %}
+    <div class="dashboard-subnav">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="menu-tabs">
+                            <ul class="tab">
+
+                                {% url 'ingredients:my' as my_storage_url %}
+                                {% url 'ingredients:new' as new_ingredient %}
+
+                                <li class="{% if my_storage_url == request.path %}uk-active{% endif %}"><a
+                                        href="{{ my_storage_url }}">My Storage</a></li>
+                                <li class="{% if new_ingredient == request.path %}uk-active{% endif %}"><a
+                                        href="{{ new_ingredient }}">New Ingredient</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
+        <div class="uk-container uk-margin-large-bottom">
+            <div class="uk-grid-medium uk-margin-top">
+                <div class="uk-block">
+                    <h4>Edit Ingredient</h4>
+                </div>
+
+                {% for error in form.non_field_errors %}
+                    <span class="uk-text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="uk-grid">
+                            <div class="uk-width-1-2@s ">
+                                {% render_field form.name class='uk-input' placeholder=form.name.label %}
+                                {% for error in form.name.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-6@s">
+                                {% render_field form.quantity class='uk-input' placeholder=form.quantity.label %}
+                                {% for error in form.quantity.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-6@s">
+                                {% render_field form.unit class='uk-input' placeholder=form.unit.label %}
+                                {% for error in form.unit.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                        <div class="uk-width-1-2@s uk-grid-margin uk-margin-bottom">
+                            <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Update Ingredient
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

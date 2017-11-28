@@ -50,6 +50,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -76,6 +77,10 @@
                                         <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
                                     </form>
                                 </td>
+                                <td>
+                                    <a uk-icon="icon:pencil" href="{% url 'ingredients:edit' ing.id %}" ></a>
+                                </td>
+
                             </tr>
                         {% endfor %}
                     </table>
