@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import modelformset_factory
 
-from src.ingredients.models import UserIngredient
+from src.ingredients.models import UserIngredient, RecipeIngredient
 
 
 class NewUserIngredientForm(forms.ModelForm):
@@ -11,3 +11,4 @@ class NewUserIngredientForm(forms.ModelForm):
 
 
 NewUserIngredientFormSet = modelformset_factory(UserIngredient, fields=('name', 'quantity', 'unit'), max_num=10)
+NewRecipeIngredientFormSet = modelformset_factory(RecipeIngredient, fields=('name', 'quantity', 'unit'), max_num=20)
