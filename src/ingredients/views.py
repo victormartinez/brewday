@@ -1,11 +1,17 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 
 from src.ingredients.models import UserIngredient
 from src.ingredients.forms import NewUserIngredientFormSet, NewUserIngredientForm
+
+
+class UserIngredientsDeleteView(LoginRequiredMixin, DeleteView):
+    success_url = reverse_lazy('ingredients:my')
+
+    def get_queryset(self):
+        return UserIngredient.objects.filter(user=self.request.user)
 
 
 class MyIngredientsView(LoginRequiredMixin, ListView):
@@ -45,3 +51,4 @@ class NewIngredientView(LoginRequiredMixin, CreateView):
 
 my_ingredients = MyIngredientsView.as_view()
 new_ingredient = NewIngredientView.as_view()
+delete_ingredient = UserIngredientsDeleteView.as_view()
