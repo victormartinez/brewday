@@ -15,11 +15,11 @@
                         <div class="menu-tabs">
                             <ul class="tab">
 
-                                {% url 'ingredients:my' as my_storage_url %}
+                                {% url 'ingredients:my' as my_ingredients_url %}
                                 {% url 'ingredients:new' as new_ingredient %}
 
-                                <li class="{% if my_storage_url == request.path %}uk-active{% endif %}"><a
-                                        href="{{ my_storage_url }}">My Storage</a></li>
+                                <li class="{% if my_ingredients_url == request.path %}uk-active{% endif %}"><a
+                                        href="{{ my_ingredients_url }}">My Ingredients</a></li>
                                 <li class="{% if new_ingredient == request.path %}uk-active{% endif %}"><a
                                         href="{{ new_ingredient }}">New Ingredient</a></li>
                             </ul>

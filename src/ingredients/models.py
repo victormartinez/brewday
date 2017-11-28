@@ -27,11 +27,14 @@ class RecipeIngredient(Ingredient):
 class UserIngredient(Ingredient):
     user = models.ForeignKey(User)
 
+    def can_decrease_by(self, amount):
+        return self.quantity >= amount
+
     def increase(self, amount):
         self.quantity += amount
 
     def decrease(self, amount):
-        if self.quantity < amount:
+        if not self.can_decrease_by(amount):
             raise FieldError('The current quantity corresponds to less than the amount decreased.')
 
         self.quantity -= amount
