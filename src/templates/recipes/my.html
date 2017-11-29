@@ -80,9 +80,11 @@
 
                                 <p>Ingredients</p>
                                 <ul class="uk-list uk-text-warning uk-text-meta">
-                                    <li>Yeast</li>
-                                    <li>Water</li>
-                                    <li>Test</li>
+                                    {% for ing in recipe.recipeingredient_set.all %}
+                                        <li>{{ ing }}</li>
+                                        <li>{{ ing }}</li>
+                                        <li>{{ ing }}</li>
+                                    {% endfor %}
                                 </ul>
 
                                 <p><b>Steps</b></p>

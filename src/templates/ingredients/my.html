@@ -56,7 +56,7 @@
                         <tbody>
                         {% if not ingredients %}
                             <tr>
-                                <td colspan="3">You have not added any ingredient to your storage. <a
+                                <td class="uk-text-warning" colspan="3">You have not added any ingredient to your storage. <a
                                         href="{% url 'ingredients:new' %}">Click here to start adding!</a></td>
                             </tr>
                         {% endif %}

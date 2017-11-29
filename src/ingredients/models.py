@@ -11,9 +11,8 @@ User = get_user_model()
 
 
 class Ingredient(TimeStampedModel):
-    # To DO: change quantity to decimal field
     name = models.CharField(max_length=255)
-    quantity = models.PositiveIntegerField('Qty')
+    quantity = models.DecimalField('Qty', max_digits=8, decimal_places=4)
     unit = models.CharField(max_length=2, choices=UNIT_CHOICES)
 
     class Meta:

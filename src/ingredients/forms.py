@@ -1,3 +1,5 @@
+from _decimal import Decimal
+
 from django import forms
 from django.utils.translation import gettext as _
 from django.forms import modelformset_factory
@@ -6,15 +8,23 @@ from src.ingredients.models import UserIngredient, RecipeIngredient
 
 
 class IncreaseUserIngredientForm(forms.ModelForm):
-    amount = forms.IntegerField()
+    amount = forms.DecimalField()
 
     class Meta:
         model = UserIngredient
         fields = ['quantity', 'amount']
 
     def clean_amount(self):
-        amount = self.data['amount']
-        if int(amount) == 0:
+        amount = self.data['amount'].replace(',', '.')
+
+        if '-' in amount:
+            raise forms.ValidationError(
+                _('The amount must be greater than zero.'),
+                code='invalid',
+            )
+
+        amount = Decimal(amount)
+        if amount == 0:
             raise forms.ValidationError(
                 _('The amount must be greater than zero.'),
                 code='invalid',
@@ -23,27 +33,35 @@ class IncreaseUserIngredientForm(forms.ModelForm):
 
     def save(self, commit=True):
         amount = self.cleaned_data['amount']
-        self.instance.increase(int(amount))
+        self.instance.increase(amount)
         self.instance.save()
         return self.instance
 
 
 class DecreaseUserIngredientForm(forms.ModelForm):
-    amount = forms.IntegerField()
+    amount = forms.DecimalField()
 
     class Meta:
         model = UserIngredient
         fields = ['quantity', 'amount']
 
     def clean_amount(self):
-        amount = self.data['amount']
-        if int(amount) == 0:
+        amount = self.data['amount'].replace(',', '.')
+
+        if '-' in amount:
             raise forms.ValidationError(
                 _('The amount must be greater than zero.'),
                 code='invalid',
             )
 
-        if not self.instance.can_decrease_by(int(amount)):
+        amount = Decimal(amount)
+        if amount == 0:
+            raise forms.ValidationError(
+                _('The amount must be greater than zero.'),
+                code='invalid',
+            )
+
+        if not self.instance.can_decrease_by(amount):
             raise forms.ValidationError(
                 _('The current quantity (%(quantity)s) corresponds to less than the amount decreased.'),
                 code='invalid',
@@ -54,7 +72,7 @@ class DecreaseUserIngredientForm(forms.ModelForm):
 
     def save(self, commit=True):
         amount = self.cleaned_data['amount']
-        self.instance.decrease(int(amount))
+        self.instance.decrease(amount)
         self.instance.save()
         return self.instance
 
