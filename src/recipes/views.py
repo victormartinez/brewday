@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
@@ -16,7 +17,15 @@ class MyRecipesView(LoginRequiredMixin, ListView):
     template_name = 'recipes/my.html'
 
     def get_queryset(self):
-        return Recipe.objects.filter(owner=self.request.user)
+        recipes_qs = Recipe.objects.filter(owner=self.request.user)
+        search = self.request.GET.get('search')
+        if search:
+            recipes_qs = recipes_qs.filter(
+                Q(title__icontains=search) |
+                Q(steps__icontains=search) |
+                Q(observations__icontains=search)
+            )
+        return recipes_qs
 
 
 class NewRecipeView(LoginRequiredMixin, CreateView):

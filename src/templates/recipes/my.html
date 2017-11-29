@@ -42,19 +42,25 @@
 
             <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">
                 <div class="uk-block">
-                    <form class="uk-search uk-search-default uk-width-1-3">
+                    <form method="GET" class="uk-search uk-search-default uk-width-1-3">
                         <span uk-search-icon></span>
-                        <input class="uk-search-input" type="search" placeholder="Search a recipe...">
+                        <input class="uk-search-input" value="{{ request.GET.search }}" name="search" type="text" placeholder="Search a recipe...">
                     </form>
                 </div>
             </div>
 
             <form method="post">
                 <div class="uk-grid">
-                    {% if not recipes %}
+                    {% if not recipes and not request.GET.search %}
                         <div class="uk-width-1-3 uk-margin-bottom">
                             <div class="uk-alert uk-alert-warning">You have not created recipes. <a
                                     href="{% url 'recipes:new' %}">Create one!</a></div>
+                        </div>
+                    {% endif %}
+
+                    {% if not recipes and request.GET.search %}
+                        <div class="uk-width-1-2 uk-margin-bottom">
+                            <div class="uk-alert uk-alert-danger">We have not found any recipe that match your search.</div>
                         </div>
                     {% endif %}
 
