@@ -42,29 +42,42 @@
 
             <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">
                 <div class="uk-block">
-                    <form class="uk-search uk-search-default">
+                    <form class="uk-search uk-search-default uk-width-1-3">
                         <span uk-search-icon></span>
-                        <input class="uk-search-input" type="search" placeholder="Search recipe...">
+                        <input class="uk-search-input" type="search" placeholder="Search a recipe...">
                     </form>
                 </div>
             </div>
 
             <form method="post">
                 <div class="uk-grid">
-
                     {% if not recipes %}
                         <div class="uk-width-1-3 uk-margin-bottom">
-                            <div class="uk-alert uk-alert-warning">You have not created recipes. <a href="{% url 'recipes:new' %}">Create one!</a></div>
+                            <div class="uk-alert uk-alert-warning">You have not created recipes. <a
+                                    href="{% url 'recipes:new' %}">Create one!</a></div>
                         </div>
                     {% endif %}
 
-
                     {% for recipe in recipes %}
-                        <div class="uk-width-1-4 uk-margin-bottom">
-                            <div class="uk-card uk-card-body uk-card-small uk-card-default recipe-card"
-                                 uk-toggle="target: #recipe-modal">
+                        <div class="uk-width-1-3 uk-margin-bottom">
+                            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                 <h3 class="uk-card-title">{{ recipe.title }}</h3>
-                                <p>{{ recipe.steps }}</p>
+                                <hr>
+
+                                <p>OG: 1 FG: 2.000 IBU: 3.00 SRM: 14 ABV: 4.8% </p>
+
+                                <p>Ingredients</p>
+                                <ul class="uk-list uk-text-warning uk-text-meta">
+                                    <li>Yeast</li>
+                                    <li>Water</li>
+                                    <li>Test</li>
+                                </ul>
+
+                                <p><b>Steps</b></p>
+                                <p class="uk-text-meta uk-text-warning">{{ recipe.steps|truncatewords:30 }}</p>
+
+                                <p><b>Observations</b></p>
+                                <p class="uk-text-meta uk-text-warning">{{ recipe.observations|truncatewords:20 }}</p>
                             </div>
                         </div>
                     {% endfor %}
@@ -101,31 +114,4 @@
         </div>
     </div>
 
-{% endblock %}
-
-
-{% block extra %}
-    <div id="recipe-modal" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="uk-modal-header">
-                <h2 class="uk-modal-title">Indian Pale Ale</h2>
-            </div>
-
-            <div class="uk-modal-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-width-1-3 uk-modal-close" type="button"
-                        style="background: #e5e5e5">Close
-                </button>
-                <button class="uk-button uk-button-default uk-width-1-3" type="button">Start brew!</button>
-            </div>
-        </div>
-    </div>
 {% endblock %}
