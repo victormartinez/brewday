@@ -108,7 +108,7 @@ class LoginUsernameFailureTestCase(TestCase):
         self.assertFalse(self.response.wsgi_request.user.is_authenticated())
 
     def test_error_messages(self):
-        message = 'Please enter a correct Username and password. Note that both fields may be case-sensitive.'
+        message = 'Please enter a correct username and password. Note that both fields may be case-sensitive.'
         self.assertTrue(message in self.response.rendered_content)
 
     def tearDown(self):
@@ -133,7 +133,7 @@ class LoginEmailFailureTestCase(TestCase):
         self.assertFalse(self.response.wsgi_request.user.is_authenticated())
 
     def test_error_messages(self):
-        message = 'Please enter a correct Username and password. Note that both fields may be case-sensitive.'
+        message = 'Please enter a correct username and password. Note that both fields may be case-sensitive.'
         self.assertTrue(message in self.response.rendered_content)
 
     def tearDown(self):
@@ -158,7 +158,7 @@ class LoginPasswordFailureTestCase(TestCase):
         self.assertFalse(self.response.wsgi_request.user.is_authenticated())
 
     def test_error_messages(self):
-        message = 'Please enter a correct Username and password. Note that both fields may be case-sensitive.'
+        message = 'Please enter a correct username and password. Note that both fields may be case-sensitive.'
         self.assertTrue(message in self.response.rendered_content)
 
     def tearDown(self):
