@@ -65,8 +65,9 @@
                     {% endif %}
 
                     {% for recipe in recipes %}
-                        <div class="uk-width-1-3 uk-margin-bottom">
+                        <div class="uk-width-1-3 uk-margin-bottom recipe-card">
                             <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                <a href="{% url 'recipes:show' recipe.id %}" class="recipe-detail-anchor hidden"></a>
                                 <h3 class="uk-card-title">{{ recipe.title }}</h3>
                                 <hr>
 
@@ -120,4 +121,15 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block custom_js %}
+    <script>
+        $(document).ready(function() {
+            $('.recipe-card').on('click', function() {
+                var recipeUrl = $(this).find('.recipe-detail-anchor').attr('href');
+                window.location = recipeUrl;
+            });
+        });
+    </script>
 {% endblock %}

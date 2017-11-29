@@ -23,6 +23,9 @@ class Ingredient(TimeStampedModel):
 class RecipeIngredient(Ingredient):
     recipe = models.ForeignKey(Recipe)
 
+    def __str__(self):
+        return "{}: {}{}".format(self.name, self.quantity, self.unit)
+
 
 class UserIngredient(Ingredient):
     user = models.ForeignKey(User)

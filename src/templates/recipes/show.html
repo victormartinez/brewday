@@ -1,0 +1,75 @@
+{% extends 'app.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {{ block.super }} | New Recipe
+{% endblock %}
+
+{% block container %}
+    <div class="dashboard-subnav">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="menu-tabs">
+                            <ul class="tab">
+
+                                {% url 'recipes:my_recipes' as my_recipes_url %}
+                                {% url 'recipes:new' as new_recipe_url %}
+
+                                <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a
+                                        href="{{ my_recipes_url }}">My Recipes</a></li>
+                                <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}"><a
+                                        href="{{ new_recipe_url }}">New Recipe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
+        <div class="uk-container uk-margin-large-bottom">
+
+
+            <div class="uk-grid uk-margin-medium-top">
+                <div class="uk-width-1-2">
+                    <article class="uk-article uk-card uk-card-default uk-card-hover uk-card-body">
+                        <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ object.title }}</a></h1>
+                        <p class="uk-article-meta">Created on {{ object.created|date:"M d, Y" }}</p>
+
+                        <h4>Characteristics:</h4>
+                        <ul class="uk-list uk-list-inline">
+                            <li class="uk-margin-medium-right">OG: {% if recipe.og %} {{ recipe.og }} {% else %} - {% endif %}</li>
+                            <li class="uk-margin-medium-right">FG: {% if recipe.fg %} {{ recipe.fg }} {% else %} - {% endif %}</li>
+                            <li class="uk-margin-medium-right">IBU: {% if recipe.ibu %} {{ recipe.ibu }} {% else %} - {% endif %}</li>
+                            <li class="uk-margin-medium-right">SRM: {% if recipe.srm %} {{ recipe.srm }} {% else %} - {% endif %}</li>
+                            <li class="uk-margin-medium-right">ABV: {% if recipe.abv %} {{ recipe.abv }} {% else %} - {% endif %}</li>
+                        </ul>
+
+
+                        <h4>Ingredients:</h4>
+                        <ul class="uk-list">
+                            {% for ing in recipe.recipeingredient_set.all %}
+                                <li>{{ ing }}</li>
+                            {% endfor %}
+                        </ul>
+
+                        <h4>Steps:</h4>
+                        <p>{{ object.steps }}</p>
+
+                        <h4>Observations:</h4>
+                        <p>{{ object.observations }}</p>
+
+                    </article>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

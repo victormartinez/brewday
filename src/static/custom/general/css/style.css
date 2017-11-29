@@ -359,7 +359,6 @@ body.content-profile{
 }
 
 .recipe-card {
-    background-color: #FFE699;
     cursor: pointer;
 }
 
@@ -372,7 +371,6 @@ body.content-profile{
     list-style: none;
     display: inline-block;
 }
-
 
 #empty-row {
     display: none;

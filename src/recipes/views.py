@@ -3,7 +3,7 @@ from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 
 from src.ingredients.forms import NewRecipeIngredientFormSet
 from src.ingredients.models import UserIngredient
@@ -64,5 +64,13 @@ class NewRecipeView(LoginRequiredMixin, CreateView):
             return self.render_to_response(self.get_context_data(formset=formset, form=form))
 
 
+class ShowRecipeView(LoginRequiredMixin, DetailView):
+    template_name = 'recipes/show.html'
+
+    def get_queryset(self):
+        return Recipe.objects.filter(owner=self.request.user)
+
+
 new_recipe = NewRecipeView.as_view()
 my_recipes = MyRecipesView.as_view()
+show_recipe = ShowRecipeView.as_view()
