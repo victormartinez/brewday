@@ -64,13 +64,15 @@
                             </div>
                         </div>
 
-                        <div class="uk-grid">
-                            <div class="uk-width-1@s">
-                                {% for error in form.amount.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
+                        {% if form.amount.errors %}
+                            <div class="uk-grid">
+                                <div class="uk-width-1@s">
+                                    {% for error in form.amount.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
 
                         <div class="uk-width-1-2@s uk-grid-margin uk-margin-bottom">
                             <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Decrease</button>
