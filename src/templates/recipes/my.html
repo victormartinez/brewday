@@ -30,8 +30,7 @@
         </div>
     </div>
 
-    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
-         style="box-sizing: border-box;">
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
 
             <div class="uk-grid-medium uk-margin-top">
@@ -44,7 +43,8 @@
                 <div class="uk-block">
                     <form method="GET" class="uk-search uk-search-default uk-width-1-3">
                         <span uk-search-icon></span>
-                        <input class="uk-search-input" value="{{ request.GET.search }}" name="search" type="text" placeholder="Search a recipe...">
+                        <input class="uk-search-input" value="{{ request.GET.search }}" name="search" type="text"
+                               placeholder="Search a recipe...">
                     </form>
                 </div>
             </div>
@@ -60,7 +60,8 @@
 
                     {% if not recipes and request.GET.search %}
                         <div class="uk-width-1-2 uk-margin-bottom">
-                            <div class="uk-alert uk-alert-danger">We have not found any recipe that match your search.</div>
+                            <div class="uk-alert uk-alert-danger">We have not found any recipe that match your search.
+                            </div>
                         </div>
                     {% endif %}
 
@@ -84,7 +85,11 @@
                                 <p class="uk-text-meta uk-text-warning">{{ recipe.steps|truncatewords:30 }}</p>
 
                                 <p><b>Observations</b></p>
-                                <p class="uk-text-meta uk-text-warning">{{ recipe.observations|truncatewords:20 }}</p>
+                                {% if recipe.observations %}
+                                    <p class="uk-text-meta uk-text-warning">{{ recipe.observations|truncatewords:20 }}</p>
+                                {% else %}
+                                    <p class="uk-text-meta uk-text-warning">-</p>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
@@ -125,8 +130,8 @@
 
 {% block custom_js %}
     <script>
-        $(document).ready(function() {
-            $('.recipe-card').on('click', function() {
+        $(document).ready(function () {
+            $('.recipe-card').on('click', function () {
                 var recipeUrl = $(this).find('.recipe-detail-anchor').attr('href');
                 window.location = recipeUrl;
             });

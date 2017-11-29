@@ -43,13 +43,17 @@
 
                         <h4>Characteristics:</h4>
                         <ul class="uk-list uk-list-inline">
-                            <li class="uk-margin-medium-right">OG: {% if recipe.og %} {{ recipe.og }} {% else %} - {% endif %}</li>
-                            <li class="uk-margin-medium-right">FG: {% if recipe.fg %} {{ recipe.fg }} {% else %} - {% endif %}</li>
-                            <li class="uk-margin-medium-right">IBU: {% if recipe.ibu %} {{ recipe.ibu }} {% else %} - {% endif %}</li>
-                            <li class="uk-margin-medium-right">SRM: {% if recipe.srm %} {{ recipe.srm }} {% else %} - {% endif %}</li>
-                            <li class="uk-margin-medium-right">ABV: {% if recipe.abv %} {{ recipe.abv }} {% else %} - {% endif %}</li>
+                            <li class="uk-margin-medium-right">OG: {% if recipe.og %} {{ recipe.og }} {% else %}
+                                - {% endif %}</li>
+                            <li class="uk-margin-medium-right">FG: {% if recipe.fg %} {{ recipe.fg }} {% else %}
+                                - {% endif %}</li>
+                            <li class="uk-margin-medium-right">IBU: {% if recipe.ibu %} {{ recipe.ibu }} {% else %}
+                                - {% endif %}</li>
+                            <li class="uk-margin-medium-right">SRM: {% if recipe.srm %} {{ recipe.srm }} {% else %}
+                                - {% endif %}</li>
+                            <li class="uk-margin-medium-right">ABV: {% if recipe.abv %} {{ recipe.abv }} {% else %}
+                                - {% endif %}</li>
                         </ul>
-
 
                         <h4>Ingredients:</h4>
                         <ul class="uk-list">
@@ -62,7 +66,11 @@
                         <p>{{ object.steps }}</p>
 
                         <h4>Observations:</h4>
-                        <p>{{ object.observations }}</p>
+                        {% if object.observations %}
+                            <p>{{ object.observations }}</p>
+                        {% else %}
+                            <p>-</p>
+                        {% endif %}
 
                     </article>
                 </div>
