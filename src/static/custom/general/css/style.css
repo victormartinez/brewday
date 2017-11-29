@@ -362,6 +362,10 @@ body.content-profile{
     cursor: pointer;
 }
 
+.recipe-card-title {
+    margin-top: 0;
+}
+
 .uk-list-inline {
     padding: 0;
     margin: 0;
