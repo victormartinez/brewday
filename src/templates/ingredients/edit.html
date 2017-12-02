@@ -63,10 +63,7 @@
                             </div>
 
                             <div class="uk-width-1-6@s">
-                                {% render_field form.unit class='uk-input' placeholder=form.unit.label %}
-                                {% for error in form.unit.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
+                                {{ form.instance.unit }}
                             </div>
 
                         </div>
