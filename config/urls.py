@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^accounts/', include('src.accounts.urls', namespace='accounts')),
     url(r'^recipes/', include('src.recipes.urls', namespace='recipes')),
     url(r'^ingredients/', include('src.ingredients.urls', namespace='ingredients')),
+    url(r'^equipments/', include('src.equipments.urls', namespace='equipments')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

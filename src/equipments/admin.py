@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from src.equipments.models import Equipment
+
+admin.site.register(Equipment)

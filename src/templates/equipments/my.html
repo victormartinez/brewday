@@ -1,0 +1,89 @@
+{% extends 'app.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {{ block.super }} | New Recipe
+{% endblock %}
+
+{% block container %}
+    <div class="dashboard-subnav">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="menu-tabs">
+                            <ul class="tab">
+                                {% url 'equipments:my' as my_equipments %}
+                                {% url 'equipments:new' as new_equipment %}
+
+                                <li class="{% if my_equipments == request.path %}uk-active{% endif %}"><a
+                                        href="{{ my_equipments }}">My Equipments</a></li>
+                                <li class="{% if new_equipment == request.path %}uk-active{% endif %}"><a
+                                        href="{{ new_equipment }}">New Equipment</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand:true"
+         style="box-sizing:border-box;">
+        <div class="uk-container uk-margin-large-bottom">
+            <div class="uk-grid-medium uk-margin-top">
+                <div class="uk-block">
+                    <h4>My Equipments</h4>
+                </div>
+            </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <table class="uk-table uk-table-divider">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Capacity</th>
+                            <th>Quantity</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% if not equipments %}
+                            <tr>
+                                <td class="uk-text-danger" colspan="3">
+                                    You have not added any equipment. <a href="{% url 'equipments:new' %}">Click here to add!</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+
+                        {% for eq in equipments %}
+                            <tr>
+                                <td>{{ eq.equipment.name }}</td>
+                                <td>{{ eq.capacity }}{{ eq.unit }}</td>
+                                <td>{{ eq.quantity }} units</td>
+                                <td>
+                                    <a uk-icon="icon:pencil" href="{% url 'equipments:edit' eq.id %}"></a>
+                                </td>
+                                <td>
+                                    <form class="card-tool delete-task-form" action="{% url 'equipments:delete' eq.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
