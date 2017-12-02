@@ -66,10 +66,7 @@
                                 <td>{{ ing.name }}</td>
                                 <td>{{ ing.quantity }}{{ ing.unit }}</td>
                                 <td>
-                                    <a uk-icon="icon:arrow-up" href="{% url 'ingredients:increase' ing.id %}"></a>
-                                </td>
-                                <td>
-                                    <a uk-icon="icon:arrow-down" href="{% url 'ingredients:decrease' ing.id %}"></a>
+                                    <a uk-icon="icon:pencil" href="{% url 'ingredients:edit' ing.id %}" ></a>
                                 </td>
                                 <td>
                                     <form class="card-tool delete-task-form" action="{% url 'ingredients:delete' ing.pk %}" method="post">
@@ -77,10 +74,6 @@
                                         <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
                                     </form>
                                 </td>
-                                <td>
-                                    <a uk-icon="icon:pencil" href="{% url 'ingredients:edit' ing.id %}" ></a>
-                                </td>
-
                             </tr>
                         {% endfor %}
                     </table>

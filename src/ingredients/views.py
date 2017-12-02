@@ -7,38 +7,14 @@ from src.ingredients.models import UserIngredient
 from src.ingredients.forms import (
     NewUserIngredientFormSet,
     NewUserIngredientForm,
-    IncreaseUserIngredientForm,
-    DecreaseUserIngredientForm
 )
 
 
 class EditUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'ingredients/edit.html'
     model = UserIngredient
-    fields = ('name', )
+    fields = ('name', 'quantity',)
     success_url = reverse_lazy('ingredients:my')
-
-    def get_queryset(self):
-        return UserIngredient.objects.filter(user=self.request.user)
-
-
-class DecreaseUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = 'ingredients/decrease.html'
-    form_class = DecreaseUserIngredientForm
-    success_url = reverse_lazy('ingredients:my')
-    slug_field = 'pk'
-    slug_url_kwarg = 'pk'
-
-    def get_queryset(self):
-        return UserIngredient.objects.filter(user=self.request.user)
-
-
-class IncreaseUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = 'ingredients/increase.html'
-    form_class = IncreaseUserIngredientForm
-    success_url = reverse_lazy('ingredients:my')
-    slug_field = 'pk'
-    slug_url_kwarg = 'pk'
 
     def get_queryset(self):
         return UserIngredient.objects.filter(user=self.request.user)
@@ -89,6 +65,4 @@ class NewIngredientView(LoginRequiredMixin, CreateView):
 my_ingredients = MyIngredientsView.as_view()
 new_ingredient = NewIngredientView.as_view()
 delete_ingredient = UserIngredientsDeleteView.as_view()
-increase_ingredient = IncreaseUserIngredientUpdateView.as_view()
-decrease_ingredient = DecreaseUserIngredientUpdateView.as_view()
 edit_ingredient = EditUserIngredientUpdateView.as_view()

@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.exceptions import FieldError
 from django.contrib.auth import get_user_model
 
 from model_utils.models import TimeStampedModel
@@ -28,15 +27,3 @@ class RecipeIngredient(Ingredient):
 
 class UserIngredient(Ingredient):
     user = models.ForeignKey(User)
-
-    def can_decrease_by(self, amount):
-        return self.quantity >= amount
-
-    def increase(self, amount):
-        self.quantity += amount
-
-    def decrease(self, amount):
-        if not self.can_decrease_by(amount):
-            raise FieldError('The current quantity corresponds to less than the amount decreased.')
-
-        self.quantity -= amount

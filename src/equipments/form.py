@@ -3,12 +3,6 @@ from django import forms
 from src.equipments.models import UserEquipment
 
 
-class DecreaseUserEquipmentForm(forms.ModelForm):
-    class Meta:
-        model = UserEquipment
-        fields = ['quantity', ]
-
-
 class NewUserEquipmentForm(forms.ModelForm):
     class Meta:
         model = UserEquipment
