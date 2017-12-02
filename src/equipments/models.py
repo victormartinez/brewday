@@ -33,11 +33,16 @@ class Equipment(TimeStampedModel):
     name = models.CharField(unique=True, max_length=255)
     description = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class UserEquipment(TimeStampedModel):
     # TODO: Later on will have a link to batch indicating that is not available.
+    # TODO: Insight: tem equipamentos que funcionam como gargalo. Tipo, adianta fazer tudo e não ter garrafa?? Order de prioridades
 
     user = models.ForeignKey(User)
     equipment = models.ForeignKey(Equipment)
-    capacity = models.DecimalField('Qty', max_digits=8, decimal_places=4)
+    quantity = models.PositiveIntegerField('Qty')
+    capacity = models.DecimalField('Capacity', max_digits=8, decimal_places=4)
     unit = models.CharField(max_length=2, choices=UNIT_CHOICES)
