@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from src.ingredients.forms import NewRecipeIngredientFormSet, EditRecipeIngredientFormSet
+from src.ingredients.forms import NewRecipeIngredientFormSet
 from src.ingredients.models import UserIngredient, RecipeIngredient
 from src.recipes.models import Recipe
 from .forms import NewRecipeForm
@@ -73,7 +73,7 @@ class ShowRecipeView(LoginRequiredMixin, DetailView):
 
 class EditRecipeView(LoginRequiredMixin, UpdateView):
     model = Recipe
-    fields = ('title', 'owner', 'og', 'fg', 'ibu', 'srm', 'abv', 'steps', 'observations',)
+    fields = ('title', 'expected_quantity', 'owner', 'og', 'fg', 'ibu', 'srm', 'abv', 'steps', 'observations',)
     template_name = 'recipes/edit.html'
 
     def get_context_data(self, **kwargs):
@@ -97,6 +97,9 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
         edit_formset = NewRecipeIngredientFormSet(request.POST)
         if edit_formset.is_valid() and form.is_valid():
             with transaction.atomic():
+                recipe = Recipe.objects.filter(owner_id=self.request.user, id=self.kwargs['pk'])
+                recipe.update(**form.cleaned_data)
+
                 recipe_ingredients_qs = RecipeIngredient.objects.filter(recipe__owner=self.request.user,
                                                                         recipe_id=self.kwargs['pk'])
                 recipe_ingredients_ids = list(recipe_ingredients_qs.values_list('id', flat=True))
@@ -116,7 +119,8 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
                         new_instance.save()
 
                 if len(recipe_ingredients_ids):
-                    RecipeIngredient.objects.filter(recipe__owner=self.request.user, id__in=recipe_ingredients_ids).delete()
+                    RecipeIngredient.objects.filter(recipe__owner=self.request.user,
+                                                    id__in=recipe_ingredients_ids).delete()
 
                 return HttpResponseRedirect(self.get_success_url())
         else:

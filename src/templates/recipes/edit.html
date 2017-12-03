@@ -68,6 +68,18 @@
                         </div>
 
                         <div class="uk-grid">
+                            <div class="uk-width-1-1@s">
+                                <label for="{{ form.expected_quantity.id_for_label }}">{{ form.expected_quantity.label }}
+                                    (Litres)<span
+                                            class="uk-text-danger">*</span></label>
+                                {% render_field form.expected_quantity class='uk-input' placeholder=form.expected_quantity.label %}
+                                {% for error in form.expected_quantity.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="uk-grid">
                             <p>Ingredients <span class="uk-text-danger">*</span> <a uk-icon="icon:plus-circle"
                                                                                     class="plus-new-user-ingredient-form"></a>
                             </p>

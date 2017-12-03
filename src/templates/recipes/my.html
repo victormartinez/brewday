@@ -78,6 +78,9 @@
                                 - {% endif %} ABV: {% if recipe.abv %} {{ recipe.abv }}% {% else %}
                                 - {% endif %} </p>
 
+                                <p>Expected Quantity</p>
+                                <p class="uk-text-meta uk-text-warning">{{ recipe.expected_quantity }}L</p>
+
                                 <p>Ingredients</p>
                                 <ul class="uk-list uk-text-warning uk-text-meta">
                                     {% for ing in recipe.recipeingredient_set.all %}

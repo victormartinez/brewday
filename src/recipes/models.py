@@ -9,6 +9,8 @@ User = get_user_model()
 class Recipe(TimeStampedModel):
     title = models.CharField('Title', max_length=255, help_text='Title of the recipe.')
     owner = models.ForeignKey(User)
+    expected_quantity = models.DecimalField('Expected Production', max_digits=6, decimal_places=2)
+
     og = models.DecimalField('OG', max_digits=4, decimal_places=3, blank=True, null=True, help_text='Original Gravity')
     fg = models.DecimalField('FG', max_digits=4, decimal_places=3, blank=True, null=True, help_text='Final Gravity')
     ibu = models.PositiveIntegerField('IBU', blank=True, null=True, help_text='International Bitterness Unit')
