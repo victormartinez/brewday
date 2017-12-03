@@ -379,3 +379,17 @@ body.content-profile{
 #empty-row {
     display: none;
 }
+
+a.recipe-action-delete {
+    position: absolute;
+    right: 33px;
+}
+
+a.recipe-action-edit {
+    position: absolute;
+    right: 80px;
+}
+
+article.article-recipe h1 {
+    margin-top: 0;
+}

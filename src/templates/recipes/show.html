@@ -34,10 +34,18 @@
          style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
 
-
             <div class="uk-grid uk-margin-medium-top">
                 <div class="uk-width-1-2">
-                    <article class="uk-article uk-card uk-card-default uk-card-hover uk-card-body">
+                    <article class="uk-article uk-card uk-card-default uk-card-hover uk-card-body article-recipe">
+                        <a uk-icon="icon:pencil" class="recipe-action-edit"
+                           href="{% url 'recipes:edit' recipe.id %}"></a>
+
+                        <form class="card-tool delete-task-form" action="{% url 'recipes:delete' recipe.pk %}"
+                              method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
+                        </form>
+
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ object.title }}</a></h1>
                         <p class="uk-article-meta">Created on {{ object.created|date:"M d, Y" }}</p>
 
