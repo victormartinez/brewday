@@ -134,7 +134,7 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
 
 
 class DeleteRecipeView(LoginRequiredMixin, DeleteView):
-    success_url = reverse_lazy('recipes:my_recipes')
+    success_url = reverse_lazy('recipes:my')
 
     def get_queryset(self):
         return Recipe.objects.filter(owner=self.request.user)

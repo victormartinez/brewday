@@ -9,7 +9,7 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^my-recipes$', my_recipes, name='my_recipes'),
+    url(r'^my-recipes$', my_recipes, name='my'),
     url(r'^new$', new_recipe, name='new'),
     url(r'^(?P<pk>[\d]+)/edit$', edit_recipe, name='edit'),
     url(r'^(?P<pk>[\d]+)/delete$', delete_recipe, name='delete'),

@@ -15,7 +15,7 @@
                         <div class="menu-tabs">
                             <ul class="tab">
 
-                                {% url 'recipes:my_recipes' as my_recipes_url %}
+                                {% url 'recipes:my' as my_recipes_url %}
                                 {% url 'recipes:new' as new_recipe_url %}
 
                                 <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a
