@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
-from src.equipments.form import NewUserEquipmentFormSet, NewUserEquipmentForm
+from src.equipments.forms import NewUserEquipmentFormSet, NewUserEquipmentForm
 from src.equipments.models import UserEquipment
 
 
