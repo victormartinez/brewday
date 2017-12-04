@@ -2,6 +2,7 @@ from django.db import models
 from model_utils.models import TimeStampedModel
 from django.contrib.auth import get_user_model
 
+from src.recipes.models import Recipe
 from src.units.models import UNIT_CHOICES
 
 User = get_user_model()
@@ -42,6 +43,14 @@ class UserEquipment(TimeStampedModel):
     # TODO: Insight: tem equipamentos que funcionam como gargalo. Tipo, adianta fazer tudo e não ter garrafa?? Order de prioridades
 
     user = models.ForeignKey(User)
+    equipment = models.ForeignKey(Equipment)
+    quantity = models.PositiveIntegerField('Qty')
+    capacity = models.DecimalField('Capacity', max_digits=8, decimal_places=4)
+    unit = models.CharField(max_length=2, choices=UNIT_CHOICES)
+
+
+class RecipeEquipment(TimeStampedModel):
+    recipe = models.ForeignKey(Recipe)
     equipment = models.ForeignKey(Equipment)
     quantity = models.PositiveIntegerField('Qty')
     capacity = models.DecimalField('Capacity', max_digits=8, decimal_places=4)
