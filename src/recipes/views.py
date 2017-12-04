@@ -73,7 +73,7 @@ class ShowRecipeView(LoginRequiredMixin, DetailView):
 
 class EditRecipeView(LoginRequiredMixin, UpdateView):
     model = Recipe
-    fields = ('title', 'expected_quantity', 'owner', 'og', 'fg', 'ibu', 'srm', 'abv', 'steps', 'observations',)
+    fields = ('title', 'description', 'expected_quantity', 'owner', 'og', 'fg', 'ibu', 'srm', 'abv', 'steps', 'observations',)
     template_name = 'recipes/edit.html'
 
     def get_context_data(self, **kwargs):

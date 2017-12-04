@@ -49,6 +49,11 @@
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ object.title }}</a></h1>
                         <p class="uk-article-meta">Created on {{ object.created|date:"M d, Y" }}</p>
 
+                        {% if recipe.description %}
+                            {{ recipe.description }}
+                            <hr>
+                        {% endif %}
+
                         <h4>Characteristics:</h4>
                         <ul class="uk-list uk-list-inline">
                             <li class="uk-margin-medium-right">OG: {% if recipe.og %} {{ recipe.og }} {% else %}

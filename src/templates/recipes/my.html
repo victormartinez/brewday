@@ -72,6 +72,11 @@
                                 <h3 class="uk-card-title recipe-card-title">{{ recipe.title }}</h3>
                                 <hr>
 
+                                {% if recipe.description %}
+                                    {{ recipe.description }}
+                                <hr>
+                                {% endif %}
+
                                 <p>OG: {% if recipe.og %} {{ recipe.og }} {% else %} - {% endif %} FG: {% if recipe.fg %} {{ recipe.fg }} {% else %}
                                 - {% endif %} IBU: {% if recipe.ibu %} {{ recipe.ibu }} {% else %}
                                 - {% endif %} SRM: {% if recipe.srm %} {{ recipe.srm }} {% else %}

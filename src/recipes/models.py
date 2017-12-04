@@ -8,6 +8,7 @@ User = get_user_model()
 
 class Recipe(TimeStampedModel):
     title = models.CharField('Title', max_length=255, help_text='Title of the recipe.')
+    description = models.TextField('Description', blank=True, null=True)
     owner = models.ForeignKey(User)
     expected_quantity = models.DecimalField('Expected Production', max_digits=6, decimal_places=2)
 
