@@ -54,14 +54,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% if not ingredients %}
+                        {% if not object_list %}
                             <tr>
                                 <td class="uk-text-warning" colspan="3">You have not added any ingredient to your storage. <a
                                         href="{% url 'ingredients:new' %}">Click here to start adding!</a></td>
                             </tr>
                         {% endif %}
 
-                        {% for ing in ingredients %}
+                        {% for ing in object_list %}
                             <tr>
                                 <td>{{ ing.name }}</td>
                                 <td>{{ ing.quantity }}{{ ing.unit }}</td>

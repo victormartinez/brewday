@@ -28,7 +28,6 @@ class UserIngredientsDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class MyIngredientsView(LoginRequiredMixin, ListView):
-    context_object_name = 'ingredients'
     template_name = 'ingredients/my.html'
 
     def get_queryset(self):

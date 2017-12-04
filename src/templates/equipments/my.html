@@ -54,7 +54,7 @@
                         </thead>
                         <tbody>
 
-                        {% if not equipments %}
+                        {% if not object_list %}
                             <tr>
                                 <td class="uk-text-danger" colspan="3">
                                     You have not added any equipment. <a href="{% url 'equipments:new' %}">Click here to add!</a>
@@ -62,7 +62,7 @@
                             </tr>
                         {% endif %}
 
-                        {% for eq in equipments %}
+                        {% for eq in object_list %}
                             <tr>
                                 <td>{{ eq.equipment.name }}</td>
                                 <td>{{ eq.capacity }}{{ eq.unit }}</td>

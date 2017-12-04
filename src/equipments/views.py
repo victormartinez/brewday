@@ -9,16 +9,15 @@ from src.equipments.models import UserEquipment
 
 class MyEquipmentsView(LoginRequiredMixin, ListView):
     template_name = 'equipments/my.html'
-    context_object_name = 'equipments'
 
     def get_queryset(self):
         return UserEquipment.objects.filter(user=self.request.user).order_by('-quantity')
 
 
 class NewEquipmentView(LoginRequiredMixin, CreateView):
-    template_name = 'equipments/new.html'
     form_class = NewUserEquipmentForm
     success_url = reverse_lazy('equipments:my')
+    template_name = 'equipments/new.html'
 
     def get_context_data(self, **kwargs):
         context = super(NewEquipmentView, self).get_context_data(**kwargs)
