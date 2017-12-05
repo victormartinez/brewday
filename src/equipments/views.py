@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
-from src.equipments.forms import NewUserEquipmentFormSet, NewUserEquipmentForm
+from src.equipments.forms import NewUserEquipmentFormSet, NewUserEquipmentForm, create_user_equipments
 from src.equipments.models import UserEquipment
 
 
@@ -32,10 +32,7 @@ class NewEquipmentView(LoginRequiredMixin, CreateView):
 
         formset = NewUserEquipmentFormSet(request.POST)
         if formset.is_valid():
-            new_instances = formset.save(commit=False)
-            for new_instance in new_instances:
-                new_instance.user = request.user
-                new_instance.save()
+            create_user_equipments(formset, request.user)
             return HttpResponseRedirect(self.success_url)
         else:
             return self.render_to_response(self.get_context_data(formset=formset))
