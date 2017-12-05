@@ -12,6 +12,6 @@ class NewUserIngredientForm(forms.ModelForm):
 
 
 NewUserIngredientFormSet = modelformset_factory(UserIngredient, fields=('name', 'quantity', 'unit'), max_num=10)
-NewRecipeIngredientFormSet = modelformset_factory(RecipeIngredient, fields=('name', 'quantity', 'unit'), max_num=20, extra=0)
+NewRecipeIngredientFormSet = modelformset_factory(RecipeIngredient, fields=('name', 'quantity', 'unit'), max_num=20)
 EditRecipeIngredientFormSet = inlineformset_factory(Recipe, RecipeIngredient, fields=('name', 'quantity', 'unit'), max_num=20)
 
