@@ -52,7 +52,7 @@
                         {{ formset.management_form }}
 
                         {% for form in formset.forms %}
-                            <div class="uk-grid">
+                            <div class="uk-grid uk-margin-small-top">
                                 <div class="uk-width-1-4@s ">
                                     {% render_field form.equipment class='uk-input' placeholder=form.equipment.label %}
                                     {% for error in form.equipment.errors %}
@@ -88,7 +88,7 @@
                             </div>
                         {% endfor %}
 
-                        <div class="form-row uk-grid" id="empty-row" hidden>
+                        <div class="form-row uk-grid uk-margin-small-top" id="empty-row" hidden>
                             <div class="uk-width-1-4@s ">
                                 {% render_field formset.empty_form.equipment class='uk-input' placeholder=formset.empty_form.equipment.label %}
                                 {% for error in formset.empty_form.equipment.errors %}

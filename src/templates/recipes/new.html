@@ -30,8 +30,7 @@
         </div>
     </div>
 
-    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
-         style="box-sizing: border-box;">
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
 
         <div class="uk-container uk-margin-large-bottom">
             <form method="post" novalidate>
@@ -50,13 +49,10 @@
                     {% for error in formset.non_field_errors %}
                         <span class="uk-text-danger">{{ error }}</span>
                     {% endfor %}
-
                 </div>
-
 
                 <div class="uk-grid">
                     <div class="uk-width-1-2">
-
                         <div class="uk-grid">
                             <div class="uk-width-1-1@s">
                                 <label for="{{ form.title.id_for_label }}">{{ form.title.label }} <span
@@ -97,7 +93,6 @@
                         </div>
 
                         {% for form in formset.forms %}
-
                             <div class="uk-grid uk-margin-small-top">
                                 <div class="uk-width-1-2@s ">
                                     {% render_field form.name class='uk-input' placeholder=form.name.label %}
@@ -237,7 +232,6 @@
 {% endblock %}
 
 {% block extra %}
-
     <div id="modal-og" uk-modal="" class="uk-modal" style="">
         <div class="uk-modal-dialog uk-modal-body">
             <button class="uk-modal-close-default uk-close uk-icon" type="button" uk-close="">
