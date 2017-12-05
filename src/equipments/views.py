@@ -28,8 +28,6 @@ class NewEquipmentView(LoginRequiredMixin, CreateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        self.object = None
-
         formset = NewUserEquipmentFormSet(request.POST)
         if formset.is_valid():
             create_user_equipments(formset, request.user)
