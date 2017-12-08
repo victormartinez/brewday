@@ -393,3 +393,7 @@ a.recipe-action-edit {
 article.article-recipe h1 {
     margin-top: 0;
 }
+
+nav.uk-navbar span.brewday-name {
+    margin-left: 10px;
+}
