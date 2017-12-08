@@ -2,16 +2,8 @@
    Landing Page
  ========================================================================== */
 
-.bg-landing-page{
-	background-size: cover;
-    height: 1080px;
-    position: fixed;
-    width: 2000px;
-}
-
 .info-landing-page {
-	padding: 200px 0;
-  text-align: center;
+    text-align: center;
 }
 
 .info-landing-page h2{
