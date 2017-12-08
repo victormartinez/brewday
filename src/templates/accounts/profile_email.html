@@ -18,16 +18,9 @@
                         <div class="uk-first-column">
                             <form method="post" class="uk-grid-small alter" uk-grid>
                                 {% csrf_token %}
-                                <div class="uk-margin">
-                                    <div class="uk-grid-medium uk-margin-top">
-                                        <div class="uk-block">
-                                            <h4>Change Email</h4>
-                                        </div>
-                                    </div>
 
-                                    {% include '_includes/message_box.html' %}
-                                    {% include '_includes/form_error_box.html' %}
-                                </div>
+                                {% include '_includes/app_title_section.html' with title='Change Email' %}
+
                                 <div class="uk-width-1-1@s">
                                     {% render_field form.email class='uk-input' placeholder=form.email.label %}
                                     {% for error in form.email.errors %}

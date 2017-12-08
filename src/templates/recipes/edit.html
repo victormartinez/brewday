@@ -17,14 +17,7 @@
                 {% csrf_token %}
                 {{ formset.management_form }}
 
-                <div class="uk-grid-medium uk-margin-top">
-                    <div class="uk-block">
-                        <h4>New Recipe</h4>
-                    </div>
-
-                    {% include '_includes/message_box.html' %}
-                    {% include '_includes/form_error_box.html' %}
-                </div>
+                {% include '_includes/app_title_section.html' with title='Edit Recipe' %}
 
 
                 <div class="uk-grid">
