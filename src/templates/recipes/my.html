@@ -37,6 +37,11 @@
                 <div class="uk-block">
                     <h4>My Recipes</h4>
                 </div>
+
+                {% for message in messages %}
+                    <span class="uk-text-{{ message.tags }}">{{ message }}</span>
+                    <br>
+                {% endfor %}
             </div>
 
             <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">

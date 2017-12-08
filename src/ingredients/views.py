@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -16,12 +17,20 @@ class EditUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
     fields = ('name', 'ingredient_type', 'volume_quantity', 'weight_quantity',)
     success_url = reverse_lazy('ingredients:my')
 
+    def get_success_url(self):
+        messages.success(self.request, 'The ingredient was updated successfully.')
+        return super(EditUserIngredientUpdateView, self).get_success_url()
+
     def get_queryset(self):
         return UserIngredient.objects.filter(user=self.request.user)
 
 
 class UserIngredientsDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('ingredients:my')
+
+    def get_success_url(self):
+        messages.success(self.request, 'The ingredient was deleted.')
+        return super(UserIngredientsDeleteView, self).get_success_url()
 
     def get_queryset(self):
         return UserIngredient.objects.filter(user=self.request.user)
@@ -36,7 +45,7 @@ class MyIngredientsView(LoginRequiredMixin, ListView):
 
 class NewIngredientView(LoginRequiredMixin, CreateView):
     form_class = NewUserIngredientForm
-    success_url = reverse_lazy('ingredients:new')
+    success_url = reverse_lazy('ingredients:my')
     template_name = 'ingredients/new.html'
 
     def get_context_data(self, **kwargs):
@@ -56,6 +65,8 @@ class NewIngredientView(LoginRequiredMixin, CreateView):
             for new_instance in new_instances:
                 new_instance.user = request.user
                 new_instance.save()
+
+            messages.success(self.request, 'You have created your ingredient(s).')
             return HttpResponseRedirect(self.success_url)
         else:
             return self.render_to_response(self.get_context_data(formset=formset))

@@ -1,8 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from src.ingredients.forms import NewRecipeIngredientFormSet
@@ -30,7 +31,7 @@ class MyRecipesView(LoginRequiredMixin, ListView):
 
 class NewRecipeView(LoginRequiredMixin, CreateView):
     form_class = NewRecipeForm
-    success_url = reverse_lazy('recipes:new')
+    success_url = reverse_lazy('recipes:my')
     template_name = 'recipes/new.html'
 
     def get_context_data(self, **kwargs):
@@ -59,6 +60,7 @@ class NewRecipeView(LoginRequiredMixin, CreateView):
                     new_instance.recipe = recipe
                     new_instance.save()
 
+                messages.success(self.request, 'Your recipe was created successfully.')
                 return HttpResponseRedirect(self.success_url)
         else:
             return self.render_to_response(self.get_context_data(formset=formset, form=form))
@@ -75,6 +77,7 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
     model = Recipe
     fields = ('title', 'description', 'expected_quantity', 'owner', 'og', 'fg', 'ibu', 'srm', 'abv', 'steps', 'observations',)
     template_name = 'recipes/edit.html'
+    success_url = reverse_lazy('recipes:my')
 
     def get_context_data(self, **kwargs):
         context = super(EditRecipeView, self).get_context_data(**kwargs)
@@ -127,7 +130,8 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
             return self.render_to_response(self.get_context_data(formset=edit_formset, form=form))
 
     def get_success_url(self):
-        return reverse('recipes:edit', kwargs={'pk': self.kwargs['pk']})
+        messages.success(self.request, 'Your recipe was updated successfully.')
+        return super(EditRecipeView, self).get_success_url()
 
     def get_queryset(self):
         return Recipe.objects.filter(owner=self.request.user, id=self.kwargs['pk'])
@@ -135,6 +139,10 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
 
 class DeleteRecipeView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('recipes:my')
+
+    def get_success_url(self):
+        messages.success(self.request, 'The recipe was deleted.')
+        return super(DeleteRecipeView, self).get_success_url()
 
     def get_queryset(self):
         return Recipe.objects.filter(owner=self.request.user)

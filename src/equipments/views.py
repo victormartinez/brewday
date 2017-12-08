@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -31,6 +32,7 @@ class NewEquipmentView(LoginRequiredMixin, CreateView):
         formset = NewUserEquipmentFormSet(request.POST)
         if formset.is_valid():
             create_user_equipments(formset, request.user)
+            messages.success(self.request, 'The equipment was created successfully.')
             return HttpResponseRedirect(self.success_url)
         else:
             return self.render_to_response(self.get_context_data(formset=formset))
@@ -38,6 +40,10 @@ class NewEquipmentView(LoginRequiredMixin, CreateView):
 
 class DeleteEquipmentView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('equipments:my')
+
+    def get_success_url(self):
+        messages.success(self.request, 'The equipment was deleted.')
+        super(DeleteEquipmentView, self).get_success_url()
 
     def get_queryset(self):
         return UserEquipment.objects.filter(user=self.request.user)
@@ -48,6 +54,10 @@ class EditEquipmentView(LoginRequiredMixin, UpdateView):
     model = UserEquipment
     fields = ('equipment', 'quantity', 'volume_capacity', 'weight_capacity',)
     success_url = reverse_lazy('equipments:my')
+
+    def get_success_url(self):
+        messages.success(self.request, 'The equipment was updated successfully.')
+        super(EditEquipmentView, self).get_success_url()
 
     def get_queryset(self):
         return UserEquipment.objects.filter(user=self.request.user)

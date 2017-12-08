@@ -38,6 +38,12 @@
                 <div class="uk-block">
                     <h4>My Ingredients</h4>
                 </div>
+
+                {% for message in messages %}
+                    <span class="uk-text-{{ message.tags }}">{{ message }}</span>
+                    <br>
+                {% endfor %}
+
             </div>
 
             <div class="uk-grid">
@@ -56,8 +62,9 @@
                         <tbody>
                         {% if not object_list %}
                             <tr>
-                                <td class="uk-text-danger" colspan="3">You have not added any ingredient to your storage. <a
-                                        href="{% url 'ingredients:new' %}">Click here to add!</a></td>
+                                <td class="uk-text-danger" colspan="3">You have not added any ingredient to your
+                                    storage. <a
+                                            href="{% url 'ingredients:new' %}">Click here to add!</a></td>
                             </tr>
                         {% endif %}
 
@@ -65,12 +72,14 @@
                             <tr>
                                 <td>{{ ing.name }}</td>
                                 <td>{{ ing.ingredient_type }}</td>
-                                <td>{% if ing.volume_quantity %}{{ ing.volume_quantity }} {% else %} {{ ing.weight_quantity }} {% endif %}</td>
+                                <td>{% if ing.volume_quantity %}{{ ing.volume_quantity }} {% else %}
+                                    {{ ing.weight_quantity }} {% endif %}</td>
                                 <td>
-                                    <a uk-icon="icon:pencil" href="{% url 'ingredients:edit' ing.id %}" ></a>
+                                    <a uk-icon="icon:pencil" href="{% url 'ingredients:edit' ing.id %}"></a>
                                 </td>
                                 <td>
-                                    <form class="card-tool delete-task-form" action="{% url 'ingredients:delete' ing.pk %}" method="post">
+                                    <form class="card-tool delete-task-form"
+                                          action="{% url 'ingredients:delete' ing.pk %}" method="post">
                                         {% csrf_token %}
                                         <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
                                     </form>

@@ -62,7 +62,7 @@
                                                 <li>
 													<i uk-icon="icon:table"></i>
 													<a href="{% url 'ingredients:my' %}">
-														<span>My Ingredients</span>
+														<span>My Storage</span>
 													</a>
 												</li>
                                                 <li>
@@ -116,7 +116,7 @@
                                         <a href="{{ my_recipes_url }}">Recipes</a>
                                     </li>
                                     <li class="{% if new_ingredient_url == request.path or my_ingredients_url == request.path %}uk-active{% endif %}">
-                                        <a href="{{ my_ingredients_url }}">My Ingredients</a>
+                                        <a href="{{ my_ingredients_url }}">My Storage</a>
                                     </li>
 
                                     <li class="{% if new_equipments_url  == request.path or my_equipments_url == request.path %}uk-active{% endif %}">
