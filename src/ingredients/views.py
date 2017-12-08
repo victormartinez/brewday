@@ -13,7 +13,7 @@ from src.ingredients.forms import (
 class EditUserIngredientUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'ingredients/edit.html'
     model = UserIngredient
-    fields = ('name', 'quantity',)
+    fields = ('name', 'ingredient_type', 'volume_quantity', 'weight_quantity',)
     success_url = reverse_lazy('ingredients:my')
 
     def get_queryset(self):
@@ -31,7 +31,7 @@ class MyIngredientsView(LoginRequiredMixin, ListView):
     template_name = 'ingredients/my.html'
 
     def get_queryset(self):
-        return UserIngredient.objects.filter(user=self.request.user).order_by('-quantity')
+        return UserIngredient.objects.filter(user=self.request.user).order_by('-created')
 
 
 class NewIngredientView(LoginRequiredMixin, CreateView):

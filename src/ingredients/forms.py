@@ -8,10 +8,10 @@ from src.recipes.models import Recipe
 class NewUserIngredientForm(forms.ModelForm):
     class Meta:
         model = UserIngredient
-        fields = ['name', 'quantity', 'unit']
+        fields = ['name', 'ingredient_type', 'volume_quantity', 'weight_quantity']
 
 
-NewUserIngredientFormSet = modelformset_factory(UserIngredient, fields=('name', 'quantity', 'unit'), max_num=10)
-NewRecipeIngredientFormSet = modelformset_factory(RecipeIngredient, fields=('name', 'quantity', 'unit'), max_num=20)
-EditRecipeIngredientFormSet = inlineformset_factory(Recipe, RecipeIngredient, fields=('name', 'quantity', 'unit'), max_num=20)
+NewUserIngredientFormSet = modelformset_factory(UserIngredient, fields=('name', 'ingredient_type', 'volume_quantity', 'weight_quantity'), max_num=10)
+NewRecipeIngredientFormSet = modelformset_factory(RecipeIngredient, fields=('name', 'ingredient_type', 'volume_quantity', 'weight_quantity'), max_num=20)
+EditRecipeIngredientFormSet = inlineformset_factory(Recipe, RecipeIngredient, fields=('name', 'ingredient_type', 'volume_quantity', 'weight_quantity'), max_num=20)
 

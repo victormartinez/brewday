@@ -46,8 +46,8 @@
                         <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Type</th>
                             <th>Qty</th>
-                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -64,7 +64,8 @@
                         {% for ing in object_list %}
                             <tr>
                                 <td>{{ ing.name }}</td>
-                                <td>{{ ing.quantity }}{{ ing.unit }}</td>
+                                <td>{{ ing.ingredient_type }}</td>
+                                <td>{% if ing.volume_quantity %}{{ ing.volume_quantity }} {% else %} {{ ing.weight_quantity }} {% endif %}</td>
                                 <td>
                                     <a uk-icon="icon:pencil" href="{% url 'ingredients:edit' ing.id %}" ></a>
                                 </td>

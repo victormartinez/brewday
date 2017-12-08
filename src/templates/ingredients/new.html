@@ -45,30 +45,37 @@
             </div>
 
             <div class="uk-grid">
-                <div class="uk-width-1-2">
+                <div class="uk-width-1-1">
                     <form method="post">
                         {% csrf_token %}
                         {{ formset.management_form }}
 
                         {% for form in formset.forms %}
                             <div class="uk-grid uk-margin-small-top">
-                                <div class="uk-width-1-3@s ">
+                                <div class="uk-width-1-4@s ">
                                     {% render_field form.name class='uk-input' placeholder=form.name.label %}
                                     {% for error in form.name.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
 
-                                <div class="uk-width-1-5@s">
-                                    {% render_field form.quantity class='uk-input' placeholder=form.quantity.label %}
-                                    {% for error in form.quantity.errors %}
+                                <div class="uk-width-1-6@s">
+                                    {% render_field form.ingredient_type class='uk-input' placeholder=form.ingredient_type.label %}
+                                    {% for error in form.ingredient_type.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
 
                                 <div class="uk-width-1-6@s">
-                                    {% render_field form.unit class='uk-input' placeholder=form.unit.label %}
-                                    {% for error in form.unit.errors %}
+                                    {% render_field form.volume_quantity class='uk-input' placeholder=form.volume_quantity.label %}
+                                    {% for error in form.volume_quantity.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="uk-width-1-6@s">
+                                    {% render_field form.weight_quantity class='uk-input' placeholder=form.weight_quantity.label %}
+                                    {% for error in form.weight_quantity.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
                                 </div>
@@ -81,22 +88,29 @@
                         {% endfor %}
 
                         <div class="form-row uk-grid uk-margin-small-top" id="empty-row" hidden>
-                            <div class="uk-width-1-3@s ">
+                            <div class="uk-width-1-4@s ">
                                 {% render_field formset.empty_form.name class='uk-input' placeholder=formset.empty_form.name.label %}
                                 {% for error in formset.empty_form.name.errors %}
                                     <span class="uk-text-danger">{{ error }}</span>
                                 {% endfor %}
                             </div>
-                            <div class="uk-width-1-5@s">
-                                {% render_field formset.empty_form.quantity class='uk-input' placeholder=formset.empty_form.quantity.label %}
-                                {% for error in formset.empty_form.quantity.errors %}
+                            <div class="uk-width-1-6@s">
+                                {% render_field formset.empty_form.ingredient_type class='uk-input' placeholder=formset.empty_form.ingredient_type.label %}
+                                {% for error in formset.empty_form.ingredient_type.errors %}
                                     <span class="uk-text-danger">{{ error }}</span>
                                 {% endfor %}
                             </div>
 
                             <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.unit class='uk-input' placeholder=formset.empty_form.unit.label %}
-                                {% for error in formset.empty_form.unit.errors %}
+                                {% render_field formset.empty_form.volume_quantity class='uk-input' placeholder=formset.empty_form.volume_quantity.label %}
+                                {% for error in formset.empty_form.volume_quantity.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-6@s">
+                                {% render_field formset.empty_form.weight_quantity class='uk-input' placeholder=formset.empty_form.weight_quantity.label %}
+                                {% for error in formset.empty_form.weight_quantity.errors %}
                                     <span class="uk-text-danger">{{ error }}</span>
                                 {% endfor %}
                             </div>
@@ -106,11 +120,12 @@
                             </div>
                         </div>
 
-
-                        <div class="uk-width-1-2@s uk-grid-margin uk-margin-bottom">
-                            <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Add (<span
-                                    id="numberOfIngredients">1</span>) Ingredients
-                            </button>
+                        <div class="uk-grid uk-margin-small-top uk-margin-bottom">
+                            <div class="uk-width-1-4@s">
+                                <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Add (<span
+                                        id="numberOfIngredients">1</span>) Ingredients
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
