@@ -36,8 +36,7 @@ INSTALLED_APPS = [
     'src.core',
     'src.equipments',
     'src.recipes',
-    'src.ingredients',
-    'src.units'
+    'src.ingredients'
 ]
 
 MIDDLEWARE = [
