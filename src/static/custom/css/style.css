@@ -36,75 +36,7 @@ h1, h2, h3, h4, h5, h6{
 	font-family: 'Saira Semi Condensed', sans-serif;
 }
 
-/* ========================================================================
-   Login
- ========================================================================== */
 
-
-.form-login{
-	padding: 6rem;
-}
-
-.logo img{
-	width: 300px;
-}
-
-.logo {
-    padding: 2em;
-}
-
-.header-form{
-	text-align: center;
-}
-
-.header-form h2{
-	font-weight: bold;
-	color: #3c0014;
-}
-
-.remember-password {
-    text-align: center;
-}
-
-.create-account{
-	text-align: center;
-	padding-top: 20px;
-}
-
-.create-account a{
-	font-weight: bold;
-}
-
-.bg-login img{
-	position: fixed;
-}
-
-.uk-button-default {
-    background-color: #ffc30f;
-    color: #fff;
-    border: 1px solid #e5e5e5;
-    padding: 5px 0;
-    font-weight: bold;
-}
-
-.uk-button-default:hover {
-    background-color: #c7980b;
-    color: #fff;
-}
-
-.uk-input{
-	height: 50px;
-}
-
-.uk-link, a{
-	color: #3c0014;
-	font-weight: bold;
-}
-
-.uk-link, a:hover{
-	color: #ffc30f;
-	text-decoration: none;
-}
 
 /* ========================================================================
    Menu
@@ -250,10 +182,6 @@ span.arrow-profile{
 
 .uk-tab>.uk-active>a {
     border-color: #ffc30f;
-}
-
-.uk-card-header{
-    background: url("../images/bg-profile.jpg");
 }
 
 .box-profile {
