@@ -396,4 +396,9 @@ article.article-recipe h1 {
 
 nav.uk-navbar span.brewday-name {
     margin-left: 10px;
+    color: #ffc30f;
+}
+
+nav.uk-navbar span.brewday-name:hover {
+    color: white;
 }
