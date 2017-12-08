@@ -18,8 +18,11 @@ class IngredientType(TimeStampedModel):
         (MEASURED_BY_WEIGHT, 'weight'),
     )
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     measured_by = models.CharField(choices=MEASURED_BY_CHOICES, max_length=10)
+
+    def __str__(self):
+        return self.name
 
 
 class Ingredient(TimeStampedModel):
