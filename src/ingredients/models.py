@@ -10,22 +10,21 @@ from src.recipes.models import Recipe
 User = get_user_model()
 
 
-class Ingredient(TimeStampedModel):
-    GRAIN = 'grain'
-    HOP = 'hop'
-    YEAST = 'yeast'
-    WATER = 'water'
-    ADDITIVE = 'additive'
-    INGREDIENT_TYPE_CHOICES = (
-        (GRAIN, 'Grain'),
-        (HOP, 'Hop'),
-        (YEAST, 'Yeast'),
-        (WATER, 'Water'),
-        (ADDITIVE, 'Additive'),
+class IngredientType(TimeStampedModel):
+    MEASURED_BY_VOLUME = 'volume'
+    MEASURED_BY_WEIGHT = 'weight'
+    MEASURED_BY_CHOICES = (
+        (MEASURED_BY_VOLUME, 'volume'),
+        (MEASURED_BY_WEIGHT, 'weight'),
     )
 
     name = models.CharField(max_length=255)
-    ingredient_type = models.CharField(choices=INGREDIENT_TYPE_CHOICES, max_length=10)
+    measured_by = models.CharField(choices=MEASURED_BY_CHOICES, max_length=10)
+
+
+class Ingredient(TimeStampedModel):
+    name = models.CharField(max_length=255)
+    ingredient_type = models.ForeignKey(IngredientType)
     volume_quantity = MeasurementField(measurement=Volume, blank=True, null=True)
     weight_quantity = MeasurementField(measurement=Weight, blank=True, null=True)
 
