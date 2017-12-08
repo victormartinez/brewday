@@ -3,32 +3,11 @@
 {% load widget_tweaks %}
 
 {% block title %}
-    {{ block.super }} | New Recipe
+    {{ block.super }} | New Ingredient
 {% endblock %}
 
 {% block container %}
-    <div class="dashboard-subnav">
-        <div class="uk-container">
-            <div class="uk-grid uk-grid-large" uk-grid="">
-                <div class="uk-width-expand@m uk-first-column">
-                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-                        <div class="menu-tabs">
-                            <ul class="tab">
-
-                                {% url 'ingredients:my' as my_ingredients_url %}
-                                {% url 'ingredients:new' as new_ingredient %}
-
-                                <li class="{% if my_ingredients_url == request.path %}uk-active{% endif %}"><a
-                                        href="{{ my_ingredients_url }}">My Ingredients</a></li>
-                                <li class="{% if new_ingredient == request.path %}uk-active{% endif %}"><a
-                                        href="{{ new_ingredient }}">New Ingredient</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'ingredients/_subnav.html' %}
 
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
@@ -39,95 +18,13 @@
                                           class="uk-margin-top plus-new-user-ingredient-form"></a></h4>
                 </div>
 
-                {% for error in form.non_field_errors %}
-                    <span class="uk-text-danger">{{ error }}</span>
-                {% endfor %}
+                {% include '_includes/message_box.html' %}
+                {% include '_includes/form_error_box.html' %}
             </div>
 
             <div class="uk-grid">
                 <div class="uk-width-1-1">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ formset.management_form }}
-
-                        {% for form in formset.forms %}
-                            <div class="uk-grid uk-margin-small-top">
-                                <div class="uk-width-1-4@s ">
-                                    {% render_field form.name class='uk-input' placeholder=form.name.label %}
-                                    {% for error in form.name.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    {% render_field form.ingredient_type class='uk-input' placeholder=form.ingredient_type.label %}
-                                    {% for error in form.ingredient_type.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    {% render_field form.volume_quantity class='uk-input' placeholder=form.volume_quantity.label %}
-                                    {% for error in form.volume_quantity.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    {% render_field form.weight_quantity class='uk-input' placeholder=form.weight_quantity.label %}
-                                    {% for error in form.weight_quantity.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    <a uk-icon="icon:minus-circle"
-                                       class="uk-margin-top minus-new-user-ingredient-form"></a>
-                                </div>
-                            </div>
-                        {% endfor %}
-
-                        <div class="form-row uk-grid uk-margin-small-top" id="empty-row" hidden>
-                            <div class="uk-width-1-4@s ">
-                                {% render_field formset.empty_form.name class='uk-input' placeholder=formset.empty_form.name.label %}
-                                {% for error in formset.empty_form.name.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.ingredient_type class='uk-input' placeholder=formset.empty_form.ingredient_type.label %}
-                                {% for error in formset.empty_form.ingredient_type.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.volume_quantity class='uk-input' placeholder=formset.empty_form.volume_quantity.label %}
-                                {% for error in formset.empty_form.volume_quantity.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.weight_quantity class='uk-input' placeholder=formset.empty_form.weight_quantity.label %}
-                                {% for error in formset.empty_form.weight_quantity.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                <a uk-icon="icon:minus-circle" class="uk-margin-top minus-new-user-ingredient-form"></a>
-                            </div>
-                        </div>
-
-                        <div class="uk-grid uk-margin-small-top uk-margin-bottom">
-                            <div class="uk-width-1-4@s">
-                                <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Add (<span
-                                        id="numberOfIngredients">1</span>) Ingredients
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    {% include 'ingredients/_add_form.html' %}
                 </div>
             </div>
 
@@ -137,64 +34,5 @@
 {% endblock %}
 
 {% block custom_js %}
-    <script>
-        $(document).ready(function () {
-            function updateEmptyFormIDs(element, totalForms) {
-                var thisInput = element;
-                var currentName = element.attr('name');
-                var newName = currentName.replace(/__prefix__/g, totalForms);
-
-                thisInput.attr('name', newName);
-                thisInput.attr('id', 'id_' + newName);
-
-                var newFormRow = element.closest('.form-row');
-                var newRowId = 'row_id_' + newName;
-                newFormRow.attr('id', newRowId);
-
-                newFormRow.addClass('new-parent-row');
-
-                var parentDiv = element.parent();
-                parentDiv.attr('id', 'parent_id_' + newName);
-
-                var inputLabel = parentDiv.find('label');
-                inputLabel.attr('for', 'id_' + newName);
-
-                return newFormRow;
-            };
-
-            $('.plus-new-user-ingredient-form').on('click', function () {
-                var formId = '#id_form-TOTAL_FORMS';
-                var emptyRow = $('#empty-row').clone();
-                emptyRow.attr('id', null);
-                emptyRow.removeAttr('hidden');
-
-                var totalForms = parseInt($(formId).val());
-
-                var newFormRow;
-                emptyRow.find('input, select').each(function () {
-                    newFormRow = updateEmptyFormIDs($(this), totalForms);
-                });
-
-
-                $('.form-row:last').after(newFormRow);
-                $(formId).val(totalForms + 1);
-
-
-                var number = parseInt($("#numberOfIngredients").text());
-                number += 1;
-                $("#numberOfIngredients").text(number);
-            });
-
-            $('.uk-grid').on('click', '.minus-new-user-ingredient-form', function () {
-                $(this).parent().parent().remove();
-
-                var number = parseInt($("#numberOfIngredients").html());
-                number -= 1;
-                $("#numberOfIngredients").text(number);
-            });
-
-
-        });
-    </script>
-
+    <script src="{% static 'custom/js/more-ingredients.js' %}"></script>
 {% endblock %}

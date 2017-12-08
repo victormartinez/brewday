@@ -1,0 +1,46 @@
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <table class="uk-table uk-table-divider">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Capacity</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% if not object_list %}
+                <tr>
+                    <td class="uk-text-danger" colspan="3">
+                        You have not added any equipment. <a href="{% url 'equipments:new' %}">Click here to
+                        add!</a>
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% for eq in object_list %}
+                <tr>
+                    <td>{{ eq.equipment.name }}</td>
+                    <td>{{ eq.quantity }}</td>
+                    <td>{% if eq.volume_capacity %}{{ eq.volume_capacity }}{% elif eq.volume_capacity %}
+                        {{ eq.weight_capacity }}{% else %} - {% endif %}</td>
+                    <td>
+                        <a uk-icon="icon:pencil" href="{% url 'equipments:edit' eq.id %}"></a>
+                    </td>
+                    <td>
+                        <form class="card-tool delete-task-form"
+                              action="{% url 'equipments:delete' eq.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

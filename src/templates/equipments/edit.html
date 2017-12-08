@@ -3,32 +3,12 @@
 {% load widget_tweaks %}
 
 {% block title %}
-    {{ block.super }} | New Recipe
+    {{ block.super }} | Edit Equipment
 {% endblock %}
 
 {% block container %}
-    <div class="dashboard-subnav">
-        <div class="uk-container">
-            <div class="uk-grid uk-grid-large" uk-grid="">
-                <div class="uk-width-expand@m uk-first-column">
-                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-                        <div class="menu-tabs">
-                            <ul class="tab">
 
-                                {% url 'equipments:my' as my_equipments %}
-                                {% url 'equipments:new' as new_equipments %}
-
-                                <li class="{% if my_equipments == request.path %}uk-active{% endif %}"><a
-                                        href="{{ my_equipments }}">My Equipments</a></li>
-                                <li class="{% if new_equipments == request.path %}uk-active{% endif %}"><a
-                                        href="{{ new_equipments }}">New Equipment</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'equipments/_subnav.html' %}
 
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
@@ -38,9 +18,8 @@
                     <h4>Edit Equipment</h4>
                 </div>
 
-                {% for error in form.non_field_errors %}
-                    <span class="uk-text-danger">{{ error }}</span>
-                {% endfor %}
+                {% include '_includes/message_box.html' %}
+                {% include '_includes/form_error_box.html' %}
             </div>
 
             <div class="uk-grid">

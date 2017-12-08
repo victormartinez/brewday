@@ -1,0 +1,41 @@
+{% for recipe in object_list %}
+    <div class="uk-width-1-3 uk-margin-bottom recipe-card">
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+            <a href="{% url 'recipes:show' recipe.id %}" class="recipe-detail-anchor hidden"></a>
+            <h3 class="uk-card-title recipe-card-title">{{ recipe.title }}</h3>
+            <hr>
+
+            {% if recipe.description %}
+                {{ recipe.description }}
+                <hr>
+            {% endif %}
+
+            <p>OG: {% if recipe.og %} {{ recipe.og }} {% else %} - {% endif %} FG:
+                {% if recipe.fg %} {{ recipe.fg }} {% else %}
+                    - {% endif %} IBU: {% if recipe.ibu %} {{ recipe.ibu }} {% else %}
+                    - {% endif %} SRM: {% if recipe.srm %} {{ recipe.srm }} {% else %}
+                    - {% endif %} ABV: {% if recipe.abv %} {{ recipe.abv }}% {% else %}
+                    - {% endif %} </p>
+
+            <p>Expected Quantity</p>
+            <p class="uk-text-meta uk-text-warning">{{ recipe.expected_quantity }}L</p>
+
+            <p>Ingredients</p>
+            <ul class="uk-list uk-text-warning uk-text-meta">
+                {% for ing in recipe.recipeingredient_set.all %}
+                    <li>{{ ing }}</li>
+                {% endfor %}
+            </ul>
+
+            <p><b>Steps</b></p>
+            <p class="uk-text-meta uk-text-warning">{{ recipe.steps|truncatewords:30 }}</p>
+
+            <p><b>Observations</b></p>
+            {% if recipe.observations %}
+                <p class="uk-text-meta uk-text-warning">{{ recipe.observations|truncatewords:20 }}</p>
+            {% else %}
+                <p class="uk-text-meta uk-text-warning">-</p>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

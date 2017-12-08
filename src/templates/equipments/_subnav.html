@@ -1,0 +1,22 @@
+<div class="dashboard-subnav">
+    <div class="uk-container">
+        <div class="uk-grid uk-grid-large" uk-grid="">
+            <div class="uk-width-expand@m uk-first-column">
+                <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                    <div class="menu-tabs">
+                        <ul class="tab">
+
+                            {% url 'equipments:my' as my_equipments %}
+                            {% url 'equipments:new' as new_equipments %}
+
+                            <li class="{% if my_equipments == request.path %}uk-active{% endif %}"><a
+                                    href="{{ my_equipments }}">My Equipments</a></li>
+                            <li class="{% if new_equipments == request.path %}uk-active{% endif %}"><a
+                                    href="{{ new_equipments }}">New Equipment</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

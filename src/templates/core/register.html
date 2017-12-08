@@ -21,9 +21,8 @@
                     </div>
                     <h2>Create an account</h2>
 
-                    {% for error in form.non_field_errors %}
-                        <span class="uk-text-danger">{{ error }}</span>
-                    {% endfor %}
+                    {% include '_includes/message_box.html' %}
+                    {% include '_includes/form_error_box.html' %}
                 </div>
                 <form method="post" class="uk-grid-small" uk-grid>
                     {% csrf_token %}

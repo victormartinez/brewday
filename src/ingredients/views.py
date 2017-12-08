@@ -40,7 +40,7 @@ class MyIngredientsView(LoginRequiredMixin, ListView):
     template_name = 'ingredients/my.html'
 
     def get_queryset(self):
-        return UserIngredient.objects.filter(user=self.request.user).order_by('-created')
+        return UserIngredient.objects.filter(user=self.request.user).order_by('name')
 
 
 class NewIngredientView(LoginRequiredMixin, CreateView):

@@ -7,28 +7,7 @@
 {% endblock %}
 
 {% block container %}
-    <div class="dashboard-subnav">
-        <div class="uk-container">
-            <div class="uk-grid uk-grid-large" uk-grid="">
-                <div class="uk-width-expand@m uk-first-column">
-                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-                        <div class="menu-tabs">
-                            <ul class="tab">
-
-                                {% url 'recipes:my' as my_recipes_url %}
-                                {% url 'recipes:new' as new_recipe_url %}
-
-                                <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a
-                                        href="{{ my_recipes_url }}">My Recipes</a></li>
-                                <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}"><a
-                                        href="{{ new_recipe_url }}">New Recipe</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'recipes/_subnav.html' %}
 
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
@@ -43,13 +22,8 @@
                     <div class="uk-block">
                         <h4>New Recipe</h4>
                     </div>
-                    {% for error in form.non_field_errors %}
-                        <span class="uk-text-danger">{{ error }}</span>
-                    {% endfor %}
-
-                    {% for error in formset.non_field_errors %}
-                        <span class="uk-text-danger">{{ error }}</span>
-                    {% endfor %}
+                    {% include '_includes/message_box.html' %}
+                    {% include '_includes/form_error_box.html' %}
                 </div>
 
                 <div class="uk-grid">
@@ -94,74 +68,10 @@
                         </div>
 
                         {% for form in formset.forms %}
-                            <div class="uk-grid uk-margin-small-top">
-                                <div class="uk-width-1-4@s ">
-                                    {% render_field form.name class='uk-input' placeholder=form.name.label %}
-                                    {% for error in form.name.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    {% render_field form.ingredient_type class='uk-input' placeholder=form.ingredient_type.label %}
-                                    {% for error in form.ingredient_type.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    {% render_field form.volume_quantity class='uk-input' placeholder=form.volume_quantity.label %}
-                                    {% for error in form.volume_quantity.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    {% render_field form.weight_quantity class='uk-input' placeholder=form.weight_quantity.label %}
-                                    {% for error in form.weight_quantity.errors %}
-                                        <span class="uk-text-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-
-                                <div class="uk-width-1-6@s">
-                                    <a uk-icon="icon:minus-circle"
-                                       class="uk-margin-top minus-new-user-ingredient-form"></a>
-                                </div>
-                            </div>
+                            {% include 'ingredients/_form_fields.html' %}
                         {% endfor %}
 
-                        <div class="form-row uk-grid uk-margin-small-top" id="empty-row" hidden>
-                            <div class="uk-width-1-4@s ">
-                                {% render_field formset.empty_form.name class='uk-input' placeholder=formset.empty_form.name.label %}
-                                {% for error in formset.empty_form.name.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.ingredient_type class='uk-input' placeholder=formset.empty_form.ingredient_type.label %}
-                                {% for error in formset.empty_form.ingredient_type.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.volume_quantity class='uk-input' placeholder=formset.empty_form.volume_quantity.label %}
-                                {% for error in formset.empty_form.volume_quantity.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.weight_quantity class='uk-input' placeholder=formset.empty_form.weight_quantity.label %}
-                                {% for error in formset.empty_form.weight_quantity.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                <a uk-icon="icon:minus-circle" class="uk-margin-top minus-new-user-ingredient-form"></a>
-                            </div>
-                        </div>
+                        {% include 'ingredients/_empty_formset.html' %}
                     </div>
 
                     <div class="uk-width-1-2">
@@ -243,146 +153,13 @@
             </form>
         </div>
     </div>
-
 {% endblock %}
 
 {% block extra %}
-    <div id="modal-og" uk-modal="" class="uk-modal" style="">
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default uk-close uk-icon" type="button" uk-close="">
-            </button>
-            <h2 class="uk-modal-title">Original Gravity</h2>
-            <p>The Original Gravity (OG) of a beer is the specific gravity of the beer measured before fermentation has
-                started. It is typically measured in the fermenter before yeast has been added. If one knows the
-                original gravity and Final Gravity of a beer, several important characteristics such as the percent of
-                alcohol (ABV or ABW) can be calculated.</p>
-
-            <p>Reference <a href="http://brewwiki.com/">Brewiki</a></p>
-        </div>
-    </div>
-
-    <div id="modal-fg" uk-modal="" class="uk-modal" style="">
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default uk-close uk-icon" type="button" uk-close="">
-            </button>
-            <h2 class="uk-modal-title">Final Gravity</h2>
-            <p>The Final Gravity (FG) of a beer is simply the specific gravity of the beer measured after fermentation
-                has completed and the beer is ready for bottling. If one knows both the final gravity and Original
-                Gravity, you can calculate the percent of alcohol (ABV or ABW) as well as several other characteristics
-                of the beer.</p>
-            <p>Reference <a href="http://brewwiki.com/">Brewiki</a></p>
-        </div>
-    </div>
-
-    <div id="modal-ibu" uk-modal="" class="uk-modal" style="">
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default uk-close uk-icon" type="button" uk-close="">
-            </button>
-            <h2 class="uk-modal-title">International Bitterness Units</h2>
-            <p>An International Bitterness Unit (IBU) is a measure of the bitterness in beer. One IBU is equal to one
-                milligram of isomerized alpha acid per liter of beer. Isomerized alpha acids are the main bittering
-                acids derived from hops. IBU's can be estimated using one of several equations if one knows factors such
-                as the alpha acid of the hops used, boil time and specific gravity of the wort. See the technical
-                reference for more details on estimating IBUs.</p>
-            <p>Reference <a href="http://brewwiki.com/">Brewiki</a></p>
-        </div>
-    </div>
-
-    <div id="modal-srm" uk-modal="" class="uk-modal" style="">
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default uk-close uk-icon" type="button" uk-close="">
-            </button>
-            <h2 class="uk-modal-title">Standard Reference Method</h2>
-            <p>The Standard Reference Method, abbreviated as SRM is the color system used by brewers to specify finished
-                beer and malt color. In the case of malt it is actually the SRM color of a laboratory wort made from the
-                malt which is printed on the package. The SRM value is 12.7 times the log of the attenuation experienced
-                by light of wavelength 430 nanometers (deep blue) in passing through 1 cm of the beer (or wort). The
-                scaling factor (12.7) and path were chosen (1951) to make SRM values correspond closely to values
-                measured in the Lovibond system which was in use at the time. The two systems are approximately
-                equivalent for home brewing applications. SRM is also sometimes referred to Standard Research Method by
-                some books but this is incorrect. Below are some approximate SRM color ranges.</p>
-            <div class="uk-panel">
-                <ul>
-                    <li>1.0 - 3.0 SRM - Pale yellow color</li>
-                    <li>3.0 - 4.5 SRM - Medium yellow</li>
-                    <li>4.5 - 7.5 SRM - Gold</li>
-                    <li>7.5 - 9.0 SRM - Amber</li>
-                    <li>9.0 - 11.0 SRM - Copper</li>
-                    <li>11.0 - 14.0 SRM - Red/Brown</li>
-                    <li>14.0 - 19.0 SRM - Brown</li>
-                    <li>20.0 SRM - Black</li>
-                </ul>
-            </div>
-
-            <p>Reference <a href="http://brewwiki.com/">Brewiki</a></p>
-        </div>
-    </div>
-
-    <div id="modal-abv" uk-modal="" class="uk-modal" style="">
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default uk-close uk-icon" type="button" uk-close="">
-            </button>
-            <h2 class="uk-modal-title">Alcohol By Volume</h2>
-            <p>Alcohol By Volume (ABV) is a measure of the percentage of alcohol volume over the total volume of the
-                beer. This is equivalent to the proof value of higher alcohol liquors. Beer typically has an alcohol by
-                volume value of between 3 and 8%. Barley wine may have an ABV as high as 10% or more. Note that while
-                the majority of the world typically quotes alcohol by volume, in the US alcohol percentage is often
-                measured as Alcohol By Weight.</p>
-            <p>Reference <a href="http://brewwiki.com/">Brewiki</a></p>
-        </div>
-    </div>
-
+    {% include 'recipes/_beer_characteristics_modal.html' %}
     {{ block.super }}
 {% endblock %}
 
 {% block custom_js %}
-    <script src="{% static 'mask/1.14.12/jquery.mask.min.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-            function updateEmptyFormIDs(element, totalForms) {
-                var thisInput = element;
-                var currentName = element.attr('name');
-                var newName = currentName.replace(/__prefix__/g, totalForms);
-
-                thisInput.attr('name', newName);
-                thisInput.attr('id', 'id_' + newName);
-
-                var newFormRow = element.closest('.form-row');
-                var newRowId = 'row_id_' + newName;
-                newFormRow.attr('id', newRowId);
-
-                newFormRow.addClass('new-parent-row');
-
-                var parentDiv = element.parent();
-                parentDiv.attr('id', 'parent_id_' + newName);
-
-                var inputLabel = parentDiv.find('label');
-                inputLabel.attr('for', 'id_' + newName);
-
-                return newFormRow;
-            };
-
-            $('.plus-new-user-ingredient-form').on('click', function () {
-                var formId = '#id_form-TOTAL_FORMS';
-                var emptyRow = $('#empty-row').clone();
-                emptyRow.attr('id', null);
-                emptyRow.removeAttr('hidden');
-
-                var totalForms = parseInt($(formId).val());
-
-                var newFormRow;
-                emptyRow.find('input, select').each(function () {
-                    newFormRow = updateEmptyFormIDs($(this), totalForms);
-                });
-
-                $('.form-row:last').after(newFormRow);
-                $(formId).val(totalForms + 1);
-            });
-
-            $('.uk-grid').on('click', '.minus-new-user-ingredient-form', function () {
-                $(this).parent().parent().remove();
-            });
-        });
-    </script>
-
+    <script src="{% static 'custom/js/more-ingredients.js' %}"></script>
 {% endblock %}

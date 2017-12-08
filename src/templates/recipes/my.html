@@ -3,34 +3,14 @@
 {% load widget_tweaks %}
 
 {% block title %}
-    {{ block.super }} | New Recipe
+    {{ block.super }} | My Recipes
 {% endblock %}
 
 {% block container %}
-    <div class="dashboard-subnav">
-        <div class="uk-container">
-            <div class="uk-grid uk-grid-large" uk-grid="">
-                <div class="uk-width-expand@m uk-first-column">
-                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-                        <div class="menu-tabs">
-                            <ul class="tab">
+    {% include 'recipes/_subnav.html' %}
 
-                                {% url 'recipes:my' as my_recipes_url %}
-                                {% url 'recipes:new' as new_recipe_url %}
-
-                                <li class="{% if my_recipes_url == request.path %}uk-active{% endif %}"><a
-                                        href="{{ my_recipes_url }}">My Recipes</a></li>
-                                <li class="{% if new_recipe_url == request.path %}uk-active{% endif %}"><a
-                                        href="{{ new_recipe_url }}">New Recipe</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
 
             <div class="uk-grid-medium uk-margin-top">
@@ -38,18 +18,14 @@
                     <h4>My Recipes</h4>
                 </div>
 
-                {% for message in messages %}
-                    <span class="uk-text-{{ message.tags }}">{{ message }}</span>
-                    <br>
-                {% endfor %}
+                {% include '_includes/message_box.html' %}
             </div>
 
             <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">
                 <div class="uk-block">
                     <form method="GET" class="uk-search uk-search-default uk-width-1-3">
                         <span uk-search-icon></span>
-                        <input class="uk-search-input" value="{{ request.GET.search }}" name="search" type="text"
-                               placeholder="Search a recipe...">
+                        <input class="uk-search-input" value="{{ request.GET.search }}" name="search" type="text" placeholder="Search a recipe...">
                     </form>
                 </div>
             </div>
@@ -70,74 +46,34 @@
                         </div>
                     {% endif %}
 
-                    {% for recipe in object_list %}
-                        <div class="uk-width-1-3 uk-margin-bottom recipe-card">
-                            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                <a href="{% url 'recipes:show' recipe.id %}" class="recipe-detail-anchor hidden"></a>
-                                <h3 class="uk-card-title recipe-card-title">{{ recipe.title }}</h3>
-                                <hr>
-
-                                {% if recipe.description %}
-                                    {{ recipe.description }}
-                                <hr>
-                                {% endif %}
-
-                                <p>OG: {% if recipe.og %} {{ recipe.og }} {% else %} - {% endif %} FG: {% if recipe.fg %} {{ recipe.fg }} {% else %}
-                                - {% endif %} IBU: {% if recipe.ibu %} {{ recipe.ibu }} {% else %}
-                                - {% endif %} SRM: {% if recipe.srm %} {{ recipe.srm }} {% else %}
-                                - {% endif %} ABV: {% if recipe.abv %} {{ recipe.abv }}% {% else %}
-                                - {% endif %} </p>
-
-                                <p>Expected Quantity</p>
-                                <p class="uk-text-meta uk-text-warning">{{ recipe.expected_quantity }}L</p>
-
-                                <p>Ingredients</p>
-                                <ul class="uk-list uk-text-warning uk-text-meta">
-                                    {% for ing in recipe.recipeingredient_set.all %}
-                                        <li>{{ ing }}</li>
-                                    {% endfor %}
-                                </ul>
-
-                                <p><b>Steps</b></p>
-                                <p class="uk-text-meta uk-text-warning">{{ recipe.steps|truncatewords:30 }}</p>
-
-                                <p><b>Observations</b></p>
-                                {% if recipe.observations %}
-                                    <p class="uk-text-meta uk-text-warning">{{ recipe.observations|truncatewords:20 }}</p>
-                                {% else %}
-                                    <p class="uk-text-meta uk-text-warning">-</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endfor %}
-
+                    {% include 'recipes/_list.html' %}
                 </div>
 
 
-{#                    <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">#}
-{#                        <ul class="uk-pagination uk-flex-center" uk-margin="">#}
-{#                            <li class="uk-first-column"><a href="#"><span uk-pagination-previous=""#}
-{#                                                                          class="uk-pagination-previous uk-icon"><svg#}
-{#                                    width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg"#}
-{#                                    ratio="1"><polyline#}
-{#                                    fill="none" stroke="#000" stroke-width="1.2"#}
-{#                                    points="6 1 1 6 6 11"></polyline></svg></span></a></li>#}
-{#                            <li><a href="#">1</a></li>#}
-{#                            <li class="uk-disabled"><span>...</span></li>#}
-{#                            <li><a href="#">5</a></li>#}
-{#                            <li><a href="#">6</a></li>#}
-{#                            <li class="uk-active"><span>7</span></li>#}
-{#                            <li><a href="#">8</a></li>#}
-{#                            <li><a href="#"><span uk-pagination-next="" class="uk-pagination-next uk-icon"><svg#}
-{#                                    width="7"#}
-{#                                    height="12"#}
-{#                                    viewBox="0 0 7 12"#}
-{#                                    xmlns="http://www.w3.org/2000/svg"#}
-{#                                    ratio="1"><polyline#}
-{#                                    fill="none" stroke="#000" stroke-width="1.2"#}
-{#                                    points="1 1 6 6 1 11"></polyline></svg></span></a></li>#}
-{#                        </ul>#}
-{#                    </div>#}
+                {#                    <div class="uk-grid-medium uk-margin-top uk-margin-medium-bottom">#}
+                {#                        <ul class="uk-pagination uk-flex-center" uk-margin="">#}
+                {#                            <li class="uk-first-column"><a href="#"><span uk-pagination-previous=""#}
+                {#                                                                          class="uk-pagination-previous uk-icon"><svg#}
+                {#                                    width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg"#}
+                {#                                    ratio="1"><polyline#}
+                {#                                    fill="none" stroke="#000" stroke-width="1.2"#}
+                {#                                    points="6 1 1 6 6 11"></polyline></svg></span></a></li>#}
+                {#                            <li><a href="#">1</a></li>#}
+                {#                            <li class="uk-disabled"><span>...</span></li>#}
+                {#                            <li><a href="#">5</a></li>#}
+                {#                            <li><a href="#">6</a></li>#}
+                {#                            <li class="uk-active"><span>7</span></li>#}
+                {#                            <li><a href="#">8</a></li>#}
+                {#                            <li><a href="#"><span uk-pagination-next="" class="uk-pagination-next uk-icon"><svg#}
+                {#                                    width="7"#}
+                {#                                    height="12"#}
+                {#                                    viewBox="0 0 7 12"#}
+                {#                                    xmlns="http://www.w3.org/2000/svg"#}
+                {#                                    ratio="1"><polyline#}
+                {#                                    fill="none" stroke="#000" stroke-width="1.2"#}
+                {#                                    points="1 1 6 6 1 11"></polyline></svg></span></a></li>#}
+                {#                        </ul>#}
+                {#                    </div>#}
             </form>
         </div>
     </div>
@@ -145,12 +81,5 @@
 {% endblock %}
 
 {% block custom_js %}
-    <script>
-        $(document).ready(function () {
-            $('.recipe-card').on('click', function () {
-                var recipeUrl = $(this).find('.recipe-detail-anchor').attr('href');
-                window.location = recipeUrl;
-            });
-        });
-    </script>
+    <script src="{% static 'custom/js/recipe-details-anchor.js' %}"></script>
 {% endblock %}

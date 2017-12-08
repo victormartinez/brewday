@@ -12,7 +12,7 @@ class MyEquipmentsView(LoginRequiredMixin, ListView):
     template_name = 'equipments/my.html'
 
     def get_queryset(self):
-        return UserEquipment.objects.filter(user=self.request.user).order_by('-quantity')
+        return UserEquipment.objects.filter(user=self.request.user).order_by('equipment__name')
 
 
 class NewEquipmentView(LoginRequiredMixin, CreateView):

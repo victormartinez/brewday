@@ -3,32 +3,11 @@
 {% load widget_tweaks %}
 
 {% block title %}
-    {{ block.super }} | New Recipe
+    {{ block.super }} | New Equipment
 {% endblock %}
 
 {% block container %}
-    <div class="dashboard-subnav">
-        <div class="uk-container">
-            <div class="uk-grid uk-grid-large" uk-grid="">
-                <div class="uk-width-expand@m uk-first-column">
-                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-                        <div class="menu-tabs">
-                            <ul class="tab">
-
-                                {% url 'equipments:my' as my_equipments %}
-                                {% url 'equipments:new' as new_equipment %}
-
-                                <li class="{% if my_equipments == request.path %}uk-active{% endif %}"><a
-                                        href="{{ my_equipments }}">My Equipments</a></li>
-                                <li class="{% if new_equipment == request.path %}uk-active{% endif %}"><a
-                                        href="{{ new_equipment }}">New Equipment</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'equipments/_subnav.html' %}
 
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand:true"
          style="box-sizing: border-box;">
@@ -40,9 +19,8 @@
                     </h4>
                 </div>
 
-                {% for error in form.non_field_errors %}
-                    <span class="uk-text-danger">{{ error }}</span>
-                {% endfor %}
+                {% include '_includes/message_box.html' %}
+                {% include '_includes/form_error_box.html' %}
             </div>
 
             <div class="uk-grid">
@@ -81,7 +59,8 @@
                                 </div>
 
                                 <div class="uk-width-1-6@s">
-                                    <a uk-icon="icon:minus-circle" class="uk-margin-top minus-new-user-equipment-form"></a>
+                                    <a uk-icon="icon:minus-circle"
+                                       class="uk-margin-top minus-new-user-equipment-form"></a>
                                 </div>
                             </div>
                         {% endfor %}
@@ -136,64 +115,5 @@
 {% endblock %}
 
 {% block custom_js %}
-    <script>
-        $(document).ready(function () {
-            function updateEmptyFormIDs(element, totalForms) {
-                var thisInput = element;
-                var currentName = element.attr('name');
-                var newName = currentName.replace(/__prefix__/g, totalForms);
-
-                thisInput.attr('name', newName);
-                thisInput.attr('id', 'id_' + newName);
-
-                var newFormRow = element.closest('.form-row');
-                var newRowId = 'row_id_' + newName;
-                newFormRow.attr('id', newRowId);
-
-                newFormRow.addClass('new-parent-row');
-
-                var parentDiv = element.parent();
-                parentDiv.attr('id', 'parent_id_' + newName);
-
-                var inputLabel = parentDiv.find('label');
-                inputLabel.attr('for', 'id_' + newName);
-
-                return newFormRow;
-            };
-
-            $('.plus-new-user-equipment-form').on('click', function () {
-                var formId = '#id_form-TOTAL_FORMS';
-                var emptyRow = $('#empty-row').clone();
-                emptyRow.attr('id', null);
-                emptyRow.removeAttr('hidden');
-
-                var totalForms = parseInt($(formId).val());
-
-                var newFormRow;
-                emptyRow.find('input, select').each(function () {
-                    newFormRow = updateEmptyFormIDs($(this), totalForms);
-                });
-
-
-                $('.form-row:last').after(newFormRow);
-                $(formId).val(totalForms + 1);
-
-
-                var number = parseInt($("#numberOfEquipments").text());
-                number += 1;
-                $("#numberOfEquipments").text(number);
-            });
-
-            $('.uk-grid').on('click', '.minus-new-user-equipment-form', function () {
-                $(this).parent().parent().remove();
-
-                var number = parseInt($("#numberOfEquipments").html());
-                number -= 1;
-                $("#numberOfEquipments").text(number);
-            });
-
-
-        });
-    </script>
-
+    <script src="{% static 'custom/js/more-equipments.js' %}"></script>
 {% endblock %}
