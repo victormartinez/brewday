@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django_measurement.models import MeasurementField
+from measurement.measures import Volume
 
 from model_utils.models import TimeStampedModel
 
@@ -10,7 +12,7 @@ class Recipe(TimeStampedModel):
     title = models.CharField('Title', max_length=255, help_text='Title of the recipe.')
     description = models.TextField('Description', blank=True, null=True)
     owner = models.ForeignKey(User)
-    expected_quantity = models.DecimalField('Expected Production', max_digits=6, decimal_places=2)
+    expected_production = MeasurementField(verbose_name='Expected Production', measurement=Volume, blank=True, null=True)
 
     og = models.DecimalField('OG', max_digits=4, decimal_places=3, blank=True, null=True, help_text='Original Gravity')
     fg = models.DecimalField('FG', max_digits=4, decimal_places=3, blank=True, null=True, help_text='Final Gravity')

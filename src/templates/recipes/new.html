@@ -45,11 +45,10 @@
 
                         <div class="uk-grid">
                             <div class="uk-width-1-1@s">
-                                <label for="{{ form.expected_quantity.id_for_label }}">{{ form.expected_quantity.label }}
-                                    (Litres)<span
+                                <label for="{{ form.expected_production.id_for_label }}">{{ form.expected_production.label }}<span
                                             class="uk-text-danger">*</span></label>
-                                {% render_field form.expected_quantity class='uk-input' placeholder=form.expected_quantity.label %}
-                                {% for error in form.expected_quantity.errors %}
+                                {% render_field form.expected_production class='uk-input' placeholder=form.expected_production.label %}
+                                {% for error in form.expected_production.errors %}
                                     <span class="uk-text-danger">{{ error }}</span>
                                 {% endfor %}
                             </div>
