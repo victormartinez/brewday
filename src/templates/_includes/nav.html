@@ -6,7 +6,7 @@
             <nav class="uk-navbar" uk-navbar="{'align':'left'}">
                 <div class="uk-navbar-left">
                     <a href="{% url 'core:app' %}" class="uk-logo">
-                        <img src="images/logointerna.png" alt="Brewday">
+                        <img src="{% static '' %}" alt="Brewday">
                         <img src="images/logointerna.png" class="uk-logo-inverse" alt="Brewday">
                     </a>
                 </div>
@@ -20,7 +20,7 @@
                                     {% if user.profile.photo %}
                                         <img src="{{ user.profile.photo.url }}" alt="avatar">
                                     {% else %}
-                                        <img src="{% static 'custom/general/img/avatar.png' %}" alt="avatar">
+                                        <img src="{% static 'custom/img/avatar.png' %}" alt="avatar">
                                     {% endif %}
                                     <span class="arrow-profile" uk-icon="icon: chevron-down"></span>
 									<div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000">
@@ -33,7 +33,7 @@
                                                          height="80" alt="">
                                                 {% else %}
                                                     <img class="uk-comment-avatar"
-                                                         src="{% static 'custom/general/img/avatar.png' %}" width="80"
+                                                         src="{% static 'custom/img/avatar.png' %}" width="80"
                                                          height="80" alt="">
                                                 {% endif %}
 
