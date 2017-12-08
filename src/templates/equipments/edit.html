@@ -30,11 +30,12 @@
         </div>
     </div>
 
-    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
             <div class="uk-grid-medium uk-margin-top">
                 <div class="uk-block">
-                    <h4>Increase</h4>
+                    <h4>Edit Equipment</h4>
                 </div>
 
                 {% for error in form.non_field_errors %}
@@ -48,16 +49,32 @@
                         {% csrf_token %}
 
                         <div class="uk-grid">
-                            <div class="uk-width-1-4@s uk-margin-top">
-                                {{ object.equipment.name }}
+                            <div class="uk-width-1-4@s ">
+                                {% render_field form.equipment class='uk-input' placeholder=form.equipment.label %}
+                                {% for error in form.equipment.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
 
-                            <div class="uk-width-1-4@s uk-margin-top">
-                                {{ object.capacity}} {{ object.unit }}
-                            </div>
-
-                            <div class="uk-width-1-5@s">
+                            <div class="uk-width-1-6@s">
                                 {% render_field form.quantity class='uk-input' placeholder=form.quantity.label %}
+                                {% for error in form.quantity.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-6@s">
+                                {% render_field form.volume_capacity class='uk-input' placeholder=form.volume_capacity.label %}
+                                {% for error in form.volume_capacity.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="uk-width-1-6@s">
+                                {% render_field form.weight_capacity class='uk-input' placeholder=form.weight_capacity.label %}
+                                {% for error in form.weight_capacity.errors %}
+                                    <span class="uk-text-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
 

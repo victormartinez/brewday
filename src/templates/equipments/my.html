@@ -44,8 +44,8 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Capacity</th>
                             <th>Quantity</th>
+                            <th>Capacity</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -65,8 +65,8 @@
                         {% for eq in object_list %}
                             <tr>
                                 <td>{{ eq.equipment.name }}</td>
-                                <td>{{ eq.capacity }}{{ eq.unit }}</td>
-                                <td>{{ eq.quantity }} units</td>
+                                <td>{{ eq.quantity }}</td>
+                                <td>{% if eq.volume_capacity %}{{ eq.volume_capacity }}{% elif eq.volume_capacity %}{{ eq.weight_capacity }}{% else %} - {% endif %}</td>
                                 <td>
                                     <a uk-icon="icon:pencil" href="{% url 'equipments:edit' eq.id %}"></a>
                                 </td>
