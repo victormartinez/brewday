@@ -380,7 +380,7 @@ body.content-profile{
     display: none;
 }
 
-a.recipe-action-delete {
+form.recipe-action-delete {
     position: absolute;
     right: 33px;
 }

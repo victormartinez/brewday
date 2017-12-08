@@ -19,7 +19,7 @@
                         <a uk-icon="icon:pencil" class="recipe-action-edit"
                            href="{% url 'recipes:edit' recipe.id %}"></a>
 
-                        <form class="card-tool delete-task-form" action="{% url 'recipes:delete' recipe.pk %}"
+                        <form class="card-tool recipe-action-delete" action="{% url 'recipes:delete' recipe.pk %}"
                               method="post">
                             {% csrf_token %}
                             <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
