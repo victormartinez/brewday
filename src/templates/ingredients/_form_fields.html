@@ -15,19 +15,22 @@
         {% endfor %}
     </div>
 
-    <div class="uk-width-1-6@s measured-by volume uk-hidden">
+    {# If required to show or not in the edit form #}
+    <div class="uk-width-1-6@s measured-by volume {% if not form.instance.volume_quantity %}uk-hidden{% endif %}">
         {% render_field form.volume_quantity class='uk-input' placeholder=form.volume_quantity.label %}
         {% for error in form.volume_quantity.errors %}
             <span class="uk-text-danger">{{ error }}</span>
         {% endfor %}
     </div>
 
-    <div class="uk-width-1-6@s measured-by weight uk-hidden">
+    {# If required to show or not in the edit form #}
+    <div class="uk-width-1-6@s measured-by weight {% if not form.instance.weight_quantity %}uk-hidden{% endif %}">
         {% render_field form.weight_quantity class='uk-input' placeholder=form.weight_quantity.label %}
         {% for error in form.weight_quantity.errors %}
             <span class="uk-text-danger">{{ error }}</span>
         {% endfor %}
     </div>
+
 
     <div class="uk-width-1-6@s">
         <a uk-icon="icon:minus-circle"
