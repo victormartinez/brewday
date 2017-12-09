@@ -27,6 +27,7 @@ $(document).ready(function () {
         var emptyRow = $('#empty-row').clone();
         emptyRow.attr('id', null);
         emptyRow.removeAttr('hidden');
+        emptyRow.addClass('form-fields');
 
         var totalForms = parseInt($(formId).val());
 
@@ -35,16 +36,25 @@ $(document).ready(function () {
             newFormRow = updateEmptyFormIDs($(this), totalForms);
         });
 
-        $('.form-row:last').after(newFormRow);
+        $('.form-fields:last').after(newFormRow);
         $(formId).val(totalForms + 1);
+
+        var number = parseInt($("#numberOfIngredients").text());
+        number += 1;
+        $("#numberOfIngredients").text(number);
     });
 
     $('.uk-grid').on('click', '.minus-new-user-ingredient-form', function () {
+        var formId = '#id_form-TOTAL_FORMS';
+        var totalForms = parseInt($(formId).val());
+        if (totalForms === 1) {
+            return;
+        }
+
         $(this).parent().parent().remove();
 
-        var formId = '#id_form-TOTAL_FORMS';
-
-        var totalForms = parseInt($(formId).val());
         $(formId).val(totalForms - 1);
+
+        $("#numberOfIngredients").text(totalForms - 1);
     });
 });

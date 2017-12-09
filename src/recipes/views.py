@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from src.ingredients.forms import NewRecipeIngredientFormSet
+from src.ingredients.forms import NewRecipeIngredientFormSet, EditRecipeIngredientFormSet
 from src.ingredients.models import UserIngredient, RecipeIngredient
 from src.recipes.models import Recipe
 from .forms import NewRecipeForm
@@ -82,7 +82,7 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditRecipeView, self).get_context_data(**kwargs)
         if 'formset' not in kwargs.keys():
-            context['formset'] = NewRecipeIngredientFormSet(
+            context['formset'] = EditRecipeIngredientFormSet(
                 queryset=RecipeIngredient.objects.filter(
                     recipe__owner=self.request.user,
                     recipe_id=self.kwargs['pk']
@@ -97,7 +97,7 @@ class EditRecipeView(LoginRequiredMixin, UpdateView):
         self.object = self.get_object()
 
         form = NewRecipeForm(request.POST)
-        edit_formset = NewRecipeIngredientFormSet(request.POST)
+        edit_formset = EditRecipeIngredientFormSet(request.POST)
         if edit_formset.is_valid() and form.is_valid():
             with transaction.atomic():
                 recipe = Recipe.objects.filter(owner_id=self.request.user, id=self.kwargs['pk'])

@@ -8,7 +8,6 @@
 
 {% block container %}
     {% include 'ingredients/_subnav.html' %}
-
     <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
         <div class="uk-container uk-margin-large-bottom">
@@ -24,15 +23,32 @@
 
             <div class="uk-grid">
                 <div class="uk-width-1-1">
-                    {% include 'ingredients/_add_form.html' %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ formset.management_form }}
+
+                        {% for form in formset.forms %}
+                            {% include 'ingredients/_form_fields.html' %}
+                        {% endfor %}
+
+                        <div class="uk-grid uk-margin-top uk-margin-bottom">
+                            <div class="uk-width-1-4@s">
+                                <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Add (<span
+                                        id="numberOfIngredients">1</span>) Ingredients
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    {% include 'ingredients/_empty_formset.html' %}
                 </div>
             </div>
 
         </div>
     </div>
-
 {% endblock %}
 
 {% block custom_js %}
     <script src="{% static 'custom/js/more-ingredients.js' %}"></script>
+    <script src="{% static 'custom/js/request-measured-by.js' %}"></script>
 {% endblock %}

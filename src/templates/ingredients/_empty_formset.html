@@ -8,20 +8,20 @@
         {% endfor %}
     </div>
     <div class="uk-width-1-6@s">
-        {% render_field formset.empty_form.ingredient_type class='uk-input' placeholder=formset.empty_form.ingredient_type.label %}
+        {% render_field formset.empty_form.ingredient_type class='uk-input select-ingredient-type' placeholder=formset.empty_form.ingredient_type.label %}
         {% for error in formset.empty_form.ingredient_type.errors %}
             <span class="uk-text-danger">{{ error }}</span>
         {% endfor %}
     </div>
 
-    <div class="uk-width-1-6@s">
+    <div class="uk-width-1-6@s measured-by volume uk-hidden">
         {% render_field formset.empty_form.volume_quantity class='uk-input' placeholder=formset.empty_form.volume_quantity.label %}
         {% for error in formset.empty_form.volume_quantity.errors %}
             <span class="uk-text-danger">{{ error }}</span>
         {% endfor %}
     </div>
 
-    <div class="uk-width-1-6@s">
+    <div class="uk-width-1-6@s measured-by weight uk-hidden">
         {% render_field formset.empty_form.weight_quantity class='uk-input' placeholder=formset.empty_form.weight_quantity.label %}
         {% for error in formset.empty_form.weight_quantity.errors %}
             <span class="uk-text-danger">{{ error }}</span>

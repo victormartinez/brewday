@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-<div class="uk-grid uk-margin-small-top">
+<div class="uk-grid uk-margin-small-top form-fields">
     <div class="uk-width-1-4@s ">
         {% render_field form.name class='uk-input' placeholder=form.name.label %}
         {% for error in form.name.errors %}
@@ -9,20 +9,20 @@
     </div>
 
     <div class="uk-width-1-6@s">
-        {% render_field form.ingredient_type class='uk-input' placeholder=form.ingredient_type.label %}
+        {% render_field form.ingredient_type class='uk-input select-ingredient-type' placeholder=form.ingredient_type.label %}
         {% for error in form.ingredient_type.errors %}
             <span class="uk-text-danger">{{ error }}</span>
         {% endfor %}
     </div>
 
-    <div class="uk-width-1-6@s">
+    <div class="uk-width-1-6@s measured-by volume uk-hidden">
         {% render_field form.volume_quantity class='uk-input' placeholder=form.volume_quantity.label %}
         {% for error in form.volume_quantity.errors %}
             <span class="uk-text-danger">{{ error }}</span>
         {% endfor %}
     </div>
 
-    <div class="uk-width-1-6@s">
+    <div class="uk-width-1-6@s measured-by weight uk-hidden">
         {% render_field form.weight_quantity class='uk-input' placeholder=form.weight_quantity.label %}
         {% for error in form.weight_quantity.errors %}
             <span class="uk-text-danger">{{ error }}</span>

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # Third party libs
     'django_extensions',
     'widget_tweaks',
+    'rest_framework', 
 
     # Apps
     'src.accounts',
