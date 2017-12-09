@@ -16,13 +16,13 @@
             {% include '_includes/app_title_section.html' with title='Edit Ingredient' %}
 
             <div class="uk-grid">
-                <div class="uk-width-1-2">
+                <div class="uk-width-1-1">
                     <form method="post">
                         {% csrf_token %}
 
                         {% include 'ingredients/_form_fields.html' %}
 
-                        <div class="uk-width-1-2@s uk-grid-margin uk-margin-bottom">
+                        <div class="uk-width-1-4@s uk-grid-margin uk-margin-bottom">
                             <button class="uk-button uk-button-default uk-width-1-1 uk-grid-margin">Update Ingredient
                             </button>
                         </div>
@@ -32,4 +32,9 @@
 
         </div>
     </div>
+{% endblock %}
+
+
+{% block custom_js %}
+    <script src="{% static 'custom/js/request-measured-by.js' %}"></script>
 {% endblock %}
