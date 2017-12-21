@@ -27,8 +27,7 @@
                 <tr>
                     <td>{{ eq.equipment.name }}</td>
                     <td>{{ eq.quantity }}</td>
-                    <td>{% if eq.volume_capacity %}{{ eq.volume_capacity }}{% elif eq.volume_capacity %}
-                        {{ eq.weight_capacity }}{% else %} - {% endif %}</td>
+                    <td>{% if eq.volume_capacity %}{{ eq.volume_capacity }}{% else %} - {% endif %}</td>
                     <td>
                         <a uk-icon="icon:pencil" href="{% url 'equipments:edit' eq.id %}"></a>
                     </td>

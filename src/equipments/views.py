@@ -52,7 +52,7 @@ class DeleteEquipmentView(LoginRequiredMixin, DeleteView):
 class EditEquipmentView(LoginRequiredMixin, UpdateView):
     template_name = 'equipments/edit.html'
     model = UserEquipment
-    fields = ('equipment', 'quantity', 'volume_capacity', 'weight_capacity',)
+    fields = ('equipment', 'quantity', 'volume_capacity',)
     success_url = reverse_lazy('equipments:my')
 
     def get_success_url(self):

@@ -8,7 +8,7 @@ from src.equipments.models import UserEquipment
 class NewUserEquipmentForm(forms.ModelForm):
     class Meta:
         model = UserEquipment
-        fields = ('equipment', 'quantity', 'volume_capacity', 'weight_capacity',)
+        fields = ('equipment', 'quantity', 'volume_capacity',)
 
 
 def create_user_equipments(formset, user):

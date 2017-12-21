@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from django_measurement.models import MeasurementField
-from measurement.measures import Volume, Weight
+from measurement.measures import Volume
 from model_utils.models import TimeStampedModel
 
 User = get_user_model()
@@ -46,4 +46,3 @@ class UserEquipment(TimeStampedModel):
     equipment = models.ForeignKey(Equipment)
     quantity = models.PositiveIntegerField('Qty')
     volume_capacity = MeasurementField(measurement=Volume, blank=True, null=True)
-    weight_capacity = MeasurementField(measurement=Weight, blank=True, null=True)
