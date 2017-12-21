@@ -5,8 +5,6 @@ from django_measurement.models import MeasurementField
 from measurement.measures import Volume, Weight
 from model_utils.models import TimeStampedModel
 
-from src.recipes.models import Recipe
-
 User = get_user_model()
 
 
