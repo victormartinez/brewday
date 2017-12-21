@@ -1,8 +1,9 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
 from django_measurement.models import MeasurementField
 from measurement.measures import Volume, Weight
 from model_utils.models import TimeStampedModel
-from django.contrib.auth import get_user_model
 
 from src.recipes.models import Recipe
 

@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+
 from django_measurement.models import MeasurementField
 from measurement.measures import Volume
-
 from model_utils.models import TimeStampedModel
 
 User = get_user_model()
