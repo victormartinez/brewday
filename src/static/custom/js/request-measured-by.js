@@ -10,6 +10,14 @@ $(document).ready(function () {
             url: '/api/v1/ingredient-types/' + ingredientType,
             dataType: 'json',
             success: function (data) {
+                if (data.measured_by === null) {
+                    selectElement.parent().siblings(".measured-by").each(function() {
+                        $(this).removeClass('uk-hidden');
+                    });
+                    return;
+                }
+
+
                 var measuredBySelector = '.' + data.measured_by;
                 var measuredByAndSelector = ".measured-by" + measuredBySelector;
 
