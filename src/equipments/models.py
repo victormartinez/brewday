@@ -33,6 +33,7 @@ class Equipment(TimeStampedModel):
 
     name = models.CharField(unique=True, max_length=255)
     description = models.TextField(blank=True, null=True)
+    is_measured = models.BooleanField()
 
     def __str__(self):
         return self.name
