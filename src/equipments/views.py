@@ -43,7 +43,7 @@ class DeleteEquipmentView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, 'The equipment was deleted.')
-        super(DeleteEquipmentView, self).get_success_url()
+        return super(DeleteEquipmentView, self).get_success_url()
 
     def get_queryset(self):
         return UserEquipment.objects.filter(user=self.request.user)
@@ -52,12 +52,12 @@ class DeleteEquipmentView(LoginRequiredMixin, DeleteView):
 class EditEquipmentView(LoginRequiredMixin, UpdateView):
     template_name = 'equipments/edit.html'
     model = UserEquipment
-    fields = ('equipment', 'quantity', 'volume_capacity',)
+    fields = ('quantity', 'volume_capacity',)
     success_url = reverse_lazy('equipments:my')
 
     def get_success_url(self):
         messages.success(self.request, 'The equipment was updated successfully.')
-        super(EditEquipmentView, self).get_success_url()
+        return super(EditEquipmentView, self).get_success_url()
 
     def get_queryset(self):
         return UserEquipment.objects.filter(user=self.request.user)
