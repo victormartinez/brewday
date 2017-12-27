@@ -33,7 +33,7 @@
                     </td>
                     <td>
                         <form class="card-tool delete-task-form"
-                              action="{% url 'equipments:delete' eq.pk %}" method="post">
+                              action="{% url 'equipments:delete' eq.id %}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="close text-danger" uk-icon="icon:trash"></button>
                         </form>
