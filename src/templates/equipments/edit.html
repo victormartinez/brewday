@@ -22,10 +22,7 @@
 
                         <div class="uk-grid">
                             <div class="uk-width-1-4@s ">
-                                {% render_field form.equipment class='uk-input' placeholder=form.equipment.label %}
-                                {% for error in form.equipment.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
+                                {{ form.instance.equipment }}
                             </div>
 
                             <div class="uk-width-1-6@s">
@@ -35,7 +32,7 @@
                                 {% endfor %}
                             </div>
 
-                            <div class="uk-width-1-6@s">
+                            <div class="uk-width-1-6@s {% if not form.instance.equipment.is_measured %}uk-hidden{% endif %}">
                                 {% render_field form.volume_capacity class='uk-input' placeholder=form.volume_capacity.label %}
                                 {% for error in form.volume_capacity.errors %}
                                     <span class="uk-text-danger">{{ error }}</span>
