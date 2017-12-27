@@ -31,7 +31,7 @@
                         {% for form in formset.forms %}
                             <div class="uk-grid uk-margin-small-top">
                                 <div class="uk-width-1-4@s ">
-                                    {% render_field form.equipment class='uk-input' placeholder=form.equipment.label %}
+                                    {% render_field form.equipment class='uk-input select-equipment' placeholder=form.equipment.label %}
                                     {% for error in form.equipment.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
@@ -44,7 +44,7 @@
                                     {% endfor %}
                                 </div>
 
-                                <div class="uk-width-1-6@s">
+                                <div class="uk-width-1-6@s uk-hidden measured-by-volume">
                                     {% render_field form.volume_capacity class='uk-input' placeholder=form.volume_capacity.label %}
                                     {% for error in form.volume_capacity.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
@@ -58,9 +58,9 @@
                             </div>
                         {% endfor %}
 
-                        <div class="form-row uk-grid uk-margin-small-top" id="empty-row" hidden>
+                        <div class="form-row uk-grid uk-margin-small-top uk-hidden" id="empty-row">
                             <div class="uk-width-1-4@s ">
-                                {% render_field formset.empty_form.equipment class='uk-input' placeholder=formset.empty_form.equipment.label %}
+                                {% render_field formset.empty_form.equipment class='uk-input select-equipment' placeholder=formset.empty_form.equipment.label %}
                                 {% for error in formset.empty_form.equipment.errors %}
                                     <span class="uk-text-danger">{{ error }}</span>
                                 {% endfor %}
@@ -74,16 +74,9 @@
                             </div>
 
 
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.capacity class='uk-input' placeholder=formset.empty_form.capacity.label %}
-                                {% for error in formset.empty_form.capacity.errors %}
-                                    <span class="uk-text-danger">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-
-                            <div class="uk-width-1-6@s">
-                                {% render_field formset.empty_form.unit class='uk-input' placeholder=formset.empty_form.unit.label %}
-                                {% for error in formset.empty_form.unit.errors %}
+                            <div class="uk-width-1-6@s uk-hidden measured-by-volume">
+                                {% render_field formset.empty_form.volume_capacity class='uk-input' placeholder=formset.empty_form.volume_capacity.label %}
+                                {% for error in formset.empty_form.volume_capacity.errors %}
                                     <span class="uk-text-danger">{{ error }}</span>
                                 {% endfor %}
                             </div>
@@ -109,4 +102,5 @@
 
 {% block custom_js %}
     <script src="{% static 'custom/js/more-equipments.js' %}"></script>
+    <script src="{% static 'custom/js/request-equipment-is-measured.js' %}"></script>
 {% endblock %}

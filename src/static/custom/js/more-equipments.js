@@ -26,7 +26,8 @@ $(document).ready(function () {
         var formId = '#id_form-TOTAL_FORMS';
         var emptyRow = $('#empty-row').clone();
         emptyRow.attr('id', null);
-        emptyRow.removeAttr('hidden');
+        emptyRow.removeClass('uk-hidden');
+        emptyRow.addClass('form-fields');
 
         var totalForms = parseInt($(formId).val());
 
@@ -35,10 +36,8 @@ $(document).ready(function () {
             newFormRow = updateEmptyFormIDs($(this), totalForms);
         });
 
-
         $('.form-row:last').after(newFormRow);
         $(formId).val(totalForms + 1);
-
 
         var number = parseInt($("#numberOfEquipments").text());
         number += 1;
@@ -46,10 +45,14 @@ $(document).ready(function () {
     });
 
     $('.uk-grid').on('click', '.minus-new-user-equipment-form', function () {
-        $(this).parent().parent().remove();
         var formId = '#id_form-TOTAL_FORMS';
-
         var totalForms = parseInt($(formId).val());
+        if (totalForms === 1) {
+            return;
+        }
+
+        $(this).parent().parent().remove();
+
         $(formId).val(totalForms - 1);
 
         $("#numberOfEquipments").text(totalForms - 1);
