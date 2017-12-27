@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-<div class="form-row uk-grid uk-margin-small-top" id="empty-row" hidden>
+<div class="form-row uk-grid uk-margin-small-top uk-hidden" id="empty-row">
     <div class="uk-width-1-4@s ">
         {% render_field formset.empty_form.name class='uk-input' placeholder=formset.empty_form.name.label %}
         {% for error in formset.empty_form.name.errors %}

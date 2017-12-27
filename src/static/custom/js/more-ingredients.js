@@ -26,7 +26,7 @@ $(document).ready(function () {
         var formId = '#id_form-TOTAL_FORMS';
         var emptyRow = $('#empty-row').clone();
         emptyRow.attr('id', null);
-        emptyRow.removeAttr('hidden');
+        emptyRow.removeClass('uk-hidden');
         emptyRow.addClass('form-fields');
 
         var totalForms = parseInt($(formId).val());
