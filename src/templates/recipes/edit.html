@@ -68,7 +68,6 @@
                             {% endfor %}
 
                             <div class="uk-grid uk-margin-small-top">
-
                                 <div class="uk-width-1-4@s ">
                                     {{ form.id }}
                                     {% render_field form.name class='uk-input' placeholder=form.name.label %}
@@ -96,6 +95,11 @@
                                     {% for error in form.weight_quantity.errors %}
                                         <span class="uk-text-danger">{{ error }}</span>
                                     {% endfor %}
+                                </div>
+
+                                <div class="uk-width-1-6@s">
+                                    <a uk-icon="icon:minus-circle"
+                                       class="uk-margin-top minus-new-user-ingredient-form"></a>
                                 </div>
                             </div>
                         {% endfor %}
