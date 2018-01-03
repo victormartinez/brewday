@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.db import transaction
 
-from ..accounts.models import Profile
+from ..accounts.models import Profile, UserPreference
 
 User = get_user_model()
 
@@ -72,4 +72,6 @@ class UserRegistrationForm(UserCreationForm):
                     user=user
                 )
                 profile.save()
+                user_preference = UserPreference(user=user)
+                user_preference.save()
         return user
