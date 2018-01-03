@@ -3,6 +3,8 @@ import re
 from django.db import models
 from django.core import validators
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django_measurement.models import MeasurementField
+from measurement.measures import Volume, Weight
 
 from model_utils.models import TimeStampedModel
 
@@ -73,3 +75,10 @@ class Profile(TimeStampedModel):
 
     def __str__(self):
         return self.full_name
+
+
+class UserPreference(TimeStampedModel):
+    user = models.OneToOneField(User)
+    notified_by_storage = models.BooleanField(default=False)
+    volume_threshold = MeasurementField(measurement=Volume, blank=True, null=True)
+    weight_threshold = MeasurementField(measurement=Weight, blank=True, null=True)
