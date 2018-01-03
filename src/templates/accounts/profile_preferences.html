@@ -1,0 +1,34 @@
+{% extends 'app.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {{ block.super }} | Email
+{% endblock %}
+
+{% block container %}
+    {% include 'accounts/_subnav.html' %}
+
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="uk-first-column">
+                            <form method="post" class="uk-grid-small alter" uk-grid>
+                                {% csrf_token %}
+
+                                {% include '_includes/app_title_section.html' with title='Preferences' %}
+
+                                <div class="uk-width-1-1@s">
+                                    Preferences
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

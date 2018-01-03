@@ -9,9 +9,12 @@
                             {% url 'accounts:profile' as profile_url %}
                             {% url 'accounts:profile_password' as profile_password_url %}
                             {% url 'accounts:profile_email' as profile_email_url %}
+                            {% url 'accounts:profile_preferences' as profile_preferences_url %}
 
                             <li class="{% if profile_url == request.path %}uk-active{% endif %}"><a
                                     href="{{ profile_url }}">Personal Info</a></li>
+                            <li class="{% if profile_preferences_url == request.path %}uk-active{% endif %}"><a
+                                    href="{{ profile_preferences_url }}">Preferences</a></li>
                             <li class="{% if profile_email_url == request.path %}uk-active{% endif %}">
                                 <a href="{{ profile_email_url }}">Change Email</a></li>
                             <li class="{% if profile_password_url == request.path %}uk-active{% endif %}">
