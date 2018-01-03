@@ -5,8 +5,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetConfirmView, PasswordResetView
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
-from django.views.generic import CreateView, UpdateView, FormView, TemplateView
+from django.views.generic import CreateView, UpdateView, FormView
 
+from src.accounts.models import UserPreference
 from ..core.utils.mail import send_welcome_mail
 from ..accounts.forms import UserLoginForm, UserRegistrationForm, EmailChangeForm, ProfileChangeForm
 
@@ -121,8 +122,17 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
         return super(UserPasswordResetConfirmView, self).form_valid(form)
 
 
-class UserPreferencesView(LoginRequiredMixin, TemplateView):
+class UserPreferencesView(LoginRequiredMixin, UpdateView):
     template_name = 'accounts/profile_preferences.html'
+    model = UserPreference
+    fields = ('notified_by_storage', 'volume_threshold', 'weight_threshold',)
+    success_url = reverse_lazy('accounts:profile_preferences')
+
+    def get_object(self, queryset=None):
+        return UserPreference.objects.get(user=self.request.user)
+
+    def get_queryset(self):
+        return UserPreference.objects.filter(user=self.request.user)
 
 
 login = UserLoginView.as_view()

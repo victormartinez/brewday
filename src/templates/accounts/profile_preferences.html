@@ -22,8 +22,24 @@
                                 {% include '_includes/app_title_section.html' with title='Preferences' %}
 
                                 <div class="uk-width-1-1@s">
-                                    Preferences
+                                    {{ form.notified_by_storage }}<label for="">{{ form.notified_by_storage.label }}</label>
+                                    <small>Check if you want to get notified if any ingredient reach a threshold</small>
                                 </div>
+                                <div class="uk-width-1-2@s">
+                                    {% render_field form.volume_threshold class='uk-input' placeholder=form.volume_threshold.label %}
+                                    {% for error in form.volume_threshold.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="uk-width-1-2">
+                                    {% render_field form.weight_threshold class='uk-input' placeholder=form.weight_threshold.label %}
+                                    {% for error in form.weight_threshold.errors %}
+                                        <span class="uk-text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"
+                                        style="margin-left: 15px;">Update
+                                </button>
                             </form>
                         </div>
                     </div>
