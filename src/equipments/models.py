@@ -9,29 +9,8 @@ User = get_user_model()
 
 
 class Equipment(TimeStampedModel):
-    """
-    AIRLOCK
-    BOILING_POT
-    BOTTLE
-    BOTTLE_CAPPER
-    BOOTLE_CAPS
-    BOOTLE_BRUSH
-    FERMENTER
-    MEASURING_CUP
-    SIPHON
-    RACKING_CANE
-    BOTTLE_FILLER
-    STIRRING_PADDLE
-    THERMOMETER
-    BOTTLING_BUCKET
-    HYDROMETER
-    WINE_THIEF
-    HYDROMETER_JAR
-    WORT_CHILLER
-    STRAINER
-    """
-
     name = models.CharField(unique=True, max_length=255)
+    slug = models.SlugField(unique=True)
     description = models.TextField(blank=True, null=True)
     is_measured = models.BooleanField()
 
