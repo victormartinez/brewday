@@ -19,6 +19,7 @@ class IngredientType(TimeStampedModel):
     )
 
     name = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(unique=True)
     measured_by = models.CharField(choices=MEASURED_BY_CHOICES, max_length=10, null=True, blank=True)
 
     def __str__(self):
