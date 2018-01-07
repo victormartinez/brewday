@@ -1,3 +1,13 @@
 from django.db import models
 
-# Create your models here.
+from model_utils.models import TimeStampedModel
+
+from src.accounts.models import User
+from src.recipes.models import Recipe
+
+
+class RecipeBatch(TimeStampedModel):
+    recipe = models.ForeignKey(Recipe)
+    user = models.ForeignKey(User)
+    finished = models.DateTimeField(null=True, blank=True)
+
