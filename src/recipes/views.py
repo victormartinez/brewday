@@ -3,9 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+from src.batches.forms import NewRecipeBatchForm
 from src.ingredients.forms import NewRecipeIngredientFormSet, EditRecipeIngredientFormSet
 from src.ingredients.models import UserIngredient, RecipeIngredient
 from src.recipes.models import Recipe
@@ -75,7 +76,8 @@ class ShowRecipeView(LoginRequiredMixin, DetailView):
 
 class EditRecipeView(LoginRequiredMixin, UpdateView):
     model = Recipe
-    fields = ('title', 'description', 'expected_production', 'owner', 'og', 'fg', 'ibu', 'srm', 'abv', 'steps', 'observations',)
+    fields = (
+    'title', 'description', 'expected_production', 'owner', 'og', 'fg', 'ibu', 'srm', 'abv', 'steps', 'observations',)
     template_name = 'recipes/edit.html'
     success_url = reverse_lazy('recipes:my')
 
@@ -148,8 +150,29 @@ class DeleteRecipeView(LoginRequiredMixin, DeleteView):
         return Recipe.objects.filter(owner=self.request.user)
 
 
+class NewBatchView(LoginRequiredMixin, CreateView):
+    template_name = 'recipes/show.html'
+    form_class = NewRecipeBatchForm
+
+    def post(self, request, *args, **kwargs):
+        request.POST = request.POST.copy()
+        request.POST['user'] = self.request.user.pk
+        request.POST['recipe'] = Recipe.objects.get(owner=self.request.user, id=self.kwargs['pk']).pk
+        return super(NewBatchView, self).post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context_data = super(NewBatchView, self).get_context_data(**kwargs)
+        context_data['recipe'] = Recipe.objects.get(owner=self.request.user, id=self.kwargs['pk'])
+        return context_data
+
+    def get_success_url(self):
+        messages.success(self.request, 'Congrats! You have started a batch!')
+        return reverse('recipes:show', kwargs={'pk': self.kwargs['pk']})
+
+
 new_recipe = NewRecipeView.as_view()
 my_recipes = MyRecipesView.as_view()
 show_recipe = ShowRecipeView.as_view()
 edit_recipe = EditRecipeView.as_view()
 delete_recipe = DeleteRecipeView.as_view()
+new_batch = NewBatchView.as_view()

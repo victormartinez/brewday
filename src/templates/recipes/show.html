@@ -67,7 +67,17 @@
                             <p>-</p>
                         {% endif %}
 
+                        <form class="card-tool" action="{% url 'recipes:new_batch' recipe.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="uk-button uk-button-secondary">Start batch</button>
+                        </form>
+
                     </article>
+                </div>
+
+                <div class="uk-width-1-2">
+                    {% include '_includes/message_box.html' %}
+                    {% include '_includes/form_error_box.html' %}
                 </div>
             </div>
 
