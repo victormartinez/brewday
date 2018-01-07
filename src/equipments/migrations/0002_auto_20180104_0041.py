@@ -13,11 +13,6 @@ def populate_equipments(apps, schema_editor):
             'is_measured': False
         },
         {
-            'name': 'Boiling Pot',
-            'slug': 'boiling-pot',
-            'is_measured': True
-        },
-        {
             'name': 'Bottle',
             'slug': 'bottle',
             'is_measured': True
@@ -102,6 +97,26 @@ def populate_equipments(apps, schema_editor):
             'slug': 'strainer',
             'is_measured': False
         },
+        {
+            'name': 'Mash tun',
+            'slug': 'mash-tun',
+            'is_measured': True
+        },
+        {
+            'name': 'Boiling Kettle',
+            'slug': 'boiling-kettle',
+            'is_measured': True
+        },
+        {
+            'name': 'Hot liquor tank',
+            'slug': 'hot-liquor-tank',
+            'is_measured': True
+        },
+        {
+            'name': 'Lauter tun',
+            'slug': 'lauter-tun',
+            'is_measured': True
+        }
     ]
 
     Equipment = apps.get_model('equipments', 'Equipment')
