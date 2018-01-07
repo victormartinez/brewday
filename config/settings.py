@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     # Third party libs
     'django_extensions',
     'widget_tweaks',
-    'rest_framework', 
+    'rest_framework',
 
     # Apps
     'src.accounts',
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'src.equipments',
     'src.recipes',
     'src.ingredients',
-    'src.notifications'
+    'src.notifications',
+    'src.batches'
 ]
 
 MIDDLEWARE = [
