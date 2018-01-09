@@ -23,7 +23,7 @@
 
             {% for batch in object_list %}
                 <tr>
-                    <td>{{ batch.recipe }}</td>
+                    <td><a href="{% url 'recipes:show' batch.recipe.id %}">{{ batch.recipe }}</a></td>
                     <td>{{ batch.created }}</td>
                     <td>{% if batch.finished %}<span class="uk-text-success">Finished</span>{% else %}<span class="uk-text-warning">In progress</span>{% endif %}</td>
                     <td>{% if batch.finished %}{{ batch.finished }}{% else %}-{% endif %}</td>
