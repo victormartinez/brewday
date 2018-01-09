@@ -16,7 +16,8 @@
             {% if not object_list %}
                 <tr>
                     <td class="uk-text-danger" colspan="3">
-                        You have not started any batch. Check out your <a href="{% url 'recipes:my' %}">recipes</a> and start your first batch.
+                        You have not started any batch. Check out your <a href="{% url 'recipes:my' %}">recipes</a> and
+                        start your first batch.
                     </td>
                 </tr>
             {% endif %}
@@ -24,17 +25,24 @@
             {% for batch in object_list %}
                 <tr>
                     <td><a href="{% url 'recipes:show' batch.recipe.id %}">{{ batch.recipe }}</a></td>
-                    <td>{{ batch.created }}</td>
-                    <td>{% if batch.finished %}<span class="uk-text-success">Finished</span>{% else %}<span class="uk-text-warning">In progress</span>{% endif %}</td>
+                    <td>{% if batch.restarted %}{{ batch.restarted }}{% else %}{{ batch.created }}{% endif %}</td>
+                    <td>{% if batch.finished %}<span class="uk-text-success">Finished</span>{% else %}
+                        <span class="uk-text-warning">In progress</span>{% endif %}</td>
                     <td>{% if batch.finished %}{{ batch.finished }}{% else %}-{% endif %}</td>
                     <td>
-                        <form class="card-tool delete-task-form" action="{% url 'batches:finish' batch.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="close text-danger" uk-icon="icon:check"></button>
-                        </form>
+                        {% if batch.finished %}
+                            -
+                        {% else %}
+                            <form class="card-tool delete-task-form" action="{% url 'batches:finish' batch.id %}"
+                                  method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="close text-danger" uk-icon="icon:check"></button>
+                            </form>
+                        {% endif %}
                     </td>
                     <td>
-                        <form class="card-tool delete-task-form" action="{% url 'batches:finish' batch.id %}" method="post">
+                        <form class="card-tool delete-task-form" action="{% url 'batches:restart' batch.id %}"
+                              method="post">
                             {% csrf_token %}
                             <button type="submit" class="close text-danger" uk-icon="icon:refresh"></button>
                         </form>
