@@ -1,13 +1,14 @@
 <div class="uk-grid">
-    <div class="uk-width-1-2">
+    <div class="uk-width-1-1">
         <table class="uk-table uk-table-divider">
             <thead>
             <tr>
                 <th>Recipe</th>
                 <th>Started</th>
                 <th>Status</th>
-                <th>Finished</th>
-                <th></th>
+                <th>Finished at</th>
+                <th>Finish</th>
+                <th>Restart</th>
             </tr>
             </thead>
             <tbody>
@@ -26,7 +27,18 @@
                     <td>{{ batch.created }}</td>
                     <td>{% if batch.finished %}<span class="uk-text-success">Finished</span>{% else %}<span class="uk-text-warning">In progress</span>{% endif %}</td>
                     <td>{% if batch.finished %}{{ batch.finished }}{% else %}-{% endif %}</td>
-                    <td></td>
+                    <td>
+                        <form class="card-tool delete-task-form" action="{% url 'batches:finish' batch.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="close text-danger" uk-icon="icon:check"></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form class="card-tool delete-task-form" action="{% url 'batches:finish' batch.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="close text-danger" uk-icon="icon:refresh"></button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </table>

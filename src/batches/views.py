@@ -1,7 +1,24 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.urls import reverse
+from django.utils.datetime_safe import datetime
+from django.views.generic import ListView, UpdateView
 
 from src.batches.models import RecipeBatch
+
+
+class FinishBatchView(LoginRequiredMixin, UpdateView):
+    model = RecipeBatch
+    fields = ('finished',)
+
+    def post(self, request, *args, **kwargs):
+        request.POST = request.POST.copy()
+        request.POST['finished'] = datetime.now()
+        return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        messages.success(self.request, 'Congrats! You have finished your production. Enjoy your beer!')
+        return reverse('batches:my')
 
 
 class MyBatchesView(LoginRequiredMixin, ListView):
@@ -12,3 +29,4 @@ class MyBatchesView(LoginRequiredMixin, ListView):
 
 
 my_batches = MyBatchesView.as_view()
+finish_batch = FinishBatchView.as_view()
