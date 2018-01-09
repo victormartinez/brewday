@@ -167,7 +167,7 @@ class NewBatchView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         messages.success(self.request, 'Congrats! You have started a batch!')
-        return reverse('recipes:show', kwargs={'pk': self.kwargs['pk']})
+        return reverse('batches:my')
 
 
 new_recipe = NewRecipeView.as_view()
