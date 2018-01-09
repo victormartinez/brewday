@@ -35,7 +35,7 @@ def populate_equipments(apps, schema_editor):
         {
             'name': 'Fermenter',
             'slug': 'fermenter',
-            'is_measured': False
+            'is_measured': True
         },
         {
             'name': 'Measuring Cup',
