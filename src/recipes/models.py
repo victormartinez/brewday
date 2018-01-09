@@ -22,3 +22,6 @@ class Recipe(TimeStampedModel):
                               help_text='Alcohol by Volume')
     steps = models.TextField('Steps')
     observations = models.TextField('Observations', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
