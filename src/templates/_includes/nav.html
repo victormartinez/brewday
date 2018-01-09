@@ -109,6 +109,7 @@
                                     {% url 'ingredients:my' as my_ingredients_url %}
                                     {% url 'equipments:my' as my_equipments_url %}
                                     {% url 'equipments:new' as new_equipments_url %}
+                                    {% url 'batches:my' as my_batches %}
 
                                     <li class="{% if profile_url == request.path or profile_password_url == request.path or profile_email_url == request.path %}uk-active{% endif %}">
                                         <a href="{{ profile_url }}">Profile</a>
@@ -122,6 +123,10 @@
 
                                     <li class="{% if new_equipments_url  == request.path or my_equipments_url == request.path %}uk-active{% endif %}">
                                         <a href="{{ my_equipments_url }}">My Equipments</a>
+                                    </li>
+
+                                    <li class="{% if my_batches  == request.path %}uk-active{% endif %}">
+                                        <a href="{{ my_batches }}">My Production</a>
                                     </li>
                                 </ul>
                             </div>

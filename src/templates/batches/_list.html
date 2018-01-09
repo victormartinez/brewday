@@ -1,0 +1,34 @@
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <table class="uk-table uk-table-divider">
+            <thead>
+            <tr>
+                <th>Recipe</th>
+                <th>Started</th>
+                <th>Status</th>
+                <th>Finished</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% if not object_list %}
+                <tr>
+                    <td class="uk-text-danger" colspan="3">
+                        You have not started any batch. Check out your <a href="{% url 'recipes:my' %}">recipes</a> and start your first batch.
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% for batch in object_list %}
+                <tr>
+                    <td>{{ batch.recipe }}</td>
+                    <td>{{ batch.created }}</td>
+                    <td>{% if batch.finished %}<span class="uk-text-success">Finished</span>{% else %}<span class="uk-text-warning">In progress</span>{% endif %}</td>
+                    <td>{% if batch.finished %}{{ batch.finished }}{% else %}-{% endif %}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{% extends 'app.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {{ block.super }} | My Equipments
+{% endblock %}
+
+{% block container %}
+    {% include 'batches/_subnav.html' %}
+
+    <div id="tm-main" class="tm-main uk-section-default" uk-height-viewport="expand:true" style="box-sizing:border-box;">
+        <div class="uk-container uk-margin-large-bottom">
+            {% include '_includes/app_title_section.html' with title='Batches' %}
+
+            {% include 'batches/_list.html' %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
