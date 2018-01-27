@@ -41,8 +41,8 @@ class RecipeIngredient(Ingredient):
 
     def __str__(self):
         if self.volume_quantity:
-            return "{}: {}".format(self.name, self.volume_quantity)
-        return "{}: {}".format(self.name, self.weight_quantity)
+            return "{} ({}): {}".format(self.name, self.ingredient_type, self.volume_quantity)
+        return "{} ({}): {}".format(self.name, self.ingredient_type, self.weight_quantity)
 
 
 class UserIngredient(Ingredient):

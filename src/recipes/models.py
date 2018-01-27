@@ -43,8 +43,17 @@ class Recipe(TimeStampedModel):
         suggestions = []
         for recipe in found_recipes:
             found_ingredients_ids = sorted(list(recipe.ingredients.all().values_list('ingredient_type', flat=True)))
+
+            if len(found_ingredients_ids) > len(user_ingredients_ids):
+                continue
+
             if user_ingredients_ids == found_ingredients_ids:
                 suggestions.append(recipe)
+                continue
+
+            if not set(found_ingredients_ids).difference(set(user_ingredients_ids)):
+                suggestions.append(recipe)
+                continue
 
         if not suggestions:
             return None

@@ -3,8 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, View
 
 from src.batches.forms import NewRecipeBatchForm
 from src.ingredients.forms import NewRecipeIngredientFormSet, EditRecipeIngredientFormSet
@@ -170,9 +171,21 @@ class NewBatchView(LoginRequiredMixin, CreateView):
         return reverse('batches:my')
 
 
+class SuggestRecipeView(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        suggested_recipe = Recipe.get_suggestion(self.request.user)
+        if not suggested_recipe:
+            messages.error(self.request, 'It was not found a suggestion to you. Maybe you should check your personal storage.', extra_tags='danger')
+            return redirect(reverse_lazy('core:app'))
+
+        return redirect(reverse_lazy('recipes:show', kwargs={'pk': suggested_recipe.pk}))
+
+
 new_recipe = NewRecipeView.as_view()
 my_recipes = MyRecipesView.as_view()
 show_recipe = ShowRecipeView.as_view()
 edit_recipe = EditRecipeView.as_view()
 delete_recipe = DeleteRecipeView.as_view()
 new_batch = NewBatchView.as_view()
+suggest_view = SuggestRecipeView.as_view()
