@@ -37,7 +37,7 @@ class Ingredient(TimeStampedModel):
 
 
 class RecipeIngredient(Ingredient):
-    recipe = models.ForeignKey(Recipe)
+    recipe = models.ForeignKey(Recipe, related_name='ingredients')
 
     def __str__(self):
         if self.volume_quantity:
