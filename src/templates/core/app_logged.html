@@ -3,44 +3,59 @@
 {% load widget_tweaks %}
 
 {% block container %}
-    <div id="tm-main" class="tm-main uk-section uk-section-default" uk-height-viewport="expand: true" style="box-sizing: border-box;">
-		<div class="uk-container">
-			<div class="uk-grid uk-grid-large" uk-grid="">
-				<div class="uk-width-expand@m uk-first-column">
-					<div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-						<div class="uk-first-column">
-							<div class="uk-card uk-card-default uk-width-1-2@m">
-								<div class="box-profile blf abk">
-									<div class="bg-profile"></div>
-									<div class="mv arx">
+    <div id="tm-main" class="tm-main uk-section uk-section-default" uk-height-viewport="expand: true"
+         style="box-sizing: border-box;">
+        <div class="uk-container">
+            <div class="uk-grid uk-grid-large" uk-grid="">
+                <div class="uk-width-expand@m uk-first-column">
+                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
+                        <div class="uk-child-width-1-2@m">
+                            <div class="uk-card uk-card-default uk-width-1-2@m">
+                                <div class="box-profile blf abk">
+                                    <div class="bg-profile"></div>
+                                    <div class="mv arx">
                                         <a href="{% url 'accounts:profile' %}">
                                             {% if user.profile.photo %}
-                                                <img src="{{ user.profile.photo.url }}" class="profile-avatar" alt="avatar">
+                                                <img src="{{ user.profile.photo.url }}" class="profile-avatar"
+                                                     alt="avatar">
                                             {% else %}
-                                                <img src="{% static 'custom/img/avatar.png' %}" class="profile-avatar" alt="avatar">
+                                                <img src="{% static 'custom/img/avatar.png' %}" class="profile-avatar"
+                                                     alt="avatar">
                                             {% endif %}
                                         </a>
                                         <h4 class="mw">
-                                            <a class="bjx" href="{% url 'accounts:profile' %}">{{ request.user.profile.full_name }}</a>
+                                            <a class="bjx"
+                                               href="{% url 'accounts:profile' %}">{{ request.user.profile.full_name }}</a>
                                         </h4>
-{#                                        <ul class="links-profile">#}
-{#                                            <li class="bli">#}
-{#                                                <a href="#" class="bjx">#}
-{#                                                    Amigos#}
-{#                                                    <h6 class="aal">12M</h6>#}
-{#                                                </a>#}
-{#                                            </li>#}
-{##}
-{#                                            <li class="bli">#}
-{#                                                <a href="#" class="bjx">#}
-{#                                                    Receitas#}
-{#                                                    <h6 class="aal">1</h6>#}
-{#                                                </a>#}
-{#                                            </li>#}
-{#                                        </ul>#}
+                                        <ul class="links-profile">
+                                            <li class="bli">
+                                                <a href="{% url 'recipes:my' %}" class="bjx">
+                                                    Recipes
+                                                    <h6 class="aal">{{ recipes_count }}</h6>
+                                                </a>
+                                            </li>
+
+                                            <li class="bli">
+                                                <a href="{% url 'equipments:my' %}" class="bjx">
+                                                    Equipments
+                                                    <h6 class="aal">{{ equipments_count }}</h6>
+                                                </a>
+                                            </li>
+
+                                            <li class="bli">
+                                                <a href="{% url 'ingredients:my' %}" class="bjx">
+                                                    Ingredients
+                                                    <h6 class="aal">{{ ingredients_count }}</h6>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="uk-child-width-1-2@m">
+                            {% include '_includes/message_box.html' %}
                         </div>
                     </div>
                 </div>
