@@ -182,6 +182,16 @@ class SuggestRecipeView(LoginRequiredMixin, View):
         return redirect(reverse_lazy('recipes:show', kwargs={'pk': suggested_recipe.pk}))
 
 
+class RandomRecipeView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        random_recipe = Recipe.get_random()
+        if not random_recipe:
+            messages.error(self.request, 'Sorry, we did not find any recipe.', extra_tags='danger')
+            return redirect(reverse_lazy('core:app'))
+
+        return redirect(reverse_lazy('recipes:show', kwargs={'pk': random_recipe.pk}))
+
+
 new_recipe = NewRecipeView.as_view()
 my_recipes = MyRecipesView.as_view()
 show_recipe = ShowRecipeView.as_view()
@@ -189,3 +199,4 @@ edit_recipe = EditRecipeView.as_view()
 delete_recipe = DeleteRecipeView.as_view()
 new_batch = NewBatchView.as_view()
 suggest_view = SuggestRecipeView.as_view()
+random_view = RandomRecipeView.as_view()

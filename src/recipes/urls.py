@@ -7,13 +7,15 @@ from .views import (
     edit_recipe,
     delete_recipe,
     new_batch,
-    suggest_view
+    suggest_view,
+    random_view
 )
 
 urlpatterns = [
     url(r'^my-recipes$', my_recipes, name='my'),
     url(r'^new$', new_recipe, name='new'),
     url(r'^suggest$', suggest_view, name='suggest'),
+    url(r'^lucky', random_view, name='random'),
     url(r'^(?P<pk>[\d]+)/edit$', edit_recipe, name='edit'),
     url(r'^(?P<pk>[\d]+)/delete$', delete_recipe, name='delete'),
     url(r'^(?P<pk>[\d]+)/batch$', new_batch, name='new_batch'),

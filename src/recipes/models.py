@@ -30,6 +30,17 @@ class Recipe(TimeStampedModel):
         return self.title
 
     @staticmethod
+    def get_random():
+        recipes = Recipe.objects.filter(owner=None)
+        recipes_ids = recipes.values_list('id', flat=True)
+
+        if not len(recipes_ids):
+            return None
+
+        index = randint(0, recipes.count() - 1)
+        return recipes[index]
+
+    @staticmethod
     def get_suggestion(user):
         from src.ingredients.models import UserIngredient
 
