@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
@@ -25,7 +26,19 @@ class AppView(LoginRequiredMixin, TemplateView):
         context['recipes_count'] = Recipe.objects.filter(owner=self.request.user).count()
         context['equipments_count'] = UserEquipment.objects.filter(user=self.request.user).count()
         context['ingredients_count'] = UserIngredient.objects.filter(user=self.request.user).count()
+        context['recipes'] = self.get_recipes()
         return context
+
+    def get_recipes(self):
+        recipes_qs = Recipe.objects.filter(owner=None)
+        search = self.request.GET.get('search')
+        if search:
+            recipes_qs = recipes_qs.filter(
+                Q(title__icontains=search) |
+                Q(steps__icontains=search) |
+                Q(observations__icontains=search)
+            )
+        return recipes_qs
 
 
 index = IndexView.as_view()

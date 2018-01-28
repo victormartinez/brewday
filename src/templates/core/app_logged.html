@@ -5,61 +5,100 @@
 {% block container %}
     <div id="tm-main" class="tm-main uk-section uk-section-default" uk-height-viewport="expand: true"
          style="box-sizing: border-box;">
-        <div class="uk-container">
-            <div class="uk-grid uk-grid-large" uk-grid="">
-                <div class="uk-width-expand@m uk-first-column">
-                    <div class="uk-child-width-1-2@m uk-grid uk-grid-stack" uk-grid="">
-                        <div class="uk-child-width-1-2@m">
-                            <div class="uk-card uk-card-default uk-width-1-2@m">
-                                <div class="box-profile blf abk">
-                                    <div class="bg-profile"></div>
-                                    <div class="mv arx">
-                                        <a href="{% url 'accounts:profile' %}">
-                                            {% if user.profile.photo %}
-                                                <img src="{{ user.profile.photo.url }}" class="profile-avatar"
-                                                     alt="avatar">
-                                            {% else %}
-                                                <img src="{% static 'custom/img/avatar.png' %}" class="profile-avatar"
-                                                     alt="avatar">
-                                            {% endif %}
-                                        </a>
-                                        <h4 class="mw">
-                                            <a class="bjx"
-                                               href="{% url 'accounts:profile' %}">{{ request.user.profile.full_name }}</a>
-                                        </h4>
-                                        <ul class="links-profile">
-                                            <li class="bli">
-                                                <a href="{% url 'recipes:my' %}" class="bjx">
-                                                    Recipes
-                                                    <h6 class="aal">{{ recipes_count }}</h6>
-                                                </a>
-                                            </li>
 
-                                            <li class="bli">
-                                                <a href="{% url 'equipments:my' %}" class="bjx">
-                                                    Equipments
-                                                    <h6 class="aal">{{ equipments_count }}</h6>
-                                                </a>
-                                            </li>
+        <div class="uk-container uk-margin-large-bottom">
+            <div class="uk-grid">
+                <div class="uk-width-1-3">
+                    <div class="box-profile blf abk">
+                        <div class="bg-profile"></div>
+                        <div class="mv arx">
+                            <a href="{% url 'accounts:profile' %}">
+                                {% if user.profile.photo %}
+                                    <img src="{{ user.profile.photo.url }}" class="profile-avatar"
+                                         alt="avatar">
+                                {% else %}
+                                    <img src="{% static 'custom/img/avatar.png' %}" class="profile-avatar"
+                                         alt="avatar">
+                                {% endif %}
+                            </a>
+                            <h4 class="mw">
+                                <a class="bjx"
+                                   href="{% url 'accounts:profile' %}">{{ request.user.profile.full_name }}</a>
+                            </h4>
+                            <ul class="links-profile">
+                                <li class="bli">
+                                    <a href="{% url 'recipes:my' %}" class="bjx">
+                                        Recipes
+                                        <h6 class="aal">{{ recipes_count }}</h6>
+                                    </a>
+                                </li>
 
-                                            <li class="bli">
-                                                <a href="{% url 'ingredients:my' %}" class="bjx">
-                                                    Ingredients
-                                                    <h6 class="aal">{{ ingredients_count }}</h6>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                <li class="bli">
+                                    <a href="{% url 'equipments:my' %}" class="bjx">
+                                        Equipments
+                                        <h6 class="aal">{{ equipments_count }}</h6>
+                                    </a>
+                                </li>
 
-                        <div class="uk-child-width-1-2@m">
-                            {% include '_includes/message_box.html' %}
+                                <li class="bli">
+                                    <a href="{% url 'ingredients:my' %}" class="bjx">
+                                        Ingredients
+                                        <h6 class="aal">{{ ingredients_count }}</h6>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+
+                <div class="uk-width-1-2">
+                    {% include '_includes/message_box.html' %}
+
+                    {% if not recipes and request.GET.search %}
+                        <div class="uk-width-1-1 uk-margin-bottom">
+                            <div class="uk-alert uk-alert-danger">We have not found any recipe that match your search.
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                    {% for recipe in recipes %}
+
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-header">
+                                <div class="uk-grid-small uk-flex-middle uk-grid" uk-grid="">
+                                    <div class="uk-width-expand">
+                                        <h3 class="uk-card-title uk-margin-remove-bottom">{{ recipe.title }}</h3>
+                                        <p class="uk-text-meta uk-margin-remove-top">
+                                            OG: {% if recipe.og %} {{ recipe.og }} {% else %} - {% endif %} FG:
+                                            {% if recipe.fg %} {{ recipe.fg }} {% else %}
+                                                - {% endif %} IBU: {% if recipe.ibu %} {{ recipe.ibu }} {% else %}
+                                            - {% endif %} SRM: {% if recipe.srm %} {{ recipe.srm }} {% else %}
+                                            - {% endif %} ABV: {% if recipe.abv %} {{ recipe.abv }}% {% else %}
+                                            - {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if recipe.description %}
+                                <div class="uk-card-body">
+                                    <p>
+                                        {{ recipe.description }}
+                                    </p>
+                                </div>
+                            {% endif %}
+                            <div class="uk-card-footer">
+                                <a href="{% url 'recipes:show' recipe.pk %}" class="uk-button uk-button-text">Read
+                                    more</a>
+                            </div>
+                        </div>
+
+                        <br>
+                    {% endfor %}
+
+                </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

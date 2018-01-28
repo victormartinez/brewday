@@ -7,10 +7,25 @@
                 <div class="uk-navbar-left">
                     <a href="{% url 'core:app' %}" class="uk-logo">
                         <img src="{% static 'custom/img/logo-landing-page.png' %}" width="60" alt="Brewday">
-                        <img src="{% static 'custom/img/logo-landing-page.png' %}" width="60" class="uk-logo-inverse" alt="Brewday">
+                        <img src="{% static 'custom/img/logo-landing-page.png' %}" width="60" class="uk-logo-inverse"
+                             alt="Brewday">
                         <span class="brewday-name">BrewDay</span>
                     </a>
                 </div>
+
+                <form method="GET" class="uk-search uk-search-default uk-width-1-3" style="margin-left: 180px; background: white;">
+                            <span uk-search-icon="" class="uk-search-icon uk-icon"><svg width="20" height="20"
+                                                                                        viewBox="0 0 20 20"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        ratio="1"><circle fill="none"
+                                                                                                          stroke="#000"
+                                                                                                          stroke-width="1.1"
+                                                                                                          cx="9" cy="9"
+                                                                                                          r="7"></circle><path
+                                    fill="none" stroke="#000" stroke-width="1.1"
+                                    d="M14,14 L18,18 L14,14 Z"></path></svg></span>
+                    <input class="uk-search-input" value="{{ request.GET.search }}" name="search" type="text" placeholder="Search a recipe...">
+                </form>
 
                 <div class="uk-navbar-right">
                     <a class="uk-button uk-button-primary" href="{% url 'recipes:random' %}">I'm lucky!</a>

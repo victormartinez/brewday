@@ -72,7 +72,7 @@ class ShowRecipeView(LoginRequiredMixin, DetailView):
     template_name = 'recipes/show.html'
 
     def get_queryset(self):
-        return Recipe.objects.filter(owner=self.request.user)
+        return Recipe.objects.filter(Q(owner=self.request.user) | Q(owner=None))
 
 
 class EditRecipeView(LoginRequiredMixin, UpdateView):
