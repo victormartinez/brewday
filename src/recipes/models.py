@@ -49,7 +49,7 @@ class Recipe(TimeStampedModel):
             return None
 
         user_ingredients_ids = sorted(list(user_ingredients.values_list('ingredient_type', flat=True)))
-        found_recipes = Recipe.objects.filter(Q(owner=None) | Q(owner=user)).filter(ingredients__in=user_ingredients_ids)
+        found_recipes = Recipe.objects.filter(Q(owner=None) | Q(owner=user)).filter(ingredients__ingredient_type__in=user_ingredients_ids)
 
         suggestions = []
         for recipe in found_recipes:

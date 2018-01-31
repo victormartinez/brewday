@@ -158,7 +158,7 @@ class NewBatchView(LoginRequiredMixin, CreateView):
     def post(self, request, *args, **kwargs):
         request.POST = request.POST.copy()
         request.POST['user'] = self.request.user.pk
-        request.POST['recipe'] = Recipe.objects.get(owner=self.request.user, id=self.kwargs['pk']).pk
+        request.POST['recipe'] = Recipe.objects.filter(Q(owner=self.request.user) | Q(owner=None)).filter(id=self.kwargs['pk']).first().pk
         return super(NewBatchView, self).post(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
