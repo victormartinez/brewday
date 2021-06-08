@@ -5,7 +5,7 @@ django-model-utils==3.0.0
 django-widget-tweaks==1.4.1
 dj-static==0.0.6
 gunicorn==19.7.1
-Pillow==4.2.1
+Pillow==8.2.0
 psycopg2==2.7.3.1
 python-decouple==3.1
 ipython==6.1.0
